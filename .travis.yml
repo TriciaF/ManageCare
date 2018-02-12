@@ -1,0 +1,11 @@
+language: node_js
+node_js: node
+services:
+- mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: f1ROnzVZLM709d+BJbC2mDF3I/vSEE3LuP8LGGfNh+fccKhWMAU4t4wgp8ufRI6pGv7ChO+J6Fk9vBBpZ/Dhha4cnrvPLI4weSciUPJhj/UYCrVi94IbH/2Dw0ASBD3xg8LQOEBFcVvNB1Je4vaNMDMiV9CgJOFO6OKpu/D62rPljGMTzsKTTSSBmtxmmtoSC/zkvikrWTScr75v5dAUWEMqFn9B/NuOgjcVu+q1VAt5QZ3PPeVRZmQbtvNjFHpL2B1k0QYkg2fxAUVqqGNu8l4qgiludpcfwkKn5Mb0VRSvPJCumj0ex57jcYkYT9Q8cx67Hwb0SYggr4peuIh2Uj5Ss4TgC6OvYgTcAVRrC8QnsSozHUm7G2wAbDYAE6YiKlaAiEqZIJFC61vcK8A+LbcHRT24TTd2IT/qwgXIBGLkss0AXnoi8JUsgoCO3GrqUmItM/OMHCdtfgl56t/98QvcbIYhESgvJ8oqovtCPKOz1yEPiWq8HfWXRaABi8e+WI0LR6//wa+zZmdBH4i1o+E45VWXSPLebOiB9zyLg6c5bmK7Dnhet238nPgraYYLJuEcsI0dUzUTAzZaerrFvbzqHCiGFv2e+vuLGEog+QmIJTeMvQN6r5YMJEnAClCEGMroo+HcDc8zLrYzYdKG9x+f07DBOygJ/XUqwJ784cQ=
+  app: ManageCare
+  on:
+    repo: TriciaF/ManageCare
