@@ -1,11 +1,12 @@
-import {createStore, applyMiddleware, combineReducers} from 'redux';
-import {reducer as formReducer} from 'redux-form';
+import { createStore, applyMiddleware } from 'redux';
+// import {applyMiddleware, combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 import thunk from 'redux-thunk';
-import {loadAuthToken} from './local-storage';
+import { loadAuthToken } from './local-storage';
 // import authReducer from './reducers/auth';
 // import protectedDataReducer from './reducers/protected-data';
 // import {setAuthToken, refreshAuthToken} from './actions/auth';
-import {patientReducer} from './reducers/patient-reducer';
+import { patientReducer } from './reducers/patient-reducer';
 
 
 export default createStore(patientReducer, applyMiddleware(thunk));
@@ -26,5 +27,3 @@ export default createStore(patientReducer, applyMiddleware(thunk));
 //     store.dispatch(setAuthToken(token));
 //     store.dispatch(refreshAuthToken());
 // }
-
-export default store;
