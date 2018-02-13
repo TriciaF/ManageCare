@@ -12,13 +12,14 @@ const users = {
 			.count()
 			.then(count => {
 				if (count !== 0) {
-					// There is an existing user with the same username
-					return Promise.reject({
-						code: 422,
-						reason: 'ValidationError',
-						message: 'Username already taken',
-						location: 'username'
-					});
+					// user already exits, decrypt password and login
+					return Users.find({ username })
+						.then(user => {
+							user.map(item => {
+								if (bcrypt.compareSync(password, item.password))
+									return Promise.resolve();
+							});
+						});
 				} else {
 					// If there is no existing user, hash the password
 					const hash = bcrypt.hashSync(password, 10);
@@ -33,6 +34,11 @@ const users = {
 	get: function() {
 		console.log('Enter Get users');
 		return Users.find();
+	},
+
+	delete: function(id) {
+		console.log('Enter Delete users');
+		return Users.findByIdAndRemove(id);
 	},
 };
 

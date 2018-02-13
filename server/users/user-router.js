@@ -97,10 +97,12 @@ userRouter.post('/login', (req, res) => {
 	let { username, password } = req.body;
 
 	users.create(username, password)
-		.then(user => {
-			return res.status(201).json(user.serialize());
+		.then(response => {
+			console.log('user.create: ', username);
+			return res.status(201).json(username);
 		})
 		.catch(err => {
+			console.log(err);
 			// Forward validation errors on to the client, otherwise give a 500
 			// error because something unexpected has happened
 			if (err.reason === 'ValidationError') {
@@ -124,5 +126,16 @@ userRouter.get('/login', (req, res) => {
 			res.status(500).json({ message: 'Something went wrong' });
 		});
 });
+
+userRouter.delete('/login/:id', (req, res) => {
+	console.log('enter Delete end point');
+	users.delete(req.params.id)
+		.then(response => res.status(204).json(response))
+		.catch(err => {
+			console.log(err);
+			res.status(500).json({ message: 'Something went wrong' });
+		});
+});
+
 
 module.exports = userRouter;
