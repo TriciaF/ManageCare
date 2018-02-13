@@ -3,7 +3,7 @@ import './manageCare.css';
 import {Route, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import LoginForm from './login-form';
-import {PatientForm} from './patient-form';
+import PatientForm from './patient-form';
 import {logoutTimer, logoutWarning, clearAuth} from '../actions/auth';
 import Redirect from 'react-router-dom/Redirect';
 
@@ -20,7 +20,7 @@ export class ManageCare extends React.Component {
 
   startLogoutWithInactivity(){
     console.log('startLogoutWithInactity');
-    this.logoutTimer = setInterval( () => this.props.dispatch(clearAuth()), 2 * 60000);
+    this.logoutTimer = setInterval( () => this.props.dispatch(clearAuth()), 6 * 60000);
   };
 
   componentWillUnmount() {
@@ -44,6 +44,7 @@ export class ManageCare extends React.Component {
         )
         
       }
+      console.log('return in ManageCare component');
         return ( 
           <div className = "manageCare" >
             <header className = "manageCare-header" >

@@ -13,6 +13,7 @@ import { patientReducer } from './reducers/patient-reducer';
 const store = createStore(
     combineReducers({
         form: formReducer,
+        // patient: patientReducer,
         auth: authReducer,
     }),
     applyMiddleware(thunk)

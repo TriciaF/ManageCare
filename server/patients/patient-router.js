@@ -36,7 +36,7 @@ patientRouter.get('/patient/:id', (req, res) => {
 /* ========== POST/CREATE ITEM ========== */
 patientRouter.post('/patient', (req, res) => {
 	console.log('enter post end point');
-	const requiredFields = ['name', 'medication', 'pharmacy', 'physician', ];
+	const requiredFields = ['PatientName', 'medication', 'pharmacy', 'physician', ];
 
 	for (let i = 0; i < requiredFields.length; i++) {
 		const field = requiredFields[i];
@@ -47,27 +47,28 @@ patientRouter.post('/patient', (req, res) => {
 			return res.status(400).send(message);
 		}
 	}
+	const { patientName, medication, pharmacy, physician } = req.body;
 
-	console.log(req.body.name.firstname);
-	const patientName = {
-		firstname: req.body.name.firstname,
-		lastname: req.body.name.lastname
-	};
-	const medication = {
-		name: req.body.medication.name,
-		dosage: req.body.medication.dosage,
-		schedule: req.body.medication.schedule
-	};
-	const pharmacy = {
-		name: req.body.pharmacy.name,
-		address: req.body.pharmacy.address,
-		phoneNumber: req.body.pharmacy.phoneNumber
-	};
-	const physician = {
-		name: req.body.physician.name,
-		address: req.body.physician.address,
-		phoneNumber: req.body.physician.phoneNumber
-	};
+	// console.log(req.body.name.firstname);
+	// const patientName = {
+	// 	firstname: req.body.name.firstname,
+	// 	lastname: req.body.name.lastname
+	// };
+	// const medication = {
+	// 	name: req.body.medication.name,
+	// 	dosage: req.body.medication.dosage,
+	// 	schedule: req.body.medication.schedule
+	// };
+	// const pharmacy = {
+	// 	name: req.body.pharmacy.name,
+	// 	address: req.body.pharmacy.address,
+	// 	phoneNumber: req.body.pharmacy.phoneNumber
+	// };
+	// const physician = {
+	// 	name: req.body.physician.name,
+	// 	address: req.body.physician.address,
+	// 	phoneNumber: req.body.physician.phoneNumber
+	// };
 	patients.create(patientName, medication, pharmacy, physician)
 		.then(response => res.status(201).json(response.serialize()))
 		.catch(err => {
