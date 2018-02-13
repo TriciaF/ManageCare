@@ -36,7 +36,7 @@ patientRouter.get('/patient/:id', (req, res) => {
 /* ========== POST/CREATE ITEM ========== */
 patientRouter.post('/patient', (req, res) => {
 	console.log('enter post end point');
-	const requiredFields = ['PatientName', 'medication', 'pharmacy', 'physician', ];
+	const requiredFields = ['patientName', 'medication', 'pharmacy', 'physician', ];
 
 	for (let i = 0; i < requiredFields.length; i++) {
 		const field = requiredFields[i];
