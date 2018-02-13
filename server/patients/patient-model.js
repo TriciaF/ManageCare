@@ -1,7 +1,7 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const { Patients } = require('./schema');
+const { Patients } = require('./patient-schema');
 
 const patients = {
 	create: function(patientName, medication, pharmacy, physician) {

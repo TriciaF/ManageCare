@@ -3,7 +3,7 @@
 const express = require('express');
 
 const patientRouter = express.Router();
-const { patients } = require('../models/patient-model');
+const { patients } = require('./patient-model');
 const bodyParser = require('body-parser');
 
 patientRouter.use(bodyParser.json());

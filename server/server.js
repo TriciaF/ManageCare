@@ -7,8 +7,9 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const morgan = require('morgan');
-const patientRouter = require('./server/routers/patient-router');
-
+const patientRouter = require('./patients/patient-router');
+const userRouter = require('./users/user-router');
+const authRouter = require('./auth/auth-router');
 const { PORT, DATABASE_URL, CLIENT_ORIGIN } = require('./config');
 
 const app = express();
@@ -19,6 +20,8 @@ app.use(cors({ origin: CLIENT_ORIGIN }));
 app.use(express.static(path.join(__dirname, './client/public')));
 //re-Route requests to our router
 app.use('/', patientRouter);
+app.use('/', userRouter);
+app.use('/auth', authRouter);
 
 //server functions
 let server;

@@ -1,6 +1,5 @@
 'use strict';
 
-const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 
 
@@ -30,19 +29,6 @@ const patientSchema = mongoose.Schema({
 		address: String,
 		phoneNumber: String
 	},
-});
-
-//schema definition for user login
-const UserSchema = mongoose.Schema({
-	username: {
-		type: String,
-		required: true,
-		unique: true
-	},
-	password: {
-		type: String,
-		required: true
-	}
 });
 
 
@@ -94,19 +80,12 @@ patientSchema.methods.serialize = function() {
 	};
 };
 
-//validate passwords
-UserSchema.methods.validatePassword = function(password) {
-	return bcrypt.compare(password, this.password);
-};
 
-UserSchema.methods.hashPassword = function(password) {
-	return bcrypt.hash(password, 10);
-};
 
 
 //declare and export models
 const Medicines = mongoose.model('Medicines', medicineSchema);
 const Patients = mongoose.model('Patients', patientSchema, 'patientDb');
-const Users = mongoose.model('Users', UserSchema);
 
-module.exports = { Medicines, Patients, Users };
+
+module.exports = { Medicines, Patients };
