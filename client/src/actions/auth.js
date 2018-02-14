@@ -1,5 +1,6 @@
 // import jwtDecode from 'jwt-decode';
 import { LOGIN_URL } from '../config';
+import { getPatientList } from './patient';
 
 
 export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN';
@@ -74,6 +75,7 @@ export const login = (username, password) => dispatch => {
         })
         .then(user => {
             dispatch(authSuccess(user))
+            getPatientList();
         })
         .catch(err => {
             dispatch(authError(err))

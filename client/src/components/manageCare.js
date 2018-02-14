@@ -3,8 +3,10 @@ import './manageCare.css';
 import {Route, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import LoginForm from './login-form';
-import PatientForm from './patient-form';
+import PatientList from './patient-list';
+// import PatientDashboard from '/patient-dashboard';
 import {clearAuth} from '../actions/auth';
+import {Redirect} from 'react-router-dom';
 
 export class ManageCare extends React.Component {
   componentWillReceiveProps(nextProps) {
@@ -39,7 +41,9 @@ export class ManageCare extends React.Component {
       if( this.props.loggedIn) {
         console.log('render manageCare after login');
         return (
-          <div><PatientForm /></div>
+          <div>
+            <PatientList />
+          </div>
         )
         
       }
@@ -47,9 +51,10 @@ export class ManageCare extends React.Component {
           <div className = "manageCare" >
             <header className = "manageCare-header" >
               <h1 className = "manageCare-title" >Manage Care</h1>
-              <h2 className = "manageCare-intro" >Helping to track patient care</h2>  
+              <h2 className = "manageCare-intro" >Helping to manage patient care</h2>  
             </header> 
             <Route exact path='/login' component= {LoginForm}/>
+            {/* <Route exact path='/patient' component={PatientDashboard} /> */}
           </div>
         );
     }

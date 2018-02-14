@@ -29,7 +29,7 @@ export class PatientForm extends React.Component {
       phoneNumber: values.physicianPhone
     };
     console.log('onSumit: ',patientName, medication, pharmacy, physician);
-    return this.props.dispatch(createPatientDashboard(patientName, medication, pharmacy, physician));
+    return this.props.dispatch(getPatientList(patientName, medication, pharmacy, physician));
 }
 
 render() {

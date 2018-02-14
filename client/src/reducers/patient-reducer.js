@@ -1,64 +1,27 @@
-import { PATIENT_FORM_SUBMIT, ADD_PATIENT_SUCCESS, ADD_PATIENT_ERROR } from '../actions/patient';
+import { PATIENTLIST_REQUEST_SENT, GET_PATIENTLIST_SUCCESS, GET_PATIENTLIST_ERROR, } from '../actions/patient';
 
 const initialState = {
     loading: false,
     error: null,
-    patient: {
-        name: {
-            firstname: String,
-            lastname: String
-        },
-        medication: {
-            name: String,
-            dosage: String,
-            schedule: String
-        },
-        pharmacy: {
-            name: String,
-            address: String,
-            phoneNumber: String
-        },
-        physician: {
-            name: String,
-            address: String,
-            phoneNumber: String
-        },
-    }
-};
+    patientList: [],
+    },
+
+
 
 export const patientReducer = (state = initialState, action) => {
 
-        if (action.type === PATIENT_FORM_SUBMIT) {
+        if (action.type === PATIENTLIST_REQUEST_SENT) {
             return Object.assign({}, state, {
               loading: action.loading
             });
-        } else if (action.type === ADD_PATIENT_SUCCESS) {
+        } else if (action.type === GET_PATIENTLIST_SUCCESS) {
           console.log('This is the action: ', action);
             return Object.assign({}, state, {
-                error: action.error,
-                patient: {
-                  name: {
-                    firstname: action.name.firstname,
-                    lastname: action.name.lastname
-                  },
-                  medication: {
-                    name: action.medication.name,
-                    dosage: action.medication.dosage,
-                    schedule: action.medication.schedule
-                  },
-                  pharmacy: {
-                    name: action.pharmacy.name,
-                    address: action.pharmacy.address,
-                    phoneNumber: action.pharmacy.phoneNumber
-                  },
-                  physician: {
-                    name: action.physician.name,
-                    address: action.physician.address,
-                    phoneNumber: action.physician.phoneNumber
-                  },
-                }
+                error = false,
+                loading = false,
+                patientList: action.patientList
             });
-        } else if (action.type === ADD_PATIENT_ERROR) {
+        } else if (action.type === GET_PATIENTLIST_ERRORR) {
             return Object.assign({}, state, {
               error: action.error
             });

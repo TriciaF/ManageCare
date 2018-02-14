@@ -10,7 +10,7 @@ patientRouter.use(bodyParser.json());
 
 
 
-/* ========== GET/READ ALL ITEMS ========== */
+/* ========== GET/READ ALL PATIENTS ========== */
 patientRouter.get('/patient', (req, res) => {
 	console.log('enter GET end point');
 	patients.get()
@@ -19,11 +19,11 @@ patientRouter.get('/patient', (req, res) => {
 		})
 		.catch(err => {
 			console.log(err);
-			res.status(500).json({ message: 'Something went wrong' });
+			res.status(500).json({ message: 'Something went wrong in GET all' });
 		});
 });
 
-/* ========== GET/READ SINGLE ITEMS ========== */
+/* ========== GET/READ PATIENT BY ID ========== */
 patientRouter.get('/patient/:id', (req, res) => {
 	console.log('enter GET/id end point');
 	patients.get(req.params.id)

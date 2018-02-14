@@ -1,6 +1,5 @@
 'use strict';
 
-const mongoose = require('mongoose');
 const { Patients } = require('./patient-schema');
 
 const patients = {
@@ -31,9 +30,8 @@ const patients = {
 		console.log('Enter Patients:Get');
 		if (id === null) {
 			return Patients.find();
-		} else {
+		} else
 			return Patients.findById(id);
-		}
 	},
 
 	update: function(id, patientName, medication, pharmacy, physician) {

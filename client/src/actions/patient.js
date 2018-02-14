@@ -1,39 +1,34 @@
 import { API_BASE_URL } from '../config';
 
 
-export const PATIENT_FORM_SUBMIT = 'PATIENT_FORM_SUBMIT';
-export const patientFormSubmit = () => ({
-    type: PATIENT_FORM_SUBMIT
+export const PATIENTLIST_REQUEST_SENT = 'PATIENTLIST_REQUEST_SENT';
+export const patientListRequestSent = () => ({
+    type: PATIENTLIST_REQUEST_SENT,
+    loading
 });
 
-export const ADD_PATIENT_SUCCESS = 'ADD_PATIENT_SUCCESS';
-export const addPatientSuccess = patient => ({
-    type: ADD_PATIENT_SUCCESS,
-    patient
+export const GET_PATIENTLIST_SUCCESS = 'GET_PATIENTLIST_SUCCESS';
+export const getPatientListSuccess = patientList => ({
+    type: GET_PATIENTLIST_SUCCESS,
+    patientList
 });
 
-export const ADD_PATIENT_ERROR = 'ADD_PATIENT_ERROR';
-export const addPatientError = error => ({
-    type: ADD_PATIENT_ERROR,
+export const GET_PATIENTLIST_ERROR = 'GET_PATIENTLIST_ERROR';
+export const getPatientListError = error => ({
+    type: GET_PATIENTLIST_ERROR,
     error
 })
 
-
-export const createPatientDashboard = (patientName, medication, pharmacy, physician) => dispatch => {
-    console.log('entered async action patientStore');
-    dispatch(patientFormSubmit());
+//fetch list of all patients, medications, pharmacy and physician
+export const getPatientList = () => dispatch => {
+    console.log('entered async action getPatientList');
+    dispatch(patientListRequestSent());
     return (
         fetch(`${API_BASE_URL}`, {
-            method: 'POST',
+            method: 'GET',
             headers: {
                 'content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                patientName,
-                medication,
-                pharmacy,
-                physician
-            })
         })
         .then(res => {
             if (!res.ok) {
@@ -41,11 +36,11 @@ export const createPatientDashboard = (patientName, medication, pharmacy, physic
             }
             return res.json();
         })
-        .then(patient => {
-            dispatch(addPatientSuccess(patient));
+        .then(list => {
+            dispatch(getPatientListSuccess(list));
         })
         .catch(err => {
-            dispatch(addPatientError());
+            dispatch(getPatientListError());
         })
     )
 }
