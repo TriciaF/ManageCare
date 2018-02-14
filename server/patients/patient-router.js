@@ -49,26 +49,6 @@ patientRouter.post('/patient', (req, res) => {
 	}
 	const { patientName, medication, pharmacy, physician } = req.body;
 
-	// console.log(req.body.name.firstname);
-	// const patientName = {
-	// 	firstname: req.body.name.firstname,
-	// 	lastname: req.body.name.lastname
-	// };
-	// const medication = {
-	// 	name: req.body.medication.name,
-	// 	dosage: req.body.medication.dosage,
-	// 	schedule: req.body.medication.schedule
-	// };
-	// const pharmacy = {
-	// 	name: req.body.pharmacy.name,
-	// 	address: req.body.pharmacy.address,
-	// 	phoneNumber: req.body.pharmacy.phoneNumber
-	// };
-	// const physician = {
-	// 	name: req.body.physician.name,
-	// 	address: req.body.physician.address,
-	// 	phoneNumber: req.body.physician.phoneNumber
-	// };
 	patients.create(patientName, medication, pharmacy, physician)
 		.then(response => res.status(201).json(response.serialize()))
 		.catch(err => {
@@ -79,7 +59,7 @@ patientRouter.post('/patient', (req, res) => {
 /* ========== PUT/UPDATE A SINGLE ITEM ========== */
 patientRouter.put('/patient/:id', (req, res) => {
 	console.log('enter put end point');
-	const requiredFields = ['name', 'medication', 'pharmacy', 'physician', ];
+	const requiredFields = ['patientName', 'medication', 'pharmacy', 'physician', ];
 
 	for (let i = 0; i < requiredFields.length; i++) {
 		const field = requiredFields[i];
@@ -90,26 +70,28 @@ patientRouter.put('/patient/:id', (req, res) => {
 			return res.status(400).send(message);
 		}
 	}
+	// const id = req.params.id;
+	// const patientName = {
+	//     firstname: req.body.name.firstname,
+	//     lastname: req.body.name.lastname
+	// };
+	// const medication = {
+	//     name: req.body.medication.name,
+	//     dosage: req.body.medication.dosage,
+	//     schedule: req.body.medication.schedule
+	// };
+	// const pharmacy = {
+	//     name: req.body.pharmacy.name,
+	//     address: req.body.pharmacy.address,
+	//     phoneNumber: req.body.pharmacy.phoneNumber
+	// };
+	// const physician = {
+	//     name: req.body.physician.name,
+	//     address: req.body.physician.address,
+	//     phoneNumber: req.body.physician.phoneNumber
+	// };
+	const { patientName, medication, pharmacy, physician } = req.body;
 	const id = req.params.id;
-	const patientName = {
-		firstname: req.body.name.firstname,
-		lastname: req.body.name.lastname
-	};
-	const medication = {
-		name: req.body.medication.name,
-		dosage: req.body.medication.dosage,
-		schedule: req.body.medication.schedule
-	};
-	const pharmacy = {
-		name: req.body.pharmacy.name,
-		address: req.body.pharmacy.address,
-		phoneNumber: req.body.pharmacy.phoneNumber
-	};
-	const physician = {
-		name: req.body.physician.name,
-		address: req.body.physician.address,
-		phoneNumber: req.body.physician.phoneNumber
-	};
 
 	patients.update(id, patientName, medication, pharmacy, physician)
 		.then(response => res.status(204).json(response))

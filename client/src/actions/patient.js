@@ -19,7 +19,7 @@ export const addPatientError = error => ({
 })
 
 
-export const patientStore = (patientName, medication, pharmacy, physician) => dispatch => {
+export const createPatientDashboard = (patientName, medication, pharmacy, physician) => dispatch => {
     console.log('entered async action patientStore');
     dispatch(patientFormSubmit());
     return (

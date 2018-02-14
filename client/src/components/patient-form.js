@@ -3,7 +3,7 @@ import '../index.css';
 import {Field, reduxForm, focus} from 'redux-form';
 import {required, nonEmpty} from '../validators';
 import PatientInput from './patient-input';
-import {patientStore} from '../actions/patient';
+import {createPatientDashboard} from '../actions/patient';
 
 export class PatientForm extends React.Component {
 
@@ -29,7 +29,7 @@ export class PatientForm extends React.Component {
       phoneNumber: values.physicianPhone
     };
     console.log('onSumit: ',patientName, medication, pharmacy, physician);
-    return this.props.dispatch(patientStore(patientName, medication, pharmacy, physician));
+    return this.props.dispatch(createPatientDashboard(patientName, medication, pharmacy, physician));
 }
 
 render() {
@@ -138,5 +138,5 @@ render() {
 
   export default reduxForm({
     form: 'patientForm',
-    // onSubmitFail: (errors, dispatch) => dispatch(focus('login', 'username'))
+    onSubmitFail: (errors, dispatch) => dispatch(focus('login', 'username'))
 })(PatientForm);

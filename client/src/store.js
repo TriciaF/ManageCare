@@ -1,11 +1,11 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import thunk from 'redux-thunk';
-import { loadAuthToken } from './local-storage';
+// import { loadAuthToken } from './local-storage';
 import authReducer from './reducers/auth-reducer';
 // import protectedDataReducer from './reducers/protected-data';
 // import {setAuthToken, refreshAuthToken} from './actions/auth';
-import { patientReducer } from './reducers/patient-reducer';
+// import { patientReducer } from './reducers/patient-reducer';
 
 
 // export default createStore(patientReducer, applyMiddleware(thunk));
@@ -15,8 +15,7 @@ const store = createStore(
         form: formReducer,
         // patient: patientReducer,
         auth: authReducer,
-    }),
-    applyMiddleware(thunk)
+    }), applyMiddleware(thunk)
 );
 
 // Hydrate the authToken from localStorage if it exist

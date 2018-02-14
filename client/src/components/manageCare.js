@@ -4,8 +4,7 @@ import {Route, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import LoginForm from './login-form';
 import PatientForm from './patient-form';
-import {logoutTimer, logoutWarning, clearAuth} from '../actions/auth';
-import Redirect from 'react-router-dom/Redirect';
+import {clearAuth} from '../actions/auth';
 
 export class ManageCare extends React.Component {
   componentWillReceiveProps(nextProps) {
@@ -44,7 +43,6 @@ export class ManageCare extends React.Component {
         )
         
       }
-      console.log('return in ManageCare component');
         return ( 
           <div className = "manageCare" >
             <header className = "manageCare-header" >

@@ -1,9 +1,6 @@
-import jwtDecode from 'jwt-decode';
-import { SubmissionError, reset } from 'redux-form';
-
+// import jwtDecode from 'jwt-decode';
 import { LOGIN_URL } from '../config';
-import { normalizeResponseErrors } from './utils';
-import { saveAuthToken, clearAuthToken } from '../local-storage';
+
 
 export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN';
 export const setAuthToken = authToken => ({
@@ -49,11 +46,11 @@ export const logoutWarning = logoutWarning => ({
 // };
 
 //does not save token to local storage
-const storeAuthInfo = (authToken, dispatch) => {
-    const decodedToken = jwtDecode(authToken);
-    dispatch(setAuthToken(authToken));
-    dispatch(authSuccess(decodedToken.user));
-};
+// const storeAuthInfo = (authToken, dispatch) => {
+//     const decodedToken = jwtDecode(authToken);
+//     dispatch(setAuthToken(authToken));
+//     dispatch(authSuccess(decodedToken.user));
+// };
 
 export const login = (username, password) => dispatch => {
     console.log(username, password);
@@ -69,18 +66,17 @@ export const login = (username, password) => dispatch => {
                 password
             })
         })
-        .then( res => {
-          if (!res.ok) {
-              return Promise.reject(res.statusText)
-          }
-          return res.json();
+        .then(res => {
+            if (!res.ok) {
+                return Promise.reject(res.statusText)
+            }
+            return res.json();
         })
-        .then (user => {
-          dispatch(authSuccess(user))
+        .then(user => {
+            dispatch(authSuccess(user))
         })
         .catch(err => {
-          dispatch(authError(err))
+            dispatch(authError(err))
         })
     );
 };
-
