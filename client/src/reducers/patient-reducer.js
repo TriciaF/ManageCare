@@ -4,24 +4,23 @@ const initialState = {
     loading: false,
     error: null,
     patientList: [],
-    },
+    };
 
 
-
-export const patientReducer = (state = initialState, action) => {
-
+export default function reducer(state = initialState, action) {
         if (action.type === PATIENTLIST_REQUEST_SENT) {
             return Object.assign({}, state, {
               loading: action.loading
             });
         } else if (action.type === GET_PATIENTLIST_SUCCESS) {
-          console.log('This is the action: ', action);
             return Object.assign({}, state, {
-                error = false,
-                loading = false,
-                patientList: action.patientList
+                error: false,
+                loading: false,
+                patientList: [...state.patientList, {
+                  name: action.name
+                }]
             });
-        } else if (action.type === GET_PATIENTLIST_ERRORR) {
+        } else if (action.type === GET_PATIENTLIST_ERROR) {
             return Object.assign({}, state, {
               error: action.error
             });

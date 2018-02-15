@@ -1,10 +1,10 @@
 // import jwtDecode from 'jwt-decode';
 import { LOGIN_URL } from '../config';
-import { getPatientList } from './patient';
+
 
 
 export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN';
-export const setAuthToken = authToken => ({
+export const setAuthToken = (authToken) => ({
     type: SET_AUTH_TOKEN,
     authToken
 });
@@ -20,22 +20,24 @@ export const authRequest = () => ({
 });
 
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
-export const authSuccess = currentUser => ({
+export const authSuccess = (currentUser, loggedIn) => ({
     type: AUTH_SUCCESS,
-    currentUser
+    currentUser,
+    loggedIn
 });
 
 export const AUTH_ERROR = 'AUTH_ERROR';
-export const authError = error => ({
+export const authError = (error) => ({
     type: AUTH_ERROR,
     error
 });
 
 export const LOGOUT_WARNING = 'LOGOUT_WARNING';
-export const logoutWarning = logoutWarning => ({
+export const logoutWarning = (logoutWarning) => ({
     type: LOGOUT_WARNING,
     logoutWarning
 });
+
 
 // Stores the auth token in state and localStorage, and decodes and stores
 // the user data stored in the token
@@ -54,10 +56,8 @@ export const logoutWarning = logoutWarning => ({
 // };
 
 export const login = (username, password) => dispatch => {
-    console.log(username, password);
     dispatch(authRequest());
-    return (
-        fetch(`${LOGIN_URL}`, {
+    return fetch(`${LOGIN_URL}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -75,10 +75,8 @@ export const login = (username, password) => dispatch => {
         })
         .then(user => {
             dispatch(authSuccess(user))
-            getPatientList();
         })
         .catch(err => {
             dispatch(authError(err))
         })
-    );
 };

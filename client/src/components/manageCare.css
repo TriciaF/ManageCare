@@ -14,7 +14,8 @@ body {
     height: 100%;
 }
 
-.manageCare {
+.manageCare,
+.app {
     text-align: center;
     margin-top: 40px;
     width: 100%;

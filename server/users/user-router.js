@@ -99,7 +99,7 @@ userRouter.post('/login', (req, res) => {
 	users.create(username, password)
 		.then(response => {
 			console.log('user.create: ', username);
-			return res.status(201).json(username);
+			return res.status(201).json(username).end();
 		})
 		.catch(err => {
 			console.log(err);

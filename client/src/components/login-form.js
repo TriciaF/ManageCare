@@ -5,11 +5,13 @@ import {login} from '../actions/auth';
 import {required, nonEmpty} from '../validators';
 
 export class LoginForm extends React.Component {
+
     onSubmit(values) {
         return this.props.dispatch(login(values.username, values.password));
     }
 
     render() {
+      console.log('Enter LoginForm component');
         let error;
         if (this.props.error) {
             error = (

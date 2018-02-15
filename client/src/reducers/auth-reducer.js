@@ -4,7 +4,7 @@ import {
     AUTH_REQUEST,
     AUTH_SUCCESS,
     AUTH_ERROR,
-    LOGOUT_WARNING
+    LOGOUT_WARNING,
 } from '../actions/auth';
 
 const initialState = {
@@ -25,7 +25,6 @@ export default function reducer(state = initialState, action) {
         return Object.assign({}, state, {
             authToken: null,
             currentUser: null,
-            loggedIn: false
         });
     } else if (action.type === AUTH_REQUEST) {
         return Object.assign({}, state, {
@@ -36,7 +35,7 @@ export default function reducer(state = initialState, action) {
         return Object.assign({}, state, {
             loading: false,
             currentUser: action.currentUser,
-            loggedIn: true
+            loggedIn: action.loggedIn
         });
     } else if (action.type === AUTH_ERROR) {
         return Object.assign({}, state, {
@@ -48,6 +47,5 @@ export default function reducer(state = initialState, action) {
         return Object.assign({}, state, {
             logoutWarning: true
         });
-    }
-    return state;
+    } else return state;
 }
