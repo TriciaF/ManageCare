@@ -36,10 +36,10 @@ export const getPatientList = () => (dispatch) => {
             return res.json();
         })
         .then(list => {
-          console.log('This is the list back from fetch: ', list);
-          dispatch(getPatientListSuccess(list));
+            console.log('This is the list back from fetch: ', list);
+            dispatch(getPatientListSuccess(list));
         })
         .catch(err => {
-          dispatch(getPatientListError());
+            dispatch(getPatientListError());
         })
 }

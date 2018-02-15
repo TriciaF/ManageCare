@@ -10,16 +10,17 @@ export class PatientList extends React.Component {
     this.props.dispatch(getPatientList());
   };
 
+  //not sure this is needed?
   componentWillReceiveProps(nextProps) {
-    const patients = nextProps.patientList.map(patient => {
-      console.log('PatientList', patient.name);
-      return patient.name;
-    });
+    console.log('Reenter PatientList', this.props.patientList);
   }
 
    render() {
-
-
+    //  //map over state.patientList to obtain the patient name
+    //  const patients = this.props.patientList.map(patient => {
+    //    console.log('This is the patient name', patient.name)
+    //    return patient.name;
+    //  })
     return (
         <div>
           <DropdownList
@@ -32,7 +33,7 @@ export class PatientList extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  patientList: state.patientList
+    patientList: state.patientList
 });
 
 export default connect(mapStateToProps)(PatientList);
