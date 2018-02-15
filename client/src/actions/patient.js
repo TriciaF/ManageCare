@@ -18,6 +18,11 @@ export const getPatientListError = (error) => ({
     type: GET_PATIENTLIST_ERROR,
     error
 })
+export const SET_CURRENT_PATIENT = 'SET_CURRENT_PATIENT';
+export const setCurrentPatient = (currentPatient) => ({
+    type: SET_CURRENT_PATIENT,
+    currentPatient
+})
 
 //fetch list of all patients, medications, pharmacy and physician
 export const getPatientList = () => (dispatch) => {

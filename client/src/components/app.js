@@ -3,7 +3,6 @@ import {Route, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import ManageCare from './manageCare';
 import PatientList from './patient-list';
-// import PatientDashboard from '/patient-dashboard';
 import {clearAuth} from '../actions/auth';
 
 export class App extends React.Component {
@@ -40,7 +39,6 @@ export class App extends React.Component {
           <div className = "app" >
             <Route exact path="/" component= {ManageCare}/>
             <Route exact path="/patient" component= {PatientList}/>
-            {/* <Route exact path='/patient' component={PatientDashboard} /> */}
           </div>
         );
     }

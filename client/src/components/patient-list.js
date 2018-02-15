@@ -1,7 +1,9 @@
 import React from 'react';
 import {DropdownList} from 'react-widgets';
 import {connect} from 'react-redux';
-import {getPatientList} from '../actions/patient';
+import {getPatientList, setCurrentPatient} from '../actions/patient';
+import './patient-list.css';
+import PatientDashboard from './patient-dashboard';
 
 
 export class PatientList extends React.Component {
@@ -10,30 +12,37 @@ export class PatientList extends React.Component {
     this.props.dispatch(getPatientList());
   };
 
-  //not sure this is needed?
-  componentWillReceiveProps(nextProps) {
-    console.log('Reenter PatientList', this.props.patientList);
-  }
+  onChange(value) {
+   return this.props.dispatch(setCurrentPatient(value));
+  };
+
 
    render() {
-    //  //map over state.patientList to obtain the patient name
-    //  const patients = this.props.patientList.map(patient => {
-    //    console.log('This is the patient name', patient.name)
-    //    return patient.name;
-    //  })
-    return (
-        <div>
-          <DropdownList
-            data={this.props.patientList}
-          />
-        </div>
-    );//end return
+     if(this.props.currentPatient) {
+       return (
+        <PatientDashboard />
+       )
+     }
+     //map over state.patientList to obtain the patient name
+     const patients = this.props.patientList.map(patient => {
+       return patient.name;
+     })
 
+    return (
+      <form className="patient-list">
+        <DropdownList
+          data={patients}
+          value={this.props.currentPatient}
+          onChange={value => this.onChange(value)}
+        />
+      </form>
+    );//end return
+  }//end render
 }//end PatientDashboard
-}
 
 const mapStateToProps = state => ({
-    patientList: state.patientList
+    patientList: state.patient.patientList,
+    currentPatient: state.patient.currentPatient
 });
 
 export default connect(mapStateToProps)(PatientList);
