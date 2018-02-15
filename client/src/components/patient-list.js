@@ -12,7 +12,8 @@ export class PatientList extends React.Component {
     this.props.dispatch(getPatientList());
   };
 
-  onChange(value) {
+  onChange(value) {;
+    console.log('enter onChange setCurrentPatient')
    return this.props.dispatch(setCurrentPatient(value));
   };
 
