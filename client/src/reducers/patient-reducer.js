@@ -54,16 +54,15 @@ export default function reducer(state = initialState, action) {
         }]
       });
     } else if (action.type === SET_PATIENT_DASHBOARD) {
-      console.log('Enter SetPatientDashboard: ', state.currentPatient);
-      for(let [key, value] of Object.entries(state.patientList)) {
-        if(value === state.currentPatient) {
-          let patientDash = {
-            key: value
-          }
-        }
-        return Object.assign({}, state, {patientDashboard: patientDash});
-      };
-      
+      console.log('Enter SetPatientDashboard: ', action.patientList);
+      return Object.assign ( {}, state, { 
+        patientDashboard: action.patientDashboard
+      });
+      // for(let [key, value] of Object.entries(state.patientList)) {
+      //   if(value === state.currentPatient) {
+      //     return Object.assign(state.patientDashboard, {key:value});
+      //   };
+      // };
     } else if (action.type === REMOVE_MEDICATION) {
         return Object.assign({}, state, {
           error: action.error

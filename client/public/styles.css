@@ -1,0 +1,81 @@
+html,
+body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+
+/* body:before {
+    background-image: url(https://i.imgur.com/BiokhGd.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+} */
+
+body:before {
+    background-image: url(https://i.imgur.com/BiokhGd.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: block;
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    opacity: .3;
+}
+
+.manageCare,
+.app {
+    text-align: center;
+    margin-top: 40px;
+    width: 100%;
+}
+
+#circle {
+    background-color: #AFEEEE;
+    height: 300px;
+    width: 300px;
+    color: black;
+    opacity: 5;
+    padding: 10px;
+    font-family: Verdana;
+    border-radius: 50%;
+    margin-left: 20px;
+}
+
+.manageCare-title {
+    font-size: 30px;
+    position: absolute;
+    top: 100px;
+    left: 90px;
+}
+
+.manageCare-intro {
+    font-size: 20px;
+    position: absolute;
+    top: 150px;
+    left: 40px;
+}
+
+.patient-dashboard {
+    font-family: Verdana;
+    color: black;
+    height: 24px;
+    font-weight: bold;
+}
+
+@keyframes manageCare-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

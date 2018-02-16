@@ -3,32 +3,33 @@ import {connect} from 'react-redux';
 import {setPatientDashboard} from '../actions/patient';
 
 export class PatientDashboard extends React.Component {
-  componentWillMount() {
-    console.log('enter componetWillMount PatientDashboard', this.props.currentPatient);
-    return this.props.dispatch(setPatientDashboard(this.props.currentPatient))
-  }
+  // componentWillMount() {
+  //   console.log('enter componetWillMount PatientDashboard', this.props.currentPatient);
+  //   return this.props.dispatch(setPatientDashboard(this.props.currentPatient))
+  // }
 
   render() {
-    // console.log(this.props.patientDashboard);
+
     //map over state.patientList to obtain the patient name
-    // this.props.patientDashboard = this.props.patientList.find(patient => {
-    //   return patient.name === this.props.currentPatient
-    // });
-    
+    const patientDashboard = this.props.patientList.find(patient => {
+      return patient.name === this.props.currentPatient
+    });
+
+    this.props.dispatch(setPatientDashboard(patientDashboard));
 
     return (
         <form className="patient-dashboard">
           <div>
-            {this.props.patientDashboard.name}
+            {patientDashboard.name}
           </div>
           <div>
-            {this.props.patientDashboard.medication}
+            {patientDashboard.medication}
           </div>
           <div>
-            {this.props.patientDashboard.pharmacy}
+            {patientDashboard.pharmacy}
           </div>
           <div>
-            {this.props.patientDashboard.physician}
+            {patientDashboard.physician}
           </div>
           <div>
             <button className="dashboard-button">Add Medication</button>
