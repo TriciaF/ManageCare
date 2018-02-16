@@ -15,7 +15,7 @@ export class ManageCare extends React.Component {
       }
 
     return (
-        <div classNameName="manage-care">
+        <div className="manage-care">
           <LoginForm />
         </div>
     );

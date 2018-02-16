@@ -18,29 +18,37 @@ export class PatientDashboard extends React.Component {
     this.props.dispatch(setPatientDashboard(patientDashboard));
 
     return (
-        <form className="patient-dashboard">
-          <div>
-            {patientDashboard.name}
-          </div>
-          <div>
-            {patientDashboard.medication}
-          </div>
-          <div>
-            {patientDashboard.pharmacy}
-          </div>
-          <div>
-            {patientDashboard.physician}
-          </div>
-          <div>
-            <button className="dashboard-button">Add Medication</button>
-          </div>
-          <div>
-            <button className="dashboard-button">Remove Medication</button>
-          </div>
-          <div>
-            <button className="dashboard-button">Update Patient Information</button>
-          </div>
-        </form>
+      <form className="patient-dashboard">
+        <div className="dashboard-header">
+            <h1 className="dashboard-name">
+                {patientDashboard.name}
+            </h1>
+        </div>
+        <div className="dashboard-content">
+          <ul className="dashboard">
+            <li>
+              {patientDashboard.medication}
+            </li>
+          <li>
+              {patientDashboard.pharmacy}
+          </li>
+          <li>
+              {patientDashboard.physician}
+          </li>
+          </ul>
+        </div>
+        <div className="buttons">
+            <div>
+              <button className="dashboard-button">Add Medication</button>
+            </div>
+            <div>
+              <button className="dashboard-button">Remove Medication</button>
+            </div>
+            <div>
+              <button className="dashboard-button">Update Patient Information</button>
+            </div>
+        </div> 
+      </form>  
     );//end return
   }//end render
 }//end PatientDashboard

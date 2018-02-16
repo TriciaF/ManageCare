@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {getPatientList, setCurrentPatient} from '../actions/patient';
 import './patient-list.css';
 import PatientDashboard from './patient-dashboard';
+import 'react-widgets/dist/css/react-widgets.css';
 
 
 export class PatientList extends React.Component {
@@ -32,6 +33,7 @@ export class PatientList extends React.Component {
     return (
       <form className="patient-list">
         <DropdownList
+          className="dropdown_customized"
           data={patients}
           value={this.props.currentPatient}
           onChange={value => this.onChange(value)}
