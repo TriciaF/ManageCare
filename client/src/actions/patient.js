@@ -84,13 +84,16 @@ export const getPatientList = () => (dispatch) => {
 
 //update the local store and add medication, then update the patient database
 export const addToDashboard = (id) => dispatch => {
+  console.log("Enter addToDashboard");
   dispatch(patientListRequestSent());
-  dispatch(addMedication(patientList));
+  // dispatch(addMedication(patientDashboard));
+  // const id = state.patientDashboard.id;
   return fetch(`${API_BASE_URL}/id`, {
           method: 'POST',
           headers: {
             'content-Type': 'application/json'
           },
+          // body: JSON.stringify(obj)
         })//end fetch
         .then(res => {
           if(!res.ok) {
@@ -107,6 +110,7 @@ export const addToDashboard = (id) => dispatch => {
 
 //update the local store to remove medication, then update the patient database
 export const removeFromDashboard = (id) => dispatch => {
+  console.log("Enter removeFromDashboard");
   dispatch(patientListRequestSent());
   dispatch(removeMedication(patientList));
   return fetch(`${API_BASE_URL}/id`, {
@@ -130,6 +134,7 @@ export const removeFromDashboard = (id) => dispatch => {
 
 //update the local store with updated patient information, then update the patient database
 export const updateDashboard = (id) => dispatch => {
+  console.log("Enter updateDashboard");
   dispatch(patientListRequestSent());
   return fetch(`${API_BASE_URL}/id`, {
           method: 'PUT',

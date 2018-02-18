@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {setPatientDashboard} from '../actions/patient';
+import {setPatientDashboard, addToDashboard, removeFromDashboard, updateDashboard} from '../actions/patient';
 
 export class PatientDashboard extends React.Component {
   // componentWillMount() {
@@ -39,13 +39,13 @@ export class PatientDashboard extends React.Component {
         </div>
         <div className="buttons">
             <div>
-              <button className="dashboard-button">Add Medication</button>
+              <button className="dashboard-button" onClick={this.props.dispatch(addToDashboard(this.props.patientList))}>Add Medication</button>
             </div>
             <div>
-              <button className="dashboard-button">Remove Medication</button>
+              <button className="dashboard-button" onClick={this.props.dispatch(removeFromDashboard(this.props.patientList))}>Remove Medication</button>
             </div>
             <div>
-              <button className="dashboard-button">Update Patient Information</button>
+              <button className="dashboard-button" onClick={this.props.dispatch(updateDashboard(this.props.patientList))}>Update Patient Information</button>
             </div>
         </div> 
       </form>  

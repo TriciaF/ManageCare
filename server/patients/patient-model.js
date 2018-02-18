@@ -3,26 +3,15 @@
 const { Patients } = require('./patient-schema');
 
 const patients = {
-	create: function(patientName, medication, pharmacy, physician) {
+	create: function(patientName, medication) {
 		console.log('Enter Patients:create');
+		const meds = medication.map(item => {
+			return item;
+		});
 		return Patients
 			.create({
 				name: { firstname: patientName.firstname, lastname: patientName.lastname },
-				medication: {
-					name: medication.name,
-					dosage: medication.dosage,
-					schedule: medication.schedule
-				},
-				pharmacy: {
-					name: pharmacy.name,
-					address: pharmacy.address,
-					phoneNumber: pharmacy.phoneNumber
-				},
-				physician: {
-					name: physician.name,
-					address: physician.address,
-					phoneNumber: physician.phoneNumber
-				}
+				medication: meds
 			});
 	},
 
@@ -39,21 +28,21 @@ const patients = {
 		console.log(id);
 		const updateObj = {
 			name: { firstname: patientName.firstname, lastname: patientName.lastname },
-			medication: {
+			medication: [{
 				name: medication.name,
 				dosage: medication.dosage,
-				schedule: medication.schedule
-			},
-			pharmacy: {
-				name: pharmacy.name,
-				address: pharmacy.address,
-				phoneNumber: pharmacy.phoneNumber
-			},
-			physician: {
-				name: physician.name,
-				address: physician.address,
-				phoneNumber: physician.phoneNumber
-			},
+				schedule: medication.schedule,
+				pharmacy: {
+					name: pharmacy.name,
+					address: pharmacy.address,
+					phoneNumber: pharmacy.phoneNumber
+				},
+				physician: {
+					name: physician.name,
+					address: physician.address,
+					phoneNumber: physician.phoneNumber
+				},
+			}]
 		};
 		console.log(updateObj);
 		return Patients

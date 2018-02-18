@@ -45,16 +45,10 @@ export default function reducer(state = initialState, action) {
       });
     } else if (action.type === ADD_MEDICATION) {
         return Object.assign({}, state, {
-        patientList: [...state.patientList, {
-            medication: {
-                name: action.medication.name,
-                dosage: action.medication.dosage,
-                schedule: action.medication.schedule
-            },
-        }]
+        patientDashboard: action.patientList
       });
     } else if (action.type === SET_PATIENT_DASHBOARD) {
-      console.log('Enter SetPatientDashboard: ', action.patientList);
+      console.log('Enter SetPatientDashboard: ', action.Dashboard);
       return Object.assign ( {}, state, { 
         patientDashboard: action.patientDashboard
       });

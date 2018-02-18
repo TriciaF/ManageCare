@@ -36,7 +36,7 @@ patientRouter.get('/patient/:id', (req, res) => {
 /* ========== POST/CREATE ITEM ========== */
 patientRouter.post('/patient', (req, res) => {
 	console.log('enter post end point');
-	const requiredFields = ['patientName', 'medication', 'pharmacy', 'physician', ];
+	const requiredFields = ['name', 'medication'];
 
 	for (let i = 0; i < requiredFields.length; i++) {
 		const field = requiredFields[i];
@@ -47,10 +47,13 @@ patientRouter.post('/patient', (req, res) => {
 			return res.status(400).send(message);
 		}
 	}
-	const { patientName, medication, pharmacy, physician } = req.body;
+	const { name, medication } = req.body;
 
-	patients.create(patientName, medication, pharmacy, physician)
-		.then(response => res.status(201).json(response.serialize()))
+	patients.create(name, medication)
+		.then(response => {
+			console.log('Response from create: ', response);
+			res.status(201).json(response.serialize());
+		})
 		.catch(err => {
 			res.status(500).json({ message: "Internal server error'});" });
 		});
@@ -70,26 +73,7 @@ patientRouter.put('/patient/:id', (req, res) => {
 			return res.status(400).send(message);
 		}
 	}
-	// const id = req.params.id;
-	// const patientName = {
-	//     firstname: req.body.name.firstname,
-	//     lastname: req.body.name.lastname
-	// };
-	// const medication = {
-	//     name: req.body.medication.name,
-	//     dosage: req.body.medication.dosage,
-	//     schedule: req.body.medication.schedule
-	// };
-	// const pharmacy = {
-	//     name: req.body.pharmacy.name,
-	//     address: req.body.pharmacy.address,
-	//     phoneNumber: req.body.pharmacy.phoneNumber
-	// };
-	// const physician = {
-	//     name: req.body.physician.name,
-	//     address: req.body.physician.address,
-	//     phoneNumber: req.body.physician.phoneNumber
-	// };
+
 	const { patientName, medication, pharmacy, physician } = req.body;
 	const id = req.params.id;
 
