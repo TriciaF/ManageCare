@@ -10,7 +10,7 @@ const patients = {
 		});
 		return Patients
 			.create({
-				name: { firstname: patientName.firstname, lastname: patientName.lastname },
+				name: patientName,
 				medication: meds
 			});
 	},
@@ -23,26 +23,15 @@ const patients = {
 			return Patients.findById(id);
 	},
 
-	update: function(id, patientName, medication, pharmacy, physician) {
+	update: function(id, patientName, medication) {
+
 		console.log('Enter Patients:Update');
-		console.log(id);
+		const meds = medication.map(item => {
+			return item;
+		});
 		const updateObj = {
-			name: { firstname: patientName.firstname, lastname: patientName.lastname },
-			medication: [{
-				name: medication.name,
-				dosage: medication.dosage,
-				schedule: medication.schedule,
-				pharmacy: {
-					name: pharmacy.name,
-					address: pharmacy.address,
-					phoneNumber: pharmacy.phoneNumber
-				},
-				physician: {
-					name: physician.name,
-					address: physician.address,
-					phoneNumber: physician.phoneNumber
-				},
-			}]
+			name: patientName,
+			medication: meds
 		};
 		console.log(updateObj);
 		return Patients

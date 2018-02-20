@@ -38,6 +38,12 @@ export const logoutWarning = (logoutWarning) => ({
     logoutWarning
 });
 
+export const SHOW_LOGIN_FORM = 'SHOW_LOGIN_FORM';
+export const showLoginForm = () => ({
+    type: SHOW_LOGIN_FORM,
+    showLoginForm
+});
+
 
 // Stores the auth token in state and localStorage, and decodes and stores
 // the user data stored in the token

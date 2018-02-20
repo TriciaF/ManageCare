@@ -51,18 +51,17 @@ patientRouter.post('/patient', (req, res) => {
 
 	patients.create(name, medication)
 		.then(response => {
-			console.log('Response from create: ', response);
 			res.status(201).json(response.serialize());
 		})
 		.catch(err => {
-			res.status(500).json({ message: "Internal server error'});" });
+			res.status(500).json(err);
 		});
 });
 
 /* ========== PUT/UPDATE A SINGLE ITEM ========== */
 patientRouter.put('/patient/:id', (req, res) => {
 	console.log('enter put end point');
-	const requiredFields = ['patientName', 'medication', 'pharmacy', 'physician', ];
+	const requiredFields = ['name', 'medication'];
 
 	for (let i = 0; i < requiredFields.length; i++) {
 		const field = requiredFields[i];
@@ -74,14 +73,13 @@ patientRouter.put('/patient/:id', (req, res) => {
 		}
 	}
 
-	const { patientName, medication, pharmacy, physician } = req.body;
+	const { name, medication } = req.body;
 	const id = req.params.id;
 
-	patients.update(id, patientName, medication, pharmacy, physician)
+	patients.update(id, name, medication)
 		.then(response => res.status(204).json(response))
 		.catch(err => {
-			console.log(err);
-			res.status(500).json({ message: 'Something went wrong: Update Patient' });
+			res.status(500).json(err);
 		});
 });
 
