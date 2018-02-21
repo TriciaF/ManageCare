@@ -75,7 +75,6 @@ patientRouter.put('/patient/:id', (req, res) => {
 
 	const { name, medication } = req.body;
 	const id = req.params.id;
-
 	patients.update(id, name, medication)
 		.then(response => res.status(204).json(response))
 		.catch(err => {

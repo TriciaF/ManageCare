@@ -1,12 +1,14 @@
-import {PATIENTLIST_REQUEST_SENT, 
-        GET_PATIENTLIST_SUCCESS, 
-        GET_PATIENTLIST_ERROR, 
-        SET_CURRENT_PATIENT,
-        SET_PATIENT_DASHBOARD,
-        UPDATE_PATIENT_SUCCESS,
-        UPDATE_PATIENT_ERROR,
-        ADD_MEDICATION,
-        REMOVE_MEDICATION} from '../actions/patient';
+import {
+    PATIENTLIST_REQUEST_SENT,
+    GET_PATIENTLIST_SUCCESS,
+    GET_PATIENTLIST_ERROR,
+    SET_CURRENT_PATIENT,
+    SET_PATIENT_DASHBOARD,
+    UPDATE_PATIENT_SUCCESS,
+    UPDATE_PATIENT_ERROR,
+    ADD_MEDICATION,
+    REMOVE_MEDICATION
+} from '../actions/patient';
 
 const initialState = {
     loading: false,
@@ -23,8 +25,8 @@ export default function reducer(state = initialState, action) {
             loading: true
         });
     } else if (action.type === GET_PATIENTLIST_SUCCESS) {
-      console.log('enter GET_PATIENTLIST_SUCCESS', action.patientList);
-        return  Object.assign({}, state, {
+        console.log('enter GET_PATIENTLIST_SUCCESS', action.patientList);
+        return Object.assign({}, state, {
             patientList: action.patientList
         });
     } else if (action.type === GET_PATIENTLIST_ERROR) {
@@ -32,35 +34,30 @@ export default function reducer(state = initialState, action) {
             error: action.error
         });
     } else if (action.type === SET_CURRENT_PATIENT) {
-        return Object.assign ( {}, state, {
-          currentPatient: action.currentPatient
+        return Object.assign({}, state, {
+            currentPatient: action.currentPatient
         });
     } else if (action.type === UPDATE_PATIENT_SUCCESS) {
-        return Object.assign ({}, state, {
-          error: false
-      });
+        return Object.assign({}, state, {
+            error: false
+        });
     } else if (action.type === UPDATE_PATIENT_ERROR) {
         return Object.assign({}, state, {
-          error: action.error
-      });
+            error: action.error
+        });
     } else if (action.type === ADD_MEDICATION) {
         return Object.assign({}, state, {
-        patientDashboard: action.patientList
-      });
+            patientDashboard: action.patientList
+        });
     } else if (action.type === SET_PATIENT_DASHBOARD) {
-      console.log('Enter SetPatientDashboard: ', action.Dashboard);
-      return Object.assign ( {}, state, { 
-        patientDashboard: action.patientDashboard
-      });
-      // for(let [key, value] of Object.entries(state.patientList)) {
-      //   if(value === state.currentPatient) {
-      //     return Object.assign(state.patientDashboard, {key:value});
-      //   };
-      // };
+        console.log('Enter SetPatientDashboard: ', action.patientDashboard);
+        return Object.assign({}, state, {
+            patientDashboard: action.patientDashboard
+        });
     } else if (action.type === REMOVE_MEDICATION) {
         return Object.assign({}, state, {
-          error: action.error
-      });
+            error: action.error
+        });
     } else
         return state;
 

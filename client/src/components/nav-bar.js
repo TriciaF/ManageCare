@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {LoginForm} from './login-form';
+import LoginForm from './login-form';
 import {showLoginForm} from '../actions/auth';
 
 
@@ -120,7 +120,7 @@ export class NavBar extends React.Component {
 }//end NavBar
 
 const mapStateToProps = state => ({
-  showLoginForm: state.auth.loggedIn,
+  showLoginForm: state.auth.showLoginForm,
 });
 
 export default connect(mapStateToProps)(NavBar);

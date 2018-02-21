@@ -6,6 +6,18 @@ body {
     font-family: Verdana;
 }
 
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    /* 1 */
+    display: table;
+    /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
 body:before {
     background-image: url("https://i.imgur.com/BiokhGd.jpg");
     background-size: cover;
