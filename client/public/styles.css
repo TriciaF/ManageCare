@@ -84,20 +84,30 @@ body:before {
 .patient-dashboard {
     color: black;
     height: 24px;
-    font-weight: bold;
-    display: flex;
-    justify-content: space-between;
-    align-items: right;
+    padding: .875rem 1rem;
+    width: 100%;
+    border-collapse: collapse;
 }
 
-ul.dashboard {
-    list-style-type: none;
-    border-radius: .1875rem;
-    color: #333132;
-    font-size: 1.25rem;
-    font-weight: 20;
-    line-height: 1.2;
-    padding: .875rem 1rem;
+table,
+{
+    width: 100%;
+    margin: 20px auto;
+    table-layout: auto;
+}
+
+thead>tr,
+tbody {
+    display: inline;
+}
+
+th,
+td {
+    padding: 10px;
+    border: solid 1px;
+    text-align: center;
+    width: 80px;
+    vertical-align: top;
 }
 
 .rw-widget>.rw-widget-container {

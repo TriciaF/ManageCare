@@ -19,16 +19,10 @@ export const getPatientListError = (error) => ({
     type: GET_PATIENTLIST_ERROR,
     error
 });
-export const SET_CURRENT_PATIENT = 'SET_CURRENT_PATIENT';
-export const setCurrentPatient = (currentPatient, patientDashboard) => ({
-    type: SET_CURRENT_PATIENT,
-    currentPatient,
-    patientDashboard
-});
-
 export const SET_PATIENT_DASHBOARD = 'SET_PATIENT_DASHBOARD';
-export const setPatientDashboard = (patientDashboard) => ({
+export const setPatientDashboard = (currentPatient, patientDashboard) => ({
     type: SET_PATIENT_DASHBOARD,
+    currentPatient,
     patientDashboard
 });
 
@@ -45,16 +39,22 @@ export const updatePatientError = (error) => ({
 });
 
 export const ADD_MEDICATION = 'ADD_MEDICATION';
-export const addMedication = (patientList) => ({
+export const addMedication = (patientDashboard) => ({
     type: ADD_MEDICATION,
-    patientList
+    patientDashboard
 });
 
 export const REMOVE_MEDICATION = 'REMOVE_MEDICATION';
-export const removeMedication = (patientList) => ({
+export const removeMedication = (patientDashboard) => ({
     type: REMOVE_MEDICATION,
-    patientList
+    patientDashboard
 });
+
+export const SHOW_MEDS_ADD_FORM = 'SHOW_MEDS_ADD_FORM';
+export const showMedsAddForm = (showMedsAddForm) => ({
+    type: SHOW_MEDS_ADD_FORM,
+    showMedsAddForm
+})
 
 
 //fetch list of all patients, medications, pharmacy and physician
@@ -84,28 +84,28 @@ export const getPatientList = () => (dispatch) => {
 
 
 //update the local store and add medication, then update the patient database
-export const addToDashboard = (id) => dispatch => {
+export const addToDashboard = (values) => dispatch => {
         console.log("Enter addToDashboard");
+        dispatch(addMedication(values));       
         dispatch(patientListRequestSent());
-        // dispatch(addMedication(patientDashboard));
         // const id = state.patientDashboard.id;
-        return fetch(`${API_BASE_URL}/id`, {
-                method: 'POST',
-                headers: {
-                    'content-Type': 'application/json'
-                },
-                // body: JSON.stringify(obj)
-            }) //end fetch
-            .then(res => {
-                if (!res.ok) {
-                    return Promise.reject(res.statusText)
-                }
-                return res.json();
-            })
-            .then(({ patientData }) => dispatch(updatePatientSuccess(patientData)))
-            .catch(err => {
-                dispatch(updatePatientError(err));
-            });
+        // return fetch(`${API_BASE_URL}/dashboard/id`, {
+        //         method: 'POST',
+        //         headers: {
+        //             'content-Type': 'application/json'
+        //         },
+        //         // body: JSON.stringify(obj)
+        //     }) //end fetch
+        //     .then(res => {
+        //         if (!res.ok) {
+        //             return Promise.reject(res.statusText)
+        //         }
+        //         return res.json();
+        //     })
+        //     .then(({ patientData }) => dispatch(updatePatientSuccess(patientData)))
+        //     .catch(err => {
+        //         dispatch(updatePatientError(err));
+        //     });
     } //end addMedication
 
 

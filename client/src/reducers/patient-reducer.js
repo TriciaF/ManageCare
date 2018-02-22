@@ -2,12 +2,12 @@ import {
     PATIENTLIST_REQUEST_SENT,
     GET_PATIENTLIST_SUCCESS,
     GET_PATIENTLIST_ERROR,
-    SET_CURRENT_PATIENT,
     SET_PATIENT_DASHBOARD,
     UPDATE_PATIENT_SUCCESS,
     UPDATE_PATIENT_ERROR,
     ADD_MEDICATION,
-    REMOVE_MEDICATION
+    REMOVE_MEDICATION,
+    SHOW_MEDS_ADD_FORM
 } from '../actions/patient';
 
 const initialState = {
@@ -16,6 +16,7 @@ const initialState = {
     patientList: [],
     currentPatient: null,
     patientDashboard: null,
+    showMedsAddForm: false
 };
 
 
@@ -33,8 +34,8 @@ export default function reducer(state = initialState, action) {
         return Object.assign({}, state, {
             error: action.error
         });
-    } else if (action.type === SET_CURRENT_PATIENT) {
-      console.log('Enter set patient: ', action)
+    } else if (action.type === SET_PATIENT_DASHBOARD) {
+      console.log('Enter set patient Dashboard: ', action)
         return Object.assign({}, state, {
             currentPatient: action.currentPatient,
             patientDashboard: {
@@ -54,15 +55,34 @@ export default function reducer(state = initialState, action) {
             error: action.error
         });
     } else if (action.type === ADD_MEDICATION) {
+      console.log("Enter AddMedication action = ", action)
         return Object.assign({}, state, {
-            patientDashboard: action.patientList
-        });
-    } else if (action.type === SET_PATIENT_DASHBOARD) {
-        
+            showMedsAddForm: false, 
+            patientDashboard: {
+              medication: this.state.patientDashboard.medication.concat([{
+                  name: action.patientDashboard.medName,
+                  dosage: action.patientDashboard.medDosage,
+                  schedule: action.patientDashboard.medSchedule,
+                  pharmacy: {
+                      name: action.patientDashboard.pharmName,
+                      address: action.patientDashboard.pharmAddr,
+                      phoneNumber: action.patientDashboard.pharmPhone
+                  },
+                  physician: {
+                      name: action.patientDashboard.physicianName,
+                      address: action.patientDashboard.physicianAddr,
+                      phoneNumber: action.patientDashboard.physicianPhone
+                  }}])
+            }
+        });  
     } else if (action.type === REMOVE_MEDICATION) {
         return Object.assign({}, state, {
             error: action.error
         });
+    } else if (action.type === SHOW_MEDS_ADD_FORM) {
+      return Object.assign({}, state, {
+          showMedsAddForm: true
+      });
     } else
         return state;
 

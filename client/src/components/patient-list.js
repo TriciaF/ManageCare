@@ -1,7 +1,7 @@
 import React from 'react';
 import {DropdownList} from 'react-widgets';
 import {connect} from 'react-redux';
-import {getPatientList, setCurrentPatient, setPatientDashboard} from '../actions/patient';
+import {getPatientList, setPatientDashboard} from '../actions/patient';
 import './patient-list.css';
 import PatientDashboard from './patient-dashboard';
 import 'react-widgets/dist/css/react-widgets.css';
@@ -18,8 +18,9 @@ export class PatientList extends React.Component {
     const patientDashboardInfo = this.props.patientList.find(patient => {
       return patient.name === value
     });
-
-    this.props.dispatch(setCurrentPatient(value, patientDashboardInfo));
+    this.props.dispatch(setPatientDashboard(value, patientDashboardInfo));
+    
+    
     
     // console.log('patientDashboardInfo: ', patientDashboardInfo);
     // this.props.dispatch(setPatientDashboard(patientDashboardInfo));
