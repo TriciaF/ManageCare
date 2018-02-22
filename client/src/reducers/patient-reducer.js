@@ -34,8 +34,16 @@ export default function reducer(state = initialState, action) {
             error: action.error
         });
     } else if (action.type === SET_CURRENT_PATIENT) {
+      console.log('Enter set patient: ', action)
         return Object.assign({}, state, {
-            currentPatient: action.currentPatient
+            currentPatient: action.currentPatient,
+            patientDashboard: {
+              id: action.patientDashboard.id,
+              name: action.patientDashboard.name,
+              medication: action.patientDashboard.medication.map( med => {
+                return med;
+              })
+            }
         });
     } else if (action.type === UPDATE_PATIENT_SUCCESS) {
         return Object.assign({}, state, {
@@ -50,10 +58,7 @@ export default function reducer(state = initialState, action) {
             patientDashboard: action.patientList
         });
     } else if (action.type === SET_PATIENT_DASHBOARD) {
-        console.log('Enter SetPatientDashboard: ', action.patientDashboard);
-        return Object.assign({}, state, {
-            patientDashboard: action.patientDashboard
-        });
+        
     } else if (action.type === REMOVE_MEDICATION) {
         return Object.assign({}, state, {
             error: action.error

@@ -4,41 +4,19 @@ import {setPatientDashboard, addToDashboard, removeFromDashboard, updateDashboar
 
 export class PatientDashboard extends React.Component {
   componentWillMount() {
-    console.log('Enter ComponentWillMount PatientDashboard: ', this.props.patientDashboard);
-    //map over state.patientList to obtain the patient name
-    const patientDashboard = this.props.patientList.find(patient => {
-      return patient.name === this.props.currentPatient
-    });
-    this.props.dispatch(setPatientDashboard(patientDashboard));
+    
   }
-
-  componentWillReceiveProps(nextProps) {
-    console.log('Enter Component Will Receive Props - Patient Dashboard: ', this.props.patientDashboard);
-    if(nextProps.patientDashboard && !this.props.patientDashboard) {
-      const medication = this.props.patientDashboard.map( meds => {
-        return Object.assign({}, meds, {
-           name: meds.name,
-           dosage: meds.dosage,
-           schedule: meds.schedule,
-           pharmacy: {
-             name: meds.pharmacy.name,
-             address: meds.pharmacy.address,
-             phoneNumber: meds.pharmacy.phoneNumber
-           },
-           physician: {
-             name: meds.physician.name,
-             address: meds.physician.address,
-             phoneNumber: meds.physician.phoneNumber
-           },
-         })
-     });
-    }
-  }
-
 
   render() {
+
     
-    console.log('Enter Render PatientDashboard: ', this.props.patientDashboard);
+    // if(!this.props.patientDashboard){
+    //   console.log('After setPatientDashboard props.patientDashboard =  ', this.props.patientDashboard);
+    //   return <div>Hello</div>
+    // }
+
+    
+
     return (
       <form className="patient-dashboard">
         <div className="dashboard-header">
@@ -49,13 +27,13 @@ export class PatientDashboard extends React.Component {
         <div className="dashboard-content">
           <ul className="dashboard clearfix">
             <li>
-              {this.props.patientDashboard.medication.name}
+              {this.props.patientDashboard.medication[0].name}
             </li>
             <li>
-              {this.props.patientDashboard.medication.dosage}
+              {this.props.patientDashboard.medication[0].dosage}
             </li>
             <li>
-              {this.props.patientDashboard.medication.schedule}
+              {this.props.patientDashboard.medication[0].schedule}
             </li>
             <li>
               {this.props.patientDashboard.medication[0].pharmacy.name}

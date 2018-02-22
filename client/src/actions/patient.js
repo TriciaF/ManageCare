@@ -20,9 +20,10 @@ export const getPatientListError = (error) => ({
     error
 });
 export const SET_CURRENT_PATIENT = 'SET_CURRENT_PATIENT';
-export const setCurrentPatient = (currentPatient) => ({
+export const setCurrentPatient = (currentPatient, patientDashboard) => ({
     type: SET_CURRENT_PATIENT,
-    currentPatient
+    currentPatient,
+    patientDashboard
 });
 
 export const SET_PATIENT_DASHBOARD = 'SET_PATIENT_DASHBOARD';
@@ -58,13 +59,13 @@ export const removeMedication = (patientList) => ({
 
 //fetch list of all patients, medications, pharmacy and physician
 export const getPatientList = () => (dispatch) => {
-  console.log('entered async action getPatientList');
-  dispatch(patientListRequestSent());
-  return fetch(`${API_BASE_URL}`, {
-          method: 'GET',
-          headers: {
-              'content-Type': 'application/json'
-          },
+    console.log('entered async action getPatientList');
+    dispatch(patientListRequestSent());
+    return fetch(`${API_BASE_URL}`, {
+            method: 'GET',
+            headers: {
+                'content-Type': 'application/json'
+            },
         })
         .then(res => {
             if (!res.ok) {
@@ -84,72 +85,72 @@ export const getPatientList = () => (dispatch) => {
 
 //update the local store and add medication, then update the patient database
 export const addToDashboard = (id) => dispatch => {
-  console.log("Enter addToDashboard");
-  dispatch(patientListRequestSent());
-  // dispatch(addMedication(patientDashboard));
-  // const id = state.patientDashboard.id;
-  return fetch(`${API_BASE_URL}/id`, {
-          method: 'POST',
-          headers: {
-            'content-Type': 'application/json'
-          },
-          // body: JSON.stringify(obj)
-        })//end fetch
-        .then(res => {
-          if(!res.ok) {
-            return Promise.reject(res.statusText)
-          }
-            return res.json();
-        })
-        .then(({patientData}) => dispatch(updatePatientSuccess(patientData)))
-        .catch( err => {
-            dispatch(updatePatientError(err));
-        });
-} //end addMedication
+        console.log("Enter addToDashboard");
+        dispatch(patientListRequestSent());
+        // dispatch(addMedication(patientDashboard));
+        // const id = state.patientDashboard.id;
+        return fetch(`${API_BASE_URL}/id`, {
+                method: 'POST',
+                headers: {
+                    'content-Type': 'application/json'
+                },
+                // body: JSON.stringify(obj)
+            }) //end fetch
+            .then(res => {
+                if (!res.ok) {
+                    return Promise.reject(res.statusText)
+                }
+                return res.json();
+            })
+            .then(({ patientData }) => dispatch(updatePatientSuccess(patientData)))
+            .catch(err => {
+                dispatch(updatePatientError(err));
+            });
+    } //end addMedication
 
 
 //update the local store to remove medication, then update the patient database
 export const removeFromDashboard = (id) => dispatch => {
-  console.log("Enter removeFromDashboard");
-  dispatch(patientListRequestSent());
-  dispatch(removeMedication(patientList));
-  return fetch(`${API_BASE_URL}/id`, {
-          method: 'DELETE',
-          headers: {
-              'content-Type': 'application/json'
-          },
-        })//end fetch
-        .then(res => {
-          if(!res.ok) {
-            return Promise.reject(res.statusText)
-          }
-            return res.json();
-        })
-        .then(({patientData}) => dispatch(updatePatientSuccess(patientData)))
-        .catch( err => {
-            dispatch(updatePatientError(err));
-        });
-} //end removeMedication
+        console.log("Enter removeFromDashboard");
+        dispatch(patientListRequestSent());
+        dispatch(removeMedication(patientList));
+        return fetch(`${API_BASE_URL}/id`, {
+                method: 'DELETE',
+                headers: {
+                    'content-Type': 'application/json'
+                },
+            }) //end fetch
+            .then(res => {
+                if (!res.ok) {
+                    return Promise.reject(res.statusText)
+                }
+                return res.json();
+            })
+            .then(({ patientData }) => dispatch(updatePatientSuccess(patientData)))
+            .catch(err => {
+                dispatch(updatePatientError(err));
+            });
+    } //end removeMedication
 
 
 //update the local store with updated patient information, then update the patient database
 export const updateDashboard = (id) => dispatch => {
-  console.log("Enter updateDashboard");
-  dispatch(patientListRequestSent());
-  return fetch(`${API_BASE_URL}/id`, {
-          method: 'PUT',
-          headers: {
-              'content-Type': 'application/json'
-          },
-        })//end fetch
-        .then(res => {
-          if(!res.ok) {
-            return Promise.reject(res.statusText)
-          }
-            return res.json();
-        })
-        .then(({patientData}) => dispatch(updatePatientSuccess(patientData)))
-        .catch( err => {
-            dispatch(updatePatientError(err));
-        });
-} //end updatePatient
+        console.log("Enter updateDashboard");
+        dispatch(patientListRequestSent());
+        return fetch(`${API_BASE_URL}/id`, {
+                method: 'PUT',
+                headers: {
+                    'content-Type': 'application/json'
+                },
+            }) //end fetch
+            .then(res => {
+                if (!res.ok) {
+                    return Promise.reject(res.statusText)
+                }
+                return res.json();
+            })
+            .then(({ patientData }) => dispatch(updatePatientSuccess(patientData)))
+            .catch(err => {
+                dispatch(updatePatientError(err));
+            });
+    } //end updatePatient
