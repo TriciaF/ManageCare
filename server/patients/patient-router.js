@@ -60,7 +60,7 @@ patientRouter.post('/patient', (req, res) => {
 
 /* ========== PUT/UPDATE A SINGLE ITEM ========== */
 patientRouter.put('/patient/:id', (req, res) => {
-	console.log('enter put end point');
+	console.log('enter put end point', req.body);
 	const requiredFields = ['name', 'medication'];
 
 	for (let i = 0; i < requiredFields.length; i++) {

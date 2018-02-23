@@ -1,13 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {removeFromDashboard, updateDashboard, showMedsAddForm} from '../actions/patient';
+import {removeFromDashboard, updateDashboard, showMedsAddForm, addToDashboard} from '../actions/patient';
 import AddMedsForm from './add-meds-form';
 
 export class PatientDashboard extends React.Component {
 
-  // handleAddMedication() {
-  //   return <AddMedsForm />
-  // }
 
   render() {
     console.log('Enter PatientDashboard Component');
@@ -15,9 +12,12 @@ export class PatientDashboard extends React.Component {
     if(this.props.showMedsAddForm){
       return <AddMedsForm />
     }
+    if(this.props.loading) {
+      this.props.dispatch(addToDashboard(this.props.patientDashboard))
+    }
 
-    const medsName = this.props.patientDashboard.medication.map(med => {
-      return <td>
+    const medsName = this.props.patientDashboard.medication.map((med, index) => {
+      return <td key={index}>
                {med.name}
              </td>
     })
@@ -96,6 +96,7 @@ const mapStateToProps = state => ({
   patientList: state.patient.patientList,
   patientDashboard: state.patient.patientDashboard,
   showMedsAddForm: state.patient.showMedsAddForm,
+  loading: state.patient.loading
 });
 
 export default connect(mapStateToProps)(PatientDashboard);

@@ -3,6 +3,7 @@ import {
     GET_PATIENTLIST_SUCCESS,
     GET_PATIENTLIST_ERROR,
     SET_PATIENT_DASHBOARD,
+    GET_PATIENT_DASHBOARD,
     UPDATE_PATIENT_SUCCESS,
     UPDATE_PATIENT_ERROR,
     ADD_MEDICATION,
@@ -28,7 +29,8 @@ export default function reducer(state = initialState, action) {
     } else if (action.type === GET_PATIENTLIST_SUCCESS) {
         console.log('enter GET_PATIENTLIST_SUCCESS', action.patientList);
         return Object.assign({}, state, {
-            patientList: action.patientList
+            patientList: action.patientList,
+            loading: false
         });
     } else if (action.type === GET_PATIENTLIST_ERROR) {
         return Object.assign({}, state, {
@@ -46,9 +48,14 @@ export default function reducer(state = initialState, action) {
               })
             }
         });
+    } else if(action.type === GET_PATIENT_DASHBOARD) {
+      console.log(state.patientDashboard)
+        return state.patientDashboard
+    
     } else if (action.type === UPDATE_PATIENT_SUCCESS) {
         return Object.assign({}, state, {
-            error: false
+            error: false,
+            loading: false
         });
     } else if (action.type === UPDATE_PATIENT_ERROR) {
         return Object.assign({}, state, {
@@ -57,9 +64,12 @@ export default function reducer(state = initialState, action) {
     } else if (action.type === ADD_MEDICATION) {
       console.log("Enter AddMedication action = ", action)
         return Object.assign({}, state, {
+            loading: true,
             showMedsAddForm: false, 
             patientDashboard: {
-              medication: this.state.patientDashboard.medication.concat([{
+              id: state.patientDashboard.id,
+              name: state.patientDashboard.name,
+              medication: state.patientDashboard.medication.concat([{
                   name: action.patientDashboard.medName,
                   dosage: action.patientDashboard.medDosage,
                   schedule: action.patientDashboard.medSchedule,
