@@ -2,6 +2,7 @@
 
 const { Patients } = require('./patient-schema');
 
+
 const patients = {
 	create: function(patientName, medication) {
 		console.log('Enter Patients:create');
@@ -23,26 +24,34 @@ const patients = {
 			return Patients.findById(id);
 	},
 
-	update: function(id, patientName, medication) {
+	update: function(_id, patientName=null, _medication=null) {
+		console.log('enter update function in model: ', _id, patientName, _medication);
 
-		console.log('Enter Patients:Update');
-		const meds = medication.map(item => {
-			return item;
-		});
-		const updateObj = {
-			name: patientName,
-			medication: meds
-		};
-		console.log(updateObj);
-		return Patients
-			.findByIdAndUpdate(id, { $set: updateObj });
+		if (_medication){
+			console.log('Enter Patients:Update');
+			const meds = _medication.map(item => {
+				return item;
+			});
+			const updateObj = {
+				name: patientName,
+				medication: meds
+			};
+			console.log(updateObj);
+			return Patients
+				.findByIdAndUpdate(_id, { $set: updateObj });
+		} 
+    
+		else {
+			return Patients.update({name: patientName}, { $pull: { medication: { _id: _id } }}, { safe: true, multi:true });
+		}
 	},
 
-	delete: function(id) {
-		console.log('Enter Patients:Delete');
-		return Patients
-			.findByIdAndRemove(id);
+	delete: function(_id) {
+		console.log('Enter Patients:Delete id ');
+		return Patients.findByIdAndRemove(_id);
+
 	}
+
 };
 
 module.exports = { patients };

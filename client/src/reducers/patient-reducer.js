@@ -97,7 +97,6 @@ export default function reducer(state = initialState, action) {
             return med.name !== action.patientDashboard.name
         })
         console.log('This is the meds array: ', meds);
-        debugger;
         return Object.assign({}, state, {
             removeMedication: true,
             patientDashboard: {

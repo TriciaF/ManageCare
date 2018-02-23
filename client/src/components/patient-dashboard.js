@@ -3,7 +3,8 @@ import {connect} from 'react-redux';
 import {removeFromDashboard,  
         showMedsAddForm, 
         addToDashboard,
-        removeMedication} from '../actions/patient';
+        removeMedication,
+        getPatientList} from '../actions/patient';
 import AddMedsForm from './add-meds-form';
 
 export class PatientDashboard extends React.Component {
@@ -18,9 +19,9 @@ export class PatientDashboard extends React.Component {
     if(this.props.addMedication) {
       this.props.dispatch(addToDashboard(this.props.patientDashboard))
     }
-    if(this.props.removeMedication) {
-      this.props.dispatch(removeFromDashboard(this.props.patientDashboard))
-    }
+    // if(this.props.removeMedication) {
+    //   this.props.dispatch(removeFromDashboard(this.props.patientDashboard))
+    // }
 
     const medsName = this.props.patientDashboard.medication.map((med, index) => {
       return <td key={index}>
@@ -53,7 +54,7 @@ export class PatientDashboard extends React.Component {
     })
     const removeButton = this.props.patientDashboard.medication.map((med, index) =>{
       return <td key={index}>
-                <button className="rem-med-button" onClick={()=>this.props.dispatch(removeMedication(med))}>X</button>
+                <button className="rem-med-button" onClick={()=>this.props.dispatch(removeFromDashboard(med, this.props.patientDashboard.name))}>X</button>
             </td>
     })
 
@@ -61,13 +62,14 @@ export class PatientDashboard extends React.Component {
       <form className="patient-dashboard">
         <div className="dashboard-header">
             <h1 className="dashboard-name">
-                {this.props.patientDashboard.name}
+                {this.props.currentPatient}
             </h1>
         </div>
         <div className="dashboard-content">
         <div className="dashboard-button">
               <div>
                 <button className="add-med-button" onClick={() =>this.props.dispatch(showMedsAddForm())}>Add Medication</button>
+                <button className="back-to-patient-list" onClick={() =>this.props.dispatch(getPatientList())}>Back to Patient List</button>
               </div>
         </div>
           <table className="patient-dashboard">
@@ -111,8 +113,10 @@ export class PatientDashboard extends React.Component {
 const mapStateToProps = state => ({
   patientList: state.patient.patientList,
   patientDashboard: state.patient.patientDashboard,
-  showMedsAddForm: state.patient.showMedsAddForm,
+  addMedication: state.patient.addMedication,
   removeMedication: state.patient.removeMedication,
+  currentPatient: state.patient.currentPatient,
+  showMedsAddForm: state.patient.showMedsAddForm
 });
 
 export default connect(mapStateToProps)(PatientDashboard);

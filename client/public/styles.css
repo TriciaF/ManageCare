@@ -92,11 +92,20 @@ body:before {
     width: 120px;
     height: 40px;
     background: #AFEEEE;
+    margin: 40px, auto;
 }
 
 .rem-med-button {
-    border-radius: 25px;
+    border-radius: 10px;
     background: #AFEEEE;
+}
+
+.back-to-patient-list {
+    border-radius: 25px;
+    width: 160px;
+    height: 40px;
+    background: #AFEEEE;
+    margin: 40px, auto;
 }
 
 .patient-dashboard {

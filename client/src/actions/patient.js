@@ -103,7 +103,8 @@ export const getPatientList = () => (dispatch) => {
 }
 
 
-//update the local store to add medication, then update the patient database
+//update the local store to add medication, 
+//then update the patient database with new medication
 export const addToDashboard = (values) => dispatch => {
         console.log("Enter addToDashboard");
         dispatch(patientListRequestSent());
@@ -129,14 +130,19 @@ export const addToDashboard = (values) => dispatch => {
 
 
 //update the local store to remove medication, then update the patient database
-export const removeFromDashboard = (id) => dispatch => {
-        console.log("Enter removeFromDashboard");
+export const removeFromDashboard = (values, currentPatient) => dispatch => {
+        console.log("Enter removeFromDashboard ", values, currentPatient);
+        dispatch(removeMedication(values));
         dispatch(patientListRequestSent());
+        const obj = {"name":currentPatient};
+        console.log(obj);
+        const id = values.id
         return fetch(`${API_BASE_URL}/` + id, {
-                method: 'DELETE',
+                method: 'PUT',
                 headers: {
                     'content-Type': 'application/json'
                 },
+                body: JSON.stringify(obj)
             }) //end fetch
             .then(res => {
                 if (!res.ok) {

@@ -33,7 +33,7 @@ patientRouter.get('/patient/:id', (req, res) => {
 		});
 });
 
-/* ========== POST/CREATE ITEM ========== */
+/* ========== POST/CREATE PATIENT ITEM ========== */
 patientRouter.post('/patient', (req, res) => {
 	console.log('enter post end point');
 	const requiredFields = ['name', 'medication'];
@@ -58,39 +58,68 @@ patientRouter.post('/patient', (req, res) => {
 		});
 });
 
-/* ========== PUT/UPDATE A SINGLE ITEM ========== */
+/* ========== PUT/UPDATE A SINGLE PATIENT ITEM OR REMOVE A MEDICATION ========== */
 patientRouter.put('/patient/:id', (req, res) => {
 	console.log('enter put end point', req.body);
-	const requiredFields = ['name', 'medication'];
 
-	for (let i = 0; i < requiredFields.length; i++) {
-		const field = requiredFields[i];
-		console.log(field);
-		if (!(field in req.body)) {
-			const message = `Missing \`${field}\` in request body`;
-			console.error(message);
-			return res.status(400).send(message);
+	if (req.body.medication) {
+		console.log('enter if');
+		const requiredFields = ['name', 'medication'];
+
+		for (let i = 0; i < requiredFields.length; i++) {
+			const field = requiredFields[i];
+			console.log(field);
+			if (!(field in req.body)) {
+				const message = `Missing \`${field}\` in request body`;
+				console.error(message);
+				return res.status(400).send(message);
+			}
 		}
+
+		const { name, medication } = req.body;
+		const id = req.params.id;
+		patients.update(id, name, medication)
+			.then(response => res.status(204).json(response))
+			.catch(err => {
+				res.status(500).json(err);
+			});
+
+	} else {
+		console.log('enter else');
+		const requiredFields = ['name'];
+
+		for (let i = 0; i < requiredFields.length; i++) {
+			const field = requiredFields[i];
+			console.log(field);
+			if (!(field in req.body)) {
+				const message = `Missing \`${field}\` in request body`;
+				console.error(message);
+				return res.status(400).send(message);
+			}
+		}
+
+		const { name } = req.body;
+		const id = req.params.id;
+		patients.update(id, name, null)
+			.then(response => res.status(204).json(response))
+			.catch(err => {
+				res.status(500).json(err);
+			});
 	}
 
-	const { name, medication } = req.body;
-	const id = req.params.id;
-	patients.update(id, name, medication)
-		.then(response => res.status(204).json(response))
-		.catch(err => {
-			res.status(500).json(err);
-		});
 });
 
-/* ========== DELETE/REMOVE A SINGLE ITEM ========== */
+/* ========== DELETE/REMOVE A SINGLE PATIENT ITEM ========== */
 patientRouter.delete('/patient/:id', (req, res) => {
 	console.log('enter delete end point');
+
 	patients.delete(req.params.id)
 		.then(response => res.status(204).json(response))
 		.catch(err => {
 			res.status(500).json({ message: 'Something went wrong: Delete Patient' });
 		});
 });
+
 
 
 module.exports = patientRouter;
