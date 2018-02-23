@@ -1,6 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {removeFromDashboard, updateDashboard, showMedsAddForm, addToDashboard} from '../actions/patient';
+import {removeFromDashboard,  
+        showMedsAddForm, 
+        addToDashboard,
+        removeMedication} from '../actions/patient';
 import AddMedsForm from './add-meds-form';
 
 export class PatientDashboard extends React.Component {
@@ -12,8 +15,11 @@ export class PatientDashboard extends React.Component {
     if(this.props.showMedsAddForm){
       return <AddMedsForm />
     }
-    if(this.props.loading) {
+    if(this.props.addMedication) {
       this.props.dispatch(addToDashboard(this.props.patientDashboard))
+    }
+    if(this.props.removeMedication) {
+      this.props.dispatch(removeFromDashboard(this.props.patientDashboard))
     }
 
     const medsName = this.props.patientDashboard.medication.map((med, index) => {
@@ -21,28 +27,33 @@ export class PatientDashboard extends React.Component {
                {med.name}
              </td>
     })
-    const medsDosage = this.props.patientDashboard.medication.map(med => {
-      return <td>
+    const medsDosage = this.props.patientDashboard.medication.map((med, index) => {
+      return <td key={index}>
               {med.dosage}
              </td>
     })
-    const medsSchedule = this.props.patientDashboard.medication.map(med => {
-      return <td>
+    const medsSchedule = this.props.patientDashboard.medication.map((med, index) => {
+      return <td key={index}>
               {med.schedule}
              </td>
     })
-    const medsPharmacy = this.props.patientDashboard.medication.map(med => {
-      return <td>
+    const medsPharmacy = this.props.patientDashboard.medication.map((med, index) => {
+      return <td key={index}>
               {med.pharmacy.name}
               {med.pharmacy.address}
               {med.pharmacy.phoneNumber}
             </td>
     })
-    const medsPhysician = this.props.patientDashboard.medication.map(med => {
-      return <td>
+    const medsPhysician = this.props.patientDashboard.medication.map((med, index) => {
+      return <td key={index}>
               {med.physician.name}
               {med.physician.address}
               {med.physician.phoneNumber}
+            </td>
+    })
+    const removeButton = this.props.patientDashboard.medication.map((med, index) =>{
+      return <td key={index}>
+                <button className="rem-med-button" onClick={()=>this.props.dispatch(removeMedication(med))}>X</button>
             </td>
     })
 
@@ -54,38 +65,43 @@ export class PatientDashboard extends React.Component {
             </h1>
         </div>
         <div className="dashboard-content">
+        <div className="dashboard-button">
+              <div>
+                <button className="add-med-button" onClick={() =>this.props.dispatch(showMedsAddForm())}>Add Medication</button>
+              </div>
+        </div>
           <table className="patient-dashboard">
-            <thread>
+              <tbody>
               <tr>
                 <th>Name</th>
                 <th>Dosage</th>
                 <th>Schedule</th>
                 <th>Pharmacy</th>
                 <th>Physician</th>
+                <th>Remove</th>
               </tr>
-            </thread>
-              <tbody>
                 <tr>
                   {medsName}
+                </tr>
+                <tr>
                   {medsDosage}
+                </tr>
+                <tr>
                   {medsSchedule}
+                </tr>
+                <tr>
                   {medsPharmacy}
+                </tr>
+                <tr>
                   {medsPhysician}
+                </tr>
+                <tr>
+                  {removeButton}
                 </tr>
               </tbody>
           </table>
         </div>
-        <div className="buttons">
-              <div>
-                <button className="dashboard-button" onClick={() =>this.props.dispatch(showMedsAddForm())}>Add Medication</button>
-              </div>
-              <div>
-                <button className="dashboard-button" onClick={()=>this.handleRemoveMedication()}>Remove Medication</button>
-              </div>
-              <div>
-                <button className="dashboard-button" onClick={()=>this.handleUpdatePatient()}>Update Patient Information</button>
-              </div>
-        </div> 
+         
       </form>
     );//end return
   }//end render
@@ -96,7 +112,7 @@ const mapStateToProps = state => ({
   patientList: state.patient.patientList,
   patientDashboard: state.patient.patientDashboard,
   showMedsAddForm: state.patient.showMedsAddForm,
-  loading: state.patient.loading
+  removeMedication: state.patient.removeMedication,
 });
 
 export default connect(mapStateToProps)(PatientDashboard);

@@ -1,5 +1,4 @@
 import { API_BASE_URL } from '../config';
-import patientList from '../components/patient-list';
 
 
 export const PATIENTLIST_REQUEST_SENT = 'PATIENTLIST_REQUEST_SENT';
@@ -34,10 +33,10 @@ export const getPatientDashboard = (patientDashboard) => ({
 });
 
 export const UPDATE_PATIENT_SUCCESS = 'UPDATE_PATIENT_SUCCESS';
-export const updatePatientSuccess = (error, loading) => ({
+export const updatePatientSuccess = (error, addMedication) => ({
     type: UPDATE_PATIENT_SUCCESS,
     error,
-    loading
+    addMedication
 });
 
 export const UPDATE_PATIENT_ERROR = 'UPDATE_PATIENT_ERRORR';
@@ -47,16 +46,28 @@ export const updatePatientError = (error) => ({
 });
 
 export const ADD_MEDICATION = 'ADD_MEDICATION';
-export const addMedication = (patientDashboard, loading) => ({
+export const addMedication = (patientDashboard, addMedication) => ({
     type: ADD_MEDICATION,
     patientDashboard,
-    loading
+    addMedication
 });
 
 export const REMOVE_MEDICATION = 'REMOVE_MEDICATION';
 export const removeMedication = (patientDashboard) => ({
     type: REMOVE_MEDICATION,
     patientDashboard
+});
+
+export const UPDATE_PATEINT = 'UPDATE_PATEINT';
+export const updatePatient = (patientDashboard) => ({
+    type: UPDATE_PATEINT,
+    patientDashboard
+});
+
+export const ADD_PATIENT = 'ADD_PATIENT';
+export const addPatient = (patientList) => ({
+    type: ADD_PATIENT,
+    patientList
 });
 
 export const SHOW_MEDS_ADD_FORM = 'SHOW_MEDS_ADD_FORM';
@@ -121,8 +132,7 @@ export const addToDashboard = (values) => dispatch => {
 export const removeFromDashboard = (id) => dispatch => {
         console.log("Enter removeFromDashboard");
         dispatch(patientListRequestSent());
-        dispatch(removeMedication(patientList));
-        return fetch(`${API_BASE_URL}/id`, {
+        return fetch(`${API_BASE_URL}/` + id, {
                 method: 'DELETE',
                 headers: {
                     'content-Type': 'application/json'
@@ -142,14 +152,16 @@ export const removeFromDashboard = (id) => dispatch => {
 
 
 //update the local store with updated patient information, then update the patient database
-export const updateDashboard = (id) => dispatch => {
+export const addToPatientList = (values) => dispatch => {
         console.log("Enter updateDashboard");
         dispatch(patientListRequestSent());
-        return fetch(`${API_BASE_URL}/id`, {
-                method: 'PUT',
+        const id = values.id;
+        return fetch(`${API_BASE_URL}/` + id, {
+                method: 'POST',
                 headers: {
                     'content-Type': 'application/json'
                 },
+                body: JSON.stringify(values)
             }) //end fetch
             .then(res => {
                 if (!res.ok) {

@@ -3,33 +3,12 @@ import '../index.css';
 import {Field, reduxForm, focus} from 'redux-form';
 import {required, nonEmpty} from '../validators';
 import PatientInput from './patient-input';
-import {createPatientDashboard} from '../actions/patient';
+import {addPatient} from '../actions/patient';
 
 export class PatientForm extends React.Component {
 
   onSubmit(values) {
-    console.log('onSubmit values',values);
-    const patientName = {
-      firstname: values.firstname,
-      lastname: values.lastname
-    };
-    const medication = {
-      name: values.medication,
-      dosage: values.dosage,
-      schedule: values.schedule
-    };
-    const pharmacy = {
-      name: values.pharmacyName,
-      address: values.pharmacyAddr,
-      phoneNumber: values.pharmacyPhone
-    };
-    const physician = {
-      name: values.physicianName,
-      address: values.physicianAddr,
-      phoneNumber: values.physicianPhone
-    };
-    console.log('onSumit: ',patientName, medication, pharmacy, physician);
-    return this.props.dispatch(getPatientList(patientName, medication, pharmacy, physician));
+    return this.props.dispatch(addPatient(values))
 }
 
 render() {
@@ -48,20 +27,12 @@ render() {
                 this.onSubmit(values)
             )}>
             {error}
-            <label htmlFor="firstname">Firstname</label>
+            <label htmlFor="name">Name</label>
             <Field
                 component={PatientInput}
                 type="text"
-                name="firstname"
-                id="firstname"
-                validate={[required, nonEmpty]}
-            />
-            <label htmlFor="lastname">Lastname</label>
-            <Field
-                component={PatientInput}
-                type="text"
-                name="lastname"
-                id="lastname"
+                name="name"
+                id="name"
                 validate={[required, nonEmpty]}
             />
             <label htmlFor="medication">Medication</label>
@@ -138,5 +109,5 @@ render() {
 
   export default reduxForm({
     form: 'patientForm',
-    onSubmitFail: (errors, dispatch) => dispatch(focus('login', 'username'))
+    onSubmitFail: (errors, dispatch) => dispatch(focus('name'))
 })(PatientForm);

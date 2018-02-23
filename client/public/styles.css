@@ -81,6 +81,24 @@ body:before {
     display: inline;
 }
 
+.dashboard-button {
+    text-align: left;
+    margin-left: 100px;
+    margin-bottom: 30px;
+}
+
+.add-med-button {
+    border-radius: 25px;
+    width: 120px;
+    height: 40px;
+    background: #AFEEEE;
+}
+
+.rem-med-button {
+    border-radius: 25px;
+    background: #AFEEEE;
+}
+
 .patient-dashboard {
     color: black;
     height: 24px;
