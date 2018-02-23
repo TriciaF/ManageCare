@@ -9,7 +9,7 @@ import {
     ADD_MEDICATION,
     REMOVE_MEDICATION,
     SHOW_MEDS_ADD_FORM,
-    ADD_PATIENT,
+    ADD_NEW_PATIENT,
 } from '../actions/patient';
 
 const initialState = {
@@ -21,6 +21,7 @@ const initialState = {
     showMedsAddForm: false,
     removeMedication: false,
     addPatient: false,
+    showAddPatientForm: false,
     addMedication: false,
 };
 
@@ -59,7 +60,8 @@ export default function reducer(state = initialState, action) {
     } else if (action.type === UPDATE_PATIENT_SUCCESS) {
         return Object.assign({}, state, {
             error: false,
-            addMedication: false
+            addMedication: false,
+            addPatient: false
         });
     } else if (action.type === UPDATE_PATIENT_ERROR) {
         return Object.assign({}, state, {
@@ -109,8 +111,16 @@ export default function reducer(state = initialState, action) {
         return Object.assign({}, state, {
             showMedsAddForm: true
         });
-    } else if (action.type === ADD_PATIENT) {
+    } else if (action.type === ADD_NEW_PATIENT) {
+      console.log('Enter AddNewPatient action = ', action);
+      if(!state.addPatient) {
         return Object.assign({}, state, {
+          showAddPatientForm: true
+        })
+      } else {
+        return Object.assign({}, state, {
+            addPatient: true,
+            showAddPatientForm: false,
             patientList: state.patientList.concat([{
                 name: action.patientList.name,
                 medication: {
@@ -130,6 +140,7 @@ export default function reducer(state = initialState, action) {
                 }
             }])
         });
+      }
     } else
         return state;
 

@@ -36,7 +36,17 @@ patientRouter.get('/patient/:id', (req, res) => {
 /* ========== POST/CREATE PATIENT ITEM ========== */
 patientRouter.post('/patient', (req, res) => {
 	console.log('enter post end point');
-	const requiredFields = ['name', 'medication'];
+	const requiredFields = ['name',
+		'medication',
+		'dosage',
+		'schedule',
+		'pharmacyName',
+		'pharmacyAddr',
+		'pharmacyPhone',
+		'physicianName',
+		'physicianAddr',
+		'physicianPhone'
+	];
 
 	for (let i = 0; i < requiredFields.length; i++) {
 		const field = requiredFields[i];
@@ -47,9 +57,38 @@ patientRouter.post('/patient', (req, res) => {
 			return res.status(400).send(message);
 		}
 	}
-	const { name, medication } = req.body;
+	const {
+		name,
+		medication,
+		dosage,
+		schedule,
+		pharmacyName,
+		pharmacyAddr,
+		pharmacyPhone,
+		physicianName,
+		physicianAddr,
+		physicianPhone
+	} = req.body;
 
-	patients.create(name, medication)
+	const meds = [];
+	meds.push({
+		name: medication,
+		dosage: dosage,
+		schedule: schedule,
+		pharmacy: {
+			name: pharmacyName,
+			address: pharmacyAddr,
+			phoneNumber: pharmacyPhone,
+		},
+		physician: {
+			name: physicianName,
+			address: physicianAddr,
+			phoneNumber: physicianPhone
+		},
+	});
+
+
+	patients.create(name, meds)
 		.then(response => {
 			res.status(201).json(response.serialize());
 		})

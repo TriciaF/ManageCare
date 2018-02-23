@@ -95,6 +95,14 @@ body:before {
     margin: 40px, auto;
 }
 
+.add-patient {
+    border-radius: 25px;
+    width: 120px;
+    height: 40px;
+    background: #AFEEEE;
+    margin: 40px, auto;
+}
+
 .rem-med-button {
     border-radius: 10px;
     background: #AFEEEE;

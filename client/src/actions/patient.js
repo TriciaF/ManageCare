@@ -33,10 +33,11 @@ export const getPatientDashboard = (patientDashboard) => ({
 });
 
 export const UPDATE_PATIENT_SUCCESS = 'UPDATE_PATIENT_SUCCESS';
-export const updatePatientSuccess = (error, addMedication) => ({
+export const updatePatientSuccess = (error, addMedication, addPatient) => ({
     type: UPDATE_PATIENT_SUCCESS,
     error,
-    addMedication
+    addMedication,
+    addPatient
 });
 
 export const UPDATE_PATIENT_ERROR = 'UPDATE_PATIENT_ERRORR';
@@ -64,10 +65,11 @@ export const updatePatient = (patientDashboard) => ({
     patientDashboard
 });
 
-export const ADD_PATIENT = 'ADD_PATIENT';
-export const addPatient = (patientList) => ({
-    type: ADD_PATIENT,
-    patientList
+export const ADD_NEW_PATIENT = 'ADD_NEW_PATIENT';
+export const addNewPatient = (patientList, addPatient) => ({
+    type: ADD_NEW_PATIENT,
+    patientList,
+    addPatient
 });
 
 export const SHOW_MEDS_ADD_FORM = 'SHOW_MEDS_ADD_FORM';
@@ -159,10 +161,9 @@ export const removeFromDashboard = (values, currentPatient) => dispatch => {
 
 //update the local store with updated patient information, then update the patient database
 export const addToPatientList = (values) => dispatch => {
-        console.log("Enter updateDashboard");
+        console.log("Enter addToPatientList", values);
         dispatch(patientListRequestSent());
-        const id = values.id;
-        return fetch(`${API_BASE_URL}/` + id, {
+        return fetch(`${API_BASE_URL}/`, {
                 method: 'POST',
                 headers: {
                     'content-Type': 'application/json'

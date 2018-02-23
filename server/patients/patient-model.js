@@ -4,15 +4,13 @@ const { Patients } = require('./patient-schema');
 
 
 const patients = {
-	create: function(patientName, medication) {
+	create: function(_patientName, _medication) {
 		console.log('Enter Patients:create');
-		const meds = medication.map(item => {
-			return item;
-		});
+		
 		return Patients
 			.create({
-				name: patientName,
-				medication: meds
+				name: _patientName,
+				medication: _medication
 			});
 	},
 

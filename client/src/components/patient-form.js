@@ -3,12 +3,12 @@ import '../index.css';
 import {Field, reduxForm, focus} from 'redux-form';
 import {required, nonEmpty} from '../validators';
 import PatientInput from './patient-input';
-import {addPatient} from '../actions/patient';
+import {addToPatientList} from '../actions/patient';
 
 export class PatientForm extends React.Component {
 
   onSubmit(values) {
-    return this.props.dispatch(addPatient(values))
+    return this.props.dispatch(addToPatientList(values))
 }
 
 render() {
