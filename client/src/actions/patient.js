@@ -159,7 +159,7 @@ export const removeFromDashboard = (values, currentPatient) => dispatch => {
     } //end removeMedication
 
 
-//update the local store with updated patient information, then update the patient database
+//add new patient
 export const addToPatientList = (values) => dispatch => {
         console.log("Enter addToPatientList", values);
         dispatch(patientListRequestSent());

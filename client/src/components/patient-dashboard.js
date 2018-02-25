@@ -19,9 +19,6 @@ export class PatientDashboard extends React.Component {
     if(this.props.addMedication) {
       this.props.dispatch(addToDashboard(this.props.patientDashboard))
     }
-    // if(this.props.removeMedication) {
-    //   this.props.dispatch(removeFromDashboard(this.props.patientDashboard))
-    // }
 
     const medsName = this.props.patientDashboard.medication.map((med, index) => {
       return <td key={index}>
