@@ -1,119 +1,64 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import LoginForm from './login-form';
-import {showLoginForm} from '../actions/auth';
+import {showLoginForm, logOut} from '../actions/auth';
+import {withRouter} from 'react-router';
+import {Redirect, Link} from 'react-router-dom';
+
+class NavBar extends React.Component {
 
 
-export class NavBar extends React.Component {
-
-
-  componentDidMount() {
-    this.showHeading();
-  }
-
-  showHeading() {
-    const subHeading = document.getElementById("sub-heading");
-    subHeading.classList.toggle("hidden");
-};
-
-  showAbout() {
-    // const about = document.getElementById("about");
-    // const login = document.getElementById("login");
-    // login.classList.add("hidden");
-    // about.classList.toggle("hidden");
-};
-
-
-  render () {
-
-  if(this.props.showLoginForm) 
-    return <LoginForm />
-
+render () {
   console.log('Enter NavBar')
 
+if(this.props.loggedIn) {
+    console.log('hello')
+      return (<div className="container">
+      <nav>
+        <ul className="nav-components">
+            <li className="sub-component">
+              <div onClick={()=>this.props.dispatch(logOut())}>
+                <a href="localhost:3000/" className="sub-header-link">
+                  Logout
+                </a>
+              </div>
+            </li>
+            <li className="sub-component">
+              <div onClick={()=> this.showAbout()}>
+                <a href="#" className="sub-header-link">
+                  About
+                </a>
+              </div>
+            </li>
+        </ul>
+      </nav>
+    </div>)
+}
+    
+if(this.props.showLoginForm) 
+    return <LoginForm />
+
+if(this.props.loggedIn === false)
   return(
     <div className="container">
       <nav>
-        <ul id="sub-heading" className="hidden">
-            <li className="sub-header">
+        <ul className="nav-components">
+            <li className="sub-component">
               <div onClick={()=>this.props.dispatch(showLoginForm())}>
-                <a href="#" className="sub-header-link">
+                <a href="localhost:3000/" className="sub-header-link">
                   Login
                 </a>
               </div>
-                    <nav>
-                        <ul id="login" className="hidden">
-                            <li className="link-item">
-                                <a href="#" className="sub-link">
-                                    <div className="content-desktop">
-                                    Show login Screen
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </li>
-                <li className="sub-header">
-                    <div onClick={()=> this.showAbout()}>
-                        <a href="#" className="sub-header-link">
-                          About
-                        </a>
-                    </div>
-                      
-                      <nav>
-                        <ul id="about" className="hidden">
-                            <li className="link-item">
-                                <a href="#" className="sub-link">
-                                    <div className="content-desktop">
-                                    description
-                                    </div>
-                                    
-                                </a>
-                            </li>
-                            <li className="link-item">
-                                <a href="#" className="sub-link">
-                                    <div className="content-desktop">
-                                    description
-                                    </div>
-                                    
-                                </a>
-                            </li>
-                            <li className="link-item">
-                                <a href="#" className="sub-link">
-                                    <div className="content-desktop">
-                                    description
-                                    </div>
-                                    
-                                </a>
-                            </li>
-                            <li className="link-item">
-                                <a href="#" className="sub-link">
-                                    <div className="content-desktop">
-                                    descriptions
-                                    </div>
-                                    
-                                </a>
-                            </li>
-                          </ul>
-                        </nav>
-                  </li>
-                  <li className="sub-header">
-                    <a href="#" className="sub-header-link">
-                      Research Medications
-                    </a>
-                  </li>
-                  <li className="sub-header">
-                      <a href="#" className="sub-header-link">
-                    Appointments
-                      </a>
-                  </li>
-                  <li className="sub-header">
-                    <a href="#" className="sub-header-link">
-                    Patient List
-                    </a>
-                </li>
-            </ul>
-        </nav>
+            </li>
+            <li className="sub-component">
+              <div onClick={()=> this.showAbout()}>
+                <a href="localhost:3000/" className="sub-header-link">
+                  About
+                </a>
+              </div>
+            </li>
+        </ul>
+      </nav>
     </div>
   );//end return
   }//end render
@@ -121,6 +66,7 @@ export class NavBar extends React.Component {
 
 const mapStateToProps = state => ({
   showLoginForm: state.auth.showLoginForm,
+  loggedIn: state.auth.loggedIn
 });
 
-export default connect(mapStateToProps)(NavBar);
+export default withRouter(connect(mapStateToProps)(NavBar));

@@ -5,6 +5,7 @@ import {
     AUTH_SUCCESS,
     AUTH_ERROR,
     LOGOUT_WARNING,
+    LOGOUT,
     SHOW_LOGIN_FORM
 } from '../actions/auth';
 
@@ -37,7 +38,8 @@ export default function reducer(state = initialState, action) {
         return Object.assign({}, state, {
             loading: false,
             currentUser: action.currentUser,
-            loggedIn: action.loggedIn
+            loggedIn: true,
+            showLoginForm: false
         });
     } else if (action.type === AUTH_ERROR) {
         return Object.assign({}, state, {
@@ -49,6 +51,11 @@ export default function reducer(state = initialState, action) {
         return Object.assign({}, state, {
             logoutWarning: true
         });
+    } else if (action.type === LOGOUT) {
+      console.log('logout');
+      return Object.assign({}, state, {
+          loggedIn: false
+      });
     } else if (action.type === SHOW_LOGIN_FORM) {
         return Object.assign({}, state, {
             showLoginForm: true

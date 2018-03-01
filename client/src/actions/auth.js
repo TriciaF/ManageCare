@@ -20,10 +20,11 @@ export const authRequest = () => ({
 });
 
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
-export const authSuccess = (currentUser, loggedIn) => ({
+export const authSuccess = (currentUser, loggedIn, showLoginForm) => ({
     type: AUTH_SUCCESS,
     currentUser,
-    loggedIn
+    loggedIn,
+    showLoginForm
 });
 
 export const AUTH_ERROR = 'AUTH_ERROR';
@@ -36,6 +37,12 @@ export const LOGOUT_WARNING = 'LOGOUT_WARNING';
 export const logoutWarning = (logoutWarning) => ({
     type: LOGOUT_WARNING,
     logoutWarning
+});
+
+export const LOGOUT = 'LOGOUT';
+export const logOut = (loggedIn) => ({
+    type: LOGOUT,
+    loggedIn
 });
 
 export const SHOW_LOGIN_FORM = 'SHOW_LOGIN_FORM';

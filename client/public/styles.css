@@ -165,14 +165,14 @@ td {
     margin-top: 60px;
 }
 
-#sub-heading {
-    list-style: none;
+.nav-components {
+    list-style-type: none;
     text-align: center;
     padding: 0;
     margin: 0;
 }
 
-.sub-header {
+.sub-component {
     display: inline-block;
     text-transform: uppercase;
     padding: 15px;

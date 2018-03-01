@@ -3,7 +3,9 @@ import {Route, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import ManageCare from './manageCare';
 import PatientList from './patient-list';
+import NavBar from './nav-bar';
 import {clearAuth} from '../actions/auth';
+import {Redirect} from 'react-router-dom';
 
 export class App extends React.Component {
   componentWillReceiveProps(nextProps) {
@@ -14,6 +16,7 @@ export class App extends React.Component {
     } else if (!nextProps.loggedIn && this.props.loggedIn) {
         // Stop refreshing when we log out
         this.stopPeriodicRefresh();
+        this.props.history.push('/');
     };
 };
 
@@ -25,7 +28,7 @@ export class App extends React.Component {
   componentWillUnmount() {
       this.stopPeriodicRefresh();
   };
-
+ 
   stopPeriodicRefresh() {
     console.log('stopPeriodRefresh');
       if (!this.logoutTimer) {
@@ -34,9 +37,11 @@ export class App extends React.Component {
       clearInterval(this.logoutTimer);
   }
     render() {
+
       console.log('render App');
         return ( 
           <div className = "app" >
+            <NavBar />
             <Route exact path="/" component= {ManageCare}/>
             <Route exact path="/patient" component= {PatientList}/>
           </div>
