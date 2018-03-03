@@ -12,7 +12,7 @@ render () {
   console.log('Enter NavBar')
 
 if(this.props.loggedIn) {
-    console.log('hello')
+    console.log('enter render logout button')
       return (<div className="container">
       <nav>
         <ul className="nav-components">
@@ -39,6 +39,7 @@ if(this.props.showLoginForm)
     return <LoginForm />
 
 if(this.props.loggedIn === false)
+
   return(
     <div className="container">
       <nav>

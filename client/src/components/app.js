@@ -1,3 +1,5 @@
+'use strict';
+
 import React from 'react';
 import {Route, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -15,8 +17,8 @@ export class App extends React.Component {
         this.startLogoutWithInactivity();
     } else if (!nextProps.loggedIn && this.props.loggedIn) {
         // Stop refreshing when we log out
-        this.stopPeriodicRefresh();
-        this.props.history.push('/');
+        this.stopPeriodicRefresh(); 
+        this.props.history.push('/')
     };
 };
 
@@ -51,7 +53,7 @@ export class App extends React.Component {
 
 const mapStateToProps = state => ({
   logoutWarning: state.auth.logoutWarning,
-  loggedIn: state.auth.currentUser,
+  loggedIn: state.auth.loggedIn,
   hasAuthToken: state.auth.authToken
 });
 

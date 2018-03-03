@@ -33,7 +33,7 @@ export class ManageCare extends React.Component {
 
                
 const mapStateToProps = state => ({
-    loggedIn: state.auth.currentUser,
+    loggedIn: state.auth.loggedIn,
 });
 
 export default connect(mapStateToProps)(ManageCare);

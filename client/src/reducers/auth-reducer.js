@@ -52,10 +52,10 @@ export default function reducer(state = initialState, action) {
             logoutWarning: true
         });
     } else if (action.type === LOGOUT) {
-      console.log('logout');
-      return Object.assign({}, state, {
-          loggedIn: false
-      });
+        console.log('logout reducer');
+        return Object.assign({}, state, {
+            loggedIn: false
+        });
     } else if (action.type === SHOW_LOGIN_FORM) {
         return Object.assign({}, state, {
             showLoginForm: true
