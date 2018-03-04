@@ -24,17 +24,6 @@ export class PatientDashboard extends React.Component {
       return<PatientForm />
     }
 
-
-    // <tr>
-    //             <th>Name</th>
-    //             <th>Dosage</th>
-    //             <th>Schedule</th>
-    //             <th>Pharmacy</th>
-    //             <th>Physician</th>
-    //             <th>Remove</th>
-    //           </tr>
-
-
     const medicationList = this.props.patientDashboard.medication.map((med, index) => {
       return (<tr key={index}>
               <td>
@@ -70,7 +59,6 @@ export class PatientDashboard extends React.Component {
           </tr>)
     })
     
-
     return (
       <form className="patient-dashboard">
         <div className="dashboard-header">
@@ -78,13 +66,13 @@ export class PatientDashboard extends React.Component {
                 {this.props.currentPatient}
             </h1>
         </div>
-        <div className="dashboard-content">
         <div className="dashboard-button">
               <div>
                 <button className="add-med-button" onClick={() =>this.props.dispatch(showMedsAddForm())}>Add Medication</button>
                 <button className="back-to-patient-list" onClick={() =>this.props.dispatch(getPatientList())}>Back to Patient List</button>
               </div>
         </div>
+        <div className="dashboard-content">
           <table className="medication-table">
               <tbody>
                   <tr>

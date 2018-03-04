@@ -1,11 +1,11 @@
 
-
 import React from 'react';
 import {Route, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import ManageCare from './manageCare';
 import PatientList from './patient-list';
-import NavBar from './nav-bar';
+import NavBarTop from './nav-bar-top';
+import NavBarBottom from './nav-bar-bottom';
 import {clearAuth} from '../actions/auth';
 
 
@@ -44,10 +44,13 @@ export class App extends React.Component {
       console.log('render App');
         return ( 
           <div className = "app" >
-            <NavBar />
+            <NavBarTop />
             <Route exact path="/" component= {ManageCare}/>
             <Route exact path="/patient" component= {PatientList}/>
+            <NavBarBottom />
           </div>
+
+
         );
     }
 }

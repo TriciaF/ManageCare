@@ -17,11 +17,8 @@ export class ManageCare extends React.Component {
       <div>
       <div className="manage-care">
       </div>
-      <header className="manageCare-header">
-        <div id="circle">
-          <h1 className="manageCare-title">Manage Care</h1>
-          <h2 className="manageCare-intro">Helping to manage patient care</h2>
-        </div>
+      <header className="manage-care-header">
+        <div id="circle">Manage Care</div>
       </header> 
       </div> 
     );

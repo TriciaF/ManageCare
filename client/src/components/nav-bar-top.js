@@ -3,17 +3,17 @@ import {connect} from 'react-redux';
 import LoginForm from './login-form';
 import {showLoginForm, logOut} from '../actions/auth';
 import {addNewPatient} from '../actions/patient';
-import {withRouter} from 'react-router';
 
-class NavBar extends React.Component {
+
+class NavBarTop extends React.Component {
 
 
 render () {
-  console.log('Enter NavBar')
+  console.log('Enter NavBarTop')
 
 if(this.props.loggedIn) {
     console.log('enter render logout button')
-      return (<div className="container">
+      return (<div className="navbar-top">
       <nav>
         <ul className="nav-components">
             <li className="sub-component">
@@ -48,7 +48,7 @@ if(this.props.showLoginForm)
 if(this.props.loggedIn === false)
 
   return(
-    <div className="container">
+    <div className="navbar-top">
       <nav>
         <ul className="nav-components">
             <li className="sub-component">
@@ -70,11 +70,11 @@ if(this.props.loggedIn === false)
     </div>
   );//end return
   }//end render
-}//end NavBar
+}//end NavBarTop
 
 const mapStateToProps = state => ({
   showLoginForm: state.auth.showLoginForm,
   loggedIn: state.auth.loggedIn
 });
 
-export default withRouter(connect(mapStateToProps)(NavBar));
+export default connect(mapStateToProps)(NavBarTop);
