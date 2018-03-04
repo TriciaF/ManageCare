@@ -1,8 +1,7 @@
 import React from 'react';
 import {DropdownList} from 'react-widgets';
 import {connect} from 'react-redux';
-import {getPatientList, setPatientDashboard, addNewPatient} from '../actions/patient';
-import './patient-list.css';
+import {getPatientList, setPatientDashboard} from '../actions/patient';
 import PatientDashboard from './patient-dashboard';
 import PatientForm from './patient-form';
 import 'react-widgets/dist/css/react-widgets.css';
@@ -45,20 +44,18 @@ export class PatientList extends React.Component {
      const patients = this.props.patientList.map(patient => {
        return patient.name;
      })
+      
+        return (
+          <form className="patient-list">
+            <DropdownList
+              className="dropdown_customized"
+              data={patients}
+              value={this.props.currentPatient}
+              onChange={value => this.onChange(value)}
+            />
+          </form>
+        );//end return
 
-    return (
-      <form className="patient-list">
-        <DropdownList
-          className="dropdown_customized"
-          data={patients}
-          value={this.props.currentPatient}
-          onChange={value => this.onChange(value)}
-        />
-        <div>
-          <button className="add-patient" onClick={() =>this.props.dispatch(addNewPatient())}>Add Patient</button>
-        </div>
-      </form>
-    );//end return
   }//end render
 }//end PatientDashboard
 
@@ -66,7 +63,8 @@ const mapStateToProps = state => ({
     patientList: state.patient.patientList,
     currentPatient: state.patient.currentPatient,
     patientDashboard: state.patient.patientDashboard,
-    showAddPatientForm: state.patient.showAddPatientForm
+    showAddPatientForm: state.patient.showAddPatientForm,
+    showPatientList: state.patient.showPatientList
 });
 
 export default connect(mapStateToProps)(PatientList);

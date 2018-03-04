@@ -3,9 +3,10 @@ import {connect} from 'react-redux';
 import {removeFromDashboard,  
         showMedsAddForm, 
         addToDashboard,
-        removeMedication,
+        showAddPatientForm,
         getPatientList} from '../actions/patient';
 import AddMedsForm from './add-meds-form';
+import PatientForm from './patient-form';
 
 export class PatientDashboard extends React.Component {
 
@@ -19,41 +20,56 @@ export class PatientDashboard extends React.Component {
     if(this.props.addMedication) {
       this.props.dispatch(addToDashboard(this.props.patientDashboard))
     }
+    if(this.props.showAddPatientForm){
+      return<PatientForm />
+    }
 
-    const medsName = this.props.patientDashboard.medication.map((med, index) => {
-      return <td key={index}>
+
+    // <tr>
+    //             <th>Name</th>
+    //             <th>Dosage</th>
+    //             <th>Schedule</th>
+    //             <th>Pharmacy</th>
+    //             <th>Physician</th>
+    //             <th>Remove</th>
+    //           </tr>
+
+
+    const medicationList = this.props.patientDashboard.medication.map((med, index) => {
+      return (<tr key={index}>
+              <td>
                {med.name}
              </td>
-    })
-    const medsDosage = this.props.patientDashboard.medication.map((med, index) => {
-      return <td key={index}>
-              {med.dosage}
+             <td>
+               {med.dosage}
              </td>
-    })
-    const medsSchedule = this.props.patientDashboard.medication.map((med, index) => {
-      return <td key={index}>
-              {med.schedule}
+             <td>
+               {med.schedule}
              </td>
+             <td>
+               {med.pharmacy.name}
+             </td>
+             <td>
+               {med.pharmacy.address}
+             </td>
+             <td>
+               {med.pharmacy.phoneNumber}
+             </td>
+             <td>
+               {med.physician.name}
+             </td>
+             <td>
+               {med.physician.address}
+             </td>
+             <td>
+               {med.physician.phoneNumber}
+             </td>
+             <td>
+                 <button className="rem-med-button" onClick={()=>this.props.dispatch(removeFromDashboard(med, this.props.patientDashboard.name))}>X</button>
+             </td>
+          </tr>)
     })
-    const medsPharmacy = this.props.patientDashboard.medication.map((med, index) => {
-      return <td key={index}>
-              {med.pharmacy.name}
-              {med.pharmacy.address}
-              {med.pharmacy.phoneNumber}
-            </td>
-    })
-    const medsPhysician = this.props.patientDashboard.medication.map((med, index) => {
-      return <td key={index}>
-              {med.physician.name}
-              {med.physician.address}
-              {med.physician.phoneNumber}
-            </td>
-    })
-    const removeButton = this.props.patientDashboard.medication.map((med, index) =>{
-      return <td key={index}>
-                <button className="rem-med-button" onClick={()=>this.props.dispatch(removeFromDashboard(med, this.props.patientDashboard.name))}>X</button>
-            </td>
-    })
+    
 
     return (
       <form className="patient-dashboard">
@@ -69,39 +85,25 @@ export class PatientDashboard extends React.Component {
                 <button className="back-to-patient-list" onClick={() =>this.props.dispatch(getPatientList())}>Back to Patient List</button>
               </div>
         </div>
-          <table className="patient-dashboard">
+          <table className="medication-table">
               <tbody>
-              <tr>
-                <th>Name</th>
-                <th>Dosage</th>
-                <th>Schedule</th>
-                <th>Pharmacy</th>
-                <th>Physician</th>
-                <th>Remove</th>
-              </tr>
-                <tr>
-                  {medsName}
-                </tr>
-                <tr>
-                  {medsDosage}
-                </tr>
-                <tr>
-                  {medsSchedule}
-                </tr>
-                <tr>
-                  {medsPharmacy}
-                </tr>
-                <tr>
-                  {medsPhysician}
-                </tr>
-                <tr>
-                  {removeButton}
-                </tr>
+                  <tr>
+                    <th>Name</th>
+                    <th>Dosage</th>
+                    <th>Schedule</th>
+                    <th>Pharmacy Name</th>
+                    <th>Pharmacy Address</th>
+                    <th>Pharmacy Phone Number</th>
+                    <th>Physician Name</th>
+                    <th>Physician Address</th>
+                    <th>Physician Phone Number</th>
+                    <th>Remove</th>
+                  </tr>
+                      {medicationList}
               </tbody>
           </table>
-        </div>
-         
-      </form>
+        </div>  
+    </form>
     );//end return
   }//end render
 }//end PatientDashboard
@@ -113,7 +115,8 @@ const mapStateToProps = state => ({
   addMedication: state.patient.addMedication,
   removeMedication: state.patient.removeMedication,
   currentPatient: state.patient.currentPatient,
-  showMedsAddForm: state.patient.showMedsAddForm
+  showMedsAddForm: state.patient.showMedsAddForm,
+  showAddPatientForm: state.patient.showAddPatientForm
 });
 
 export default connect(mapStateToProps)(PatientDashboard);

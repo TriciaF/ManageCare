@@ -2,8 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import LoginForm from './login-form';
 import {showLoginForm, logOut} from '../actions/auth';
+import {addNewPatient} from '../actions/patient';
 import {withRouter} from 'react-router';
-import {Redirect, Link} from 'react-router-dom';
 
 class NavBar extends React.Component {
 
@@ -25,8 +25,15 @@ if(this.props.loggedIn) {
             </li>
             <li className="sub-component">
               <div onClick={()=> this.showAbout()}>
-                <a href="#" className="sub-header-link">
+                <a href="localhost:3000/" className="sub-header-link">
                   About
+                </a>
+              </div>
+            </li>
+            <li className="sub-component">
+              <div onClick={() =>this.props.dispatch(addNewPatient())}>
+                <a href="localhost:3000/" className="sub-header-link">
+                  Add Patient
                 </a>
               </div>
             </li>

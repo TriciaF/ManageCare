@@ -19,11 +19,19 @@ export const getPatientListError = (error) => ({
     type: GET_PATIENTLIST_ERROR,
     error
 });
+
+export const SHOW_PATIENT_LIST = 'SHOW_PATIENT_LIST';
+export const showPatientList = () =>({
+  type: SHOW_PATIENT_LIST,
+  showPatientList
+});
+
 export const SET_PATIENT_DASHBOARD = 'SET_PATIENT_DASHBOARD';
 export const setPatientDashboard = (currentPatient, patientDashboard) => ({
     type: SET_PATIENT_DASHBOARD,
     currentPatient,
-    patientDashboard
+    patientDashboard,
+    showPatientList
 });
 
 export const GET_PATIENT_DASHBOARD = 'GET_PATIENT_DASHBOARD';
@@ -33,11 +41,11 @@ export const getPatientDashboard = (patientDashboard) => ({
 });
 
 export const UPDATE_PATIENT_SUCCESS = 'UPDATE_PATIENT_SUCCESS';
-export const updatePatientSuccess = (error, addMedication, addPatient) => ({
+export const updatePatientSuccess = () => ({
     type: UPDATE_PATIENT_SUCCESS,
-    error,
-    addMedication,
-    addPatient
+    // error,
+    // addMedication,
+    // addPatient
 });
 
 export const UPDATE_PATIENT_ERROR = 'UPDATE_PATIENT_ERRORR';
@@ -124,7 +132,7 @@ export const addToDashboard = (values) => dispatch => {
                 }
                 return res.json();
             })
-            .then(({ patientData }) => dispatch(updatePatientSuccess(patientData)))
+            .then(({ patientData }) => dispatch(updatePatientSuccess()))
             .catch(err => {
                 dispatch(updatePatientError(err));
             });
@@ -152,7 +160,7 @@ export const removeFromDashboard = (values, currentPatient) => dispatch => {
                 }
                 return res.json();
             })
-            .then(({ patientData }) => dispatch(updatePatientSuccess(patientData)))
+            .then(({ patientData }) => dispatch(updatePatientSuccess()))
             .catch(err => {
                 dispatch(updatePatientError(err));
             });
@@ -176,8 +184,10 @@ export const addToPatientList = (values) => dispatch => {
                 }
                 return res.json();
             })
-            .then(({ patientData }) => dispatch(updatePatientSuccess(patientData)))
+            .then(({patientSuccess}) => dispatch(updatePatientSuccess()))
+            .then(({patientData}) => dispatch(getPatientList()))
+            .then(({patientList}) => dispatch(showPatientList()))
             .catch(err => {
-                dispatch(updatePatientError(err));
+                dispatch(getPatientListError(err));
             });
     } //end updatePatient

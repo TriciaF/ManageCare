@@ -95,14 +95,6 @@ body:before {
     margin: 40px, auto;
 }
 
-.add-patient {
-    border-radius: 25px;
-    width: 120px;
-    height: 40px;
-    background: #AFEEEE;
-    margin: 40px, auto;
-}
-
 .rem-med-button {
     border-radius: 10px;
     background: #AFEEEE;
@@ -116,24 +108,22 @@ body:before {
     margin: 40px, auto;
 }
 
-.patient-dashboard {
+.medication-table {
     color: black;
     height: 24px;
     padding: .875rem 1rem;
     width: 100%;
     border-collapse: collapse;
-}
-
-table,
-{
-    width: 100%;
     margin: 20px auto;
-    table-layout: auto;
+    display: inline;
+    table-layout: fixed;
 }
 
-thead>tr,
-tbody {
-    display: inline;
+.patient-list {
+    position: relative;
+    display: inline-block;
+    min-width: 160px;
+    list-style: none;
 }
 
 th,
@@ -169,13 +159,20 @@ td {
     list-style-type: none;
     text-align: center;
     padding: 0;
-    margin: 0;
+    margin: 20px;
 }
 
 .sub-component {
     display: inline-block;
     text-transform: uppercase;
     padding: 15px;
+    /* border-radius: 20px;
+    width: 120px;
+    height: 8px;
+    background: #AFEEEE;
+    border: 20px;
+    text-align: center;
+    vertical-align: middle; */
 }
 
 .sub-header-link {

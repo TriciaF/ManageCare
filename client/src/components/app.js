@@ -1,4 +1,4 @@
-'use strict';
+
 
 import React from 'react';
 import {Route, withRouter} from 'react-router-dom';
@@ -7,7 +7,7 @@ import ManageCare from './manageCare';
 import PatientList from './patient-list';
 import NavBar from './nav-bar';
 import {clearAuth} from '../actions/auth';
-import {Redirect} from 'react-router-dom';
+
 
 export class App extends React.Component {
   componentWillReceiveProps(nextProps) {
@@ -15,6 +15,7 @@ export class App extends React.Component {
     if (nextProps.loggedIn && !this.props.loggedIn) {
         // When we are logged in, start login timer
         this.startLogoutWithInactivity();
+        this.props.history.push('/patient')
     } else if (!nextProps.loggedIn && this.props.loggedIn) {
         // Stop refreshing when we log out
         this.stopPeriodicRefresh(); 

@@ -2,6 +2,7 @@ import {
     PATIENTLIST_REQUEST_SENT,
     GET_PATIENTLIST_SUCCESS,
     GET_PATIENTLIST_ERROR,
+    SHOW_PATIENT_LIST,
     SET_PATIENT_DASHBOARD,
     GET_PATIENT_DASHBOARD,
     UPDATE_PATIENT_SUCCESS,
@@ -16,6 +17,7 @@ const initialState = {
     loading: false,
     error: null,
     patientList: [],
+    showPatientList: false,
     currentPatient: null,
     patientDashboard: null,
     showMedsAddForm: false,
@@ -32,7 +34,7 @@ export default function reducer(state = initialState, action) {
             loading: true
         });
     } else if (action.type === GET_PATIENTLIST_SUCCESS) {
-        console.log('enter GET_PATIENTLIST_SUCCESS', action.patientList);
+        console.log('enter getPatientListSuccess', action.patientList);
         return Object.assign({}, state, {
             patientList: action.patientList,
             loading: false
@@ -41,10 +43,16 @@ export default function reducer(state = initialState, action) {
         return Object.assign({}, state, {
             error: action.error
         });
+    } else if (action.type === SHOW_PATIENT_LIST) {
+      console.log('enter showPatientList')
+        return Object.assign({}, state, {
+            showPatientList: true
+        });
     } else if (action.type === SET_PATIENT_DASHBOARD) {
         console.log('Enter set patient Dashboard: ', action)
         return Object.assign({}, state, {
             currentPatient: action.currentPatient,
+            showPatientList: false,
             patientDashboard: {
                 id: action.patientDashboard.id,
                 name: action.patientDashboard.name,
@@ -58,6 +66,7 @@ export default function reducer(state = initialState, action) {
         return state.patientDashboard
 
     } else if (action.type === UPDATE_PATIENT_SUCCESS) {
+      console.log('enter updatePatientSuccess')
         return Object.assign({}, state, {
             error: false,
             addMedication: false,
@@ -112,35 +121,36 @@ export default function reducer(state = initialState, action) {
             showMedsAddForm: true
         });
     } else if (action.type === ADD_NEW_PATIENT) {
-      console.log('Enter AddNewPatient action = ', action);
-      if(!state.addPatient) {
-        return Object.assign({}, state, {
-          showAddPatientForm: true
-        })
-      } else {
-        return Object.assign({}, state, {
-            addPatient: true,
-            showAddPatientForm: false,
-            patientList: state.patientList.concat([{
-                name: action.patientList.name,
-                medication: {
-                    name: action.patientList.medication.medName,
-                    dosage: action.patientList.medication.medDosage,
-                    schedule: action.patientList.medication.medSchedule,
-                    pharmacy: {
-                        name: action.patientList.medication.pharmName,
-                        address: action.patientList.medication.pharmAddr,
-                        phoneNumber: action.patientList.medication.pharmPhone
-                    },
-                    physician: {
-                        name: action.patientList.medication.physicianName,
-                        address: action.patientList.medication.physicianAddr,
-                        phoneNumber: action.patientList.medication.physicianPhone
+        console.log('Enter AddNewPatient action = ', action);
+        if (!state.addPatient) {
+            return Object.assign({}, state, {
+                showAddPatientForm: true,
+                addPatient: true
+            })
+        } else {
+            return Object.assign({}, state, {
+                addPatient: false,
+                showAddPatientForm: false,
+                patientList: state.patientList.concat([{
+                    name: action.patientList.name,
+                    medication: {
+                        name: action.patientList.medication.medName,
+                        dosage: action.patientList.medication.medDosage,
+                        schedule: action.patientList.medication.medSchedule,
+                        pharmacy: {
+                            name: action.patientList.medication.pharmName,
+                            address: action.patientList.medication.pharmAddr,
+                            phoneNumber: action.patientList.medication.pharmPhone
+                        },
+                        physician: {
+                            name: action.patientList.medication.physicianName,
+                            address: action.patientList.medication.physicianAddr,
+                            phoneNumber: action.patientList.medication.physicianPhone
+                        }
                     }
-                }
-            }])
-        });
-      }
+                }])
+            });
+        }
     } else
         return state;
 

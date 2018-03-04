@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 
-import NavBar from './nav-bar';
 
 export class ManageCare extends React.Component {
   
