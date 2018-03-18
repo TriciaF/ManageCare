@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
-
+import NavBarBottom from './nav-bar-bottom';
 
 export class ManageCare extends React.Component {
   
@@ -14,12 +14,13 @@ export class ManageCare extends React.Component {
       }
 
     return (
-      <div>
       <div className="manage-care">
-      </div>
-      <header className="manage-care-header">
-        <div id="circle">Manage Care</div>
-      </header> 
+        <header className="manage-care-header">
+           <div id="circle">Manage Care</div>
+        </header> 
+        <div>
+           <NavBarBottom />
+        </div>
       </div> 
     );
   }

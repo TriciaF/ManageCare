@@ -1,80 +1,94 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import LoginForm from './login-form';
-import {showLoginForm, logOut} from '../actions/auth';
-import {addNewPatient} from '../actions/patient';
+import { showAddPatientForm} from '../actions/patient';
+import {clearAuth, showLoginForm } from '../actions/auth';
+import {clearAuthToken} from '../local-storage';
 
 
 class NavBarTop extends React.Component {
-
-
-render () {
-  console.log('Enter NavBarTop')
-
-if(this.props.loggedIn) {
-    console.log('enter render logout button')
-      return (<div className="navbar-top">
-      <nav>
-        <ul className="nav-components">
-            <li className="sub-component">
-              <div onClick={()=>this.props.dispatch(logOut())}>
-                <a href="localhost:3000/" className="sub-header-link">
-                  Logout
-                </a>
-              </div>
-            </li>
-            <li className="sub-component">
-              <div onClick={()=> this.showAbout()}>
-                <a href="localhost:3000/" className="sub-header-link">
-                  About
-                </a>
-              </div>
-            </li>
-            <li className="sub-component">
-              <div onClick={() =>this.props.dispatch(addNewPatient())}>
-                <a href="localhost:3000/" className="sub-header-link">
-                  Add Patient
-                </a>
-              </div>
-            </li>
-        </ul>
-      </nav>
-    </div>)
+logOut() {
+    this.props.dispatch(clearAuth());
+    clearAuthToken();
 }
-    
-if(this.props.showLoginForm) 
-    return <LoginForm />
+logIn() {
+  console.log("enter logIn")
+    return this.props.dispatch(showLoginForm());
+}
+register(){
+  // this.props.dispatch(showRegistrationForm())
+    return <div>register</div>
+}
+addPatient() {
+  console.log('Enter addPatient - NavBarTop')
+    return this.props.dispatch(showAddPatientForm());
+}
 
-if(this.props.loggedIn === false)
+render() {
+  // Only render the log out button if we are logged in
+  let logOutButton;
+  let logInButton;
+  let register;
+  let addPatient;
 
-  return(
-    <div className="navbar-top">
-      <nav>
-        <ul className="nav-components">
-            <li className="sub-component">
-              <div onClick={()=>this.props.dispatch(showLoginForm())}>
-                <a href="localhost:3000/" className="sub-header-link">
-                  Login
-                </a>
-              </div>
-            </li>
-            <li className="sub-component">
-              <div onClick={()=> this.showAbout()}>
-                <a href="localhost:3000/" className="sub-header-link">
-                  About
-                </a>
-              </div>
-            </li>
-        </ul>
-      </nav>
-    </div>
-  );//end return
-  }//end render
-}//end NavBarTop
+  if (this.props.loggedIn) {
+      logOutButton = (
+          <div onClick={() => this.logOut()}>
+            <a className="nav-words" href='/'>
+              Log out
+            </a>
+          </div>
+      )
+      addPatient = (
+          <div onClick={() => this.addPatient()}>
+            <a className="nav-words" href='/patient'>
+              Add Patient
+            </a>
+          </div>
+      )
+  }
+  if (!this.props.loggedIn) {
+      logInButton = (
+           <div onClick={() => this.logIn()}>
+              <a className="nav-words" href='/login'>
+                Log in
+              </a>
+            </div>
+        )
+    }
+    if (!this.props.loggedIn) {
+        register = (
+            <div onClick={() => this.register()}>
+              <a className="nav-words" href='/register'>
+                Register
+              </a>
+           </div>
+        )
+    }
+    return (
+        <div className="nav-bar-top">
+          <div>
+            <a className="nav-words-fda" href='https://www.fda.gov/Drugs/default.htm'>
+              FDA Website
+            </a>
+          </div>
+          <div>
+            <a className="nav-words-faq" href='http://www.signgenius.com/sign-language/sign-language-faq-introduction.shtml'>
+              FAQs
+            </a>
+          </div>
+              {register}
+              {logInButton}
+              {addPatient}
+              {logOutButton}
+        </div>
+    );
+}
+}
 
 const mapStateToProps = state => ({
-  showLoginForm: state.auth.showLoginForm,
-  loggedIn: state.auth.loggedIn
-});
+loggedIn: state.auth.currentUser,
+currentUser:  state.auth.currentUser,
 
+});
 export default connect(mapStateToProps)(NavBarTop);
+

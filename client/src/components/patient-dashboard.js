@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {removeFromDashboard,  
         showMedsAddForm, 
         addToDashboard,
-        showAddPatientForm,
         getPatientList} from '../actions/patient';
 import AddMedsForm from './add-meds-form';
 import PatientForm from './patient-form';
@@ -21,7 +20,7 @@ export class PatientDashboard extends React.Component {
       this.props.dispatch(addToDashboard(this.props.patientDashboard))
     }
     if(this.props.showAddPatientForm){
-      return<PatientForm />
+      return <PatientForm />
     }
 
     const medicationList = this.props.patientDashboard.medication.map((med, index) => {
@@ -69,7 +68,7 @@ export class PatientDashboard extends React.Component {
         <div className="dashboard-button">
               <div>
                 <button className="add-med-button" onClick={() =>this.props.dispatch(showMedsAddForm())}>Add Medication</button>
-                <button className="back-to-patient-list" onClick={() =>this.props.dispatch(getPatientList())}>Back to Patient List</button>
+                <button className="back-to-patient-list-button" onClick={() =>this.props.dispatch(getPatientList())}>Back to Patient List</button>
               </div>
         </div>
         <div className="dashboard-content">

@@ -28,6 +28,7 @@ export class PatientList extends React.Component {
  
 
    render() {
+     console.log('Enter PatientList, showAddPatientForm = ', this.props.showAddPatientForm)
      if(this.props.patientDashboard) {
        return (
         <PatientDashboard />

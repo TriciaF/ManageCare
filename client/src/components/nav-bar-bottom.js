@@ -13,7 +13,7 @@ class NavBarBottom extends React.Component {
             <span className="nav-bottom-info">Manage multiple patients, by adding to your patient list. Once a patient is created, the patient dashboard contain current medication which the patient is prescribed.</span>
           </div>
           <div className='nav-bottom-column2'>
-            <h2 className="nav-bottom-heading">Medication Lists</h2><br></br>
+            <h2 className="nav-bottom-heading">Medication Lists</h2>
             <span className="nav-bottom-info">Information about a patient's medication is listed on the patient dashboard.  The medication information includes:</span>
             <ul className="nav-bottom-list">
               <li>medication name</li>

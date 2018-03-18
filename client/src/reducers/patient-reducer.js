@@ -11,6 +11,7 @@ import {
     REMOVE_MEDICATION,
     SHOW_MEDS_ADD_FORM,
     ADD_NEW_PATIENT,
+    SHOW_ADD_PATIENT_FORM,
 } from '../actions/patient';
 
 const initialState = {
@@ -49,18 +50,18 @@ export default function reducer(state = initialState, action) {
             showPatientList: true
         });
     } else if (action.type === SET_PATIENT_DASHBOARD) {
-        console.log('Enter set patient Dashboard: ', action)
-        return Object.assign({}, state, {
-            currentPatient: action.currentPatient,
-            showPatientList: false,
-            patientDashboard: {
-                id: action.patientDashboard.id,
-                name: action.patientDashboard.name,
-                medication: action.patientDashboard.medication.map(med => {
-                    return med;
-                })
-            }
-        });
+      console.log('Enter set patient Dashboard: ', action)
+      return Object.assign({}, state, {
+          currentPatient: action.currentPatient,
+          showPatientList: false,
+          patientDashboard: {
+              id: action.patientDashboard.id,
+              name: action.patientDashboard.name,
+              medication: action.patientDashboard.medication.map(med => {
+                  return med;
+              })
+          }
+      });
     } else if (action.type === GET_PATIENT_DASHBOARD) {
         console.log(state.patientDashboard)
         return state.patientDashboard
@@ -75,6 +76,11 @@ export default function reducer(state = initialState, action) {
     } else if (action.type === UPDATE_PATIENT_ERROR) {
         return Object.assign({}, state, {
             error: action.error
+        });
+    } else if (action.type === SHOW_ADD_PATIENT_FORM) {
+      console.log('Enter showAddPatientForm action')
+        return Object.assign({}, state, {
+          showAddPatientForm: true
         });
     } else if (action.type === ADD_MEDICATION) {
         console.log("Enter AddMedication action = ", action)
@@ -102,7 +108,6 @@ export default function reducer(state = initialState, action) {
             }
         });
     } else if (action.type === REMOVE_MEDICATION) {
-
         console.log('Enter removeMedication action ', action);
         const meds = state.patientDashboard.medication.filter(med => {
             return med.name !== action.patientDashboard.name

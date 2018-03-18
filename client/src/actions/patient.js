@@ -54,6 +54,11 @@ export const updatePatientError = (error) => ({
     error
 });
 
+export const SHOW_ADD_PATIENT_FORM = 'SHOW_ADD_PATIENT_FORM';
+export const showAddPatientForm = () => ({
+    type: SHOW_ADD_PATIENT_FORM,
+});
+
 export const ADD_MEDICATION = 'ADD_MEDICATION';
 export const addMedication = (patientDashboard, addMedication) => ({
     type: ADD_MEDICATION,

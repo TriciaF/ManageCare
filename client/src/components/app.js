@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import ManageCare from './manageCare';
 import PatientList from './patient-list';
 import NavBarTop from './nav-bar-top';
-import NavBarBottom from './nav-bar-bottom';
+import LoginForm from './login-form';
 import {clearAuth} from '../actions/auth';
 
 
@@ -46,8 +46,8 @@ export class App extends React.Component {
           <div className = "app" >
             <NavBarTop />
             <Route exact path="/" component= {ManageCare}/>
+            <Route exact path='/login' component={LoginForm}/>
             <Route exact path="/patient" component= {PatientList}/>
-            <NavBarBottom />
           </div>
 
 

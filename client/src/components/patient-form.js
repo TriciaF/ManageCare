@@ -24,80 +24,80 @@ render() {
         <form
             className="patient-form"
             onSubmit={this.props.handleSubmit(values =>
-                this.onSubmit(values)
-            )}>
+              this.onSubmit(values)
+          )}>
             {error}
-            <label htmlFor="name">Name</label>
             <Field
                 component={PatientInput}
                 type="text"
                 name="name"
                 id="name"
+                placeholder="patient name"
                 validate={[required, nonEmpty]}
             />
-            <label htmlFor="medication">Medication</label>
             <Field
                 component={PatientInput}
                 type="medication"
                 name="medication"
                 id="medication"
+                placeholder="medication"
                 validate={[required, nonEmpty]}
             />
-            <label htmlFor="dosage">Dosage</label>
             <Field
                 component={PatientInput}
                 type="dosage"
                 name="dosage"
                 id="dosage"
+                placeholder="dosage"
             />
-            <label htmlFor="schedule">Schedule</label>
             <Field
                 component={PatientInput}
                 type="schedule"
                 name="schedule"
                 id="schedule"
+                placeholder="schedule"
             />
-            <label htmlFor="pharmacyName">Pharmacy Name</label>
             <Field
                 component={PatientInput}
                 type="pharmacyName"
                 name="pharmacyName"
                 id="pharmacyName"
+                placeholder="pharmacy name"
             />
-            <label htmlFor="pharmacyAddr">Pharmacy Address</label>
             <Field
                 component={PatientInput}
                 type="pharmacyAddr"
                 name="pharmacyAddr"
                 id="pharmacyAddr"
+                placeholder="pharmacy address"
             />
-            <label htmlFor="pharmacyPhone">Pharmacy Phone Number</label>
             <Field
                 component={PatientInput}
                 type="pharmacyPhone"
                 name="pharmacyPhone"
                 id="pharmacyPhone"
+                placeholder="pharmacy phone number"
             />
-            <label htmlFor="physicianName">Physician Name</label>
             <Field
                 component={PatientInput}
                 type="physicianName"
                 name="physicianName"
                 id="physicianName"
+                placeholder="physician's name"
             />
-            <label htmlFor="physicianAddr">Physician Address</label>
             <Field
                 component={PatientInput}
                 type="physicianAddr"
                 name="physicianAddr"
                 id="physicianAddr"
+                placeholder="physician's address"
             />
-            <label htmlFor="physicianPhone">Physician Phone Number</label>
             <Field
                 component={PatientInput}
                 type="physicianPhone"
                 name="physicianPhone"
                 id="physicianPhone"
+                placeholder="physician's phone number"
             />
             <button disabled={this.props.pristine || this.props.submitting}>
                 Submit

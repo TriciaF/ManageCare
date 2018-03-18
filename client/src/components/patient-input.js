@@ -27,6 +27,7 @@ export default class PatientInput extends React.Component {
                     name={this.props.input.name}
                     id={this.props.id}
                     type={this.props.type}
+                    placeholder={this.props.placeholder}
                     ref={input => (this.input = input)}
                 />
                 {error}
