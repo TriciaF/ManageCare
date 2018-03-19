@@ -21,7 +21,7 @@ export default class PatientInput extends React.Component {
         }
 
         return (
-            <div className="form-input">
+            <div className="add-patient-input">
                 <input
                     {...this.props.input}
                     name={this.props.input.name}

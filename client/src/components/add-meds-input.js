@@ -21,7 +21,7 @@ export default class AddMedsInput extends React.Component {
         }
 
         return (
-            <div className="add-meds-form-input">
+            <div className="add-meds-input">
                 <label htmlFor={this.props.input.name}>
                     {this.props.label}
                     {error}

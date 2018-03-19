@@ -59,19 +59,19 @@ export class PatientDashboard extends React.Component {
     })
     
     return (
-      <form className="patient-dashboard">
-        <div className="dashboard-header">
+      <div>
+          <div className="dashboard-header">
             <h1 className="dashboard-name">
                 {this.props.currentPatient}
             </h1>
         </div>
-        <div className="dashboard-button">
+        <div className="dashboard-buttons">
               <div>
                 <button className="add-med-button" onClick={() =>this.props.dispatch(showMedsAddForm())}>Add Medication</button>
                 <button className="back-to-patient-list-button" onClick={() =>this.props.dispatch(getPatientList())}>Back to Patient List</button>
               </div>
         </div>
-        <div className="dashboard-content">
+        <div className="medicine-list">
           <table className="medication-table">
               <tbody>
                   <tr>
@@ -89,8 +89,8 @@ export class PatientDashboard extends React.Component {
                       {medicationList}
               </tbody>
           </table>
-        </div>  
-    </form>
+         </div>
+      </div>  
     );//end return
   }//end render
 }//end PatientDashboard

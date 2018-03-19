@@ -1,9 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { showAddPatientForm} from '../actions/patient';
-import {clearAuth, showLoginForm } from '../actions/auth';
+import {clearAuth } from '../actions/auth';
 import {clearAuthToken} from '../local-storage';
-
+import LoginForm from './login-form';
+import PatientForm from './patient-form';
 
 class NavBarTop extends React.Component {
 logOut() {
@@ -12,14 +13,14 @@ logOut() {
 }
 logIn() {
   console.log("enter logIn")
-    return this.props.dispatch(showLoginForm());
+  return <LoginForm />
 }
 register(){
   // this.props.dispatch(showRegistrationForm())
     return <div>register</div>
 }
 addPatient() {
-  console.log('Enter addPatient - NavBarTop')
+    console.log('Enter addPatient - NavBarTop')
     return this.props.dispatch(showAddPatientForm());
 }
 

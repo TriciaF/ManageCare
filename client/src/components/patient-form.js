@@ -12,6 +12,7 @@ export class PatientForm extends React.Component {
 }
 
 render() {
+console.log('Enter PatientForm')
     let error;
     if (this.props.error) {
         error = (
