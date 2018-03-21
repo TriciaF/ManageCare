@@ -20,10 +20,10 @@ export const getPatientListError = (error) => ({
     error
 });
 
-export const SHOW_PATIENT_LIST = 'SHOW_PATIENT_LIST';
-export const showPatientList = () =>({
-  type: SHOW_PATIENT_LIST,
-  showPatientList
+export const SHOW_PATIENT_DASHBOARD= 'SHOW_PATIENT_DASHBOARD';
+export const showPatientDashboard = () =>({
+  type: SHOW_PATIENT_DASHBOARD,
+  showPatientDashboard
 });
 
 export const SET_PATIENT_DASHBOARD = 'SET_PATIENT_DASHBOARD';
@@ -31,7 +31,7 @@ export const setPatientDashboard = (currentPatient, patientDashboard) => ({
     type: SET_PATIENT_DASHBOARD,
     currentPatient,
     patientDashboard,
-    showPatientList
+    showPatientDashboard
 });
 
 export const GET_PATIENT_DASHBOARD = 'GET_PATIENT_DASHBOARD';
@@ -41,11 +41,11 @@ export const getPatientDashboard = (patientDashboard) => ({
 });
 
 export const UPDATE_PATIENT_SUCCESS = 'UPDATE_PATIENT_SUCCESS';
-export const updatePatientSuccess = () => ({
-    type: UPDATE_PATIENT_SUCCESS,
-    // error,
-    // addMedication,
-    // addPatient
+export const updatePatientSuccess = (error, addMedication, addPatient) => ({
+    type: UPDATE_PATIENT_SUCCESS, 
+    error, 
+    addMedication, 
+    addPatient
 });
 
 export const UPDATE_PATIENT_ERROR = 'UPDATE_PATIENT_ERRORR';
@@ -89,7 +89,12 @@ export const SHOW_MEDS_ADD_FORM = 'SHOW_MEDS_ADD_FORM';
 export const showMedsAddForm = (showMedsAddForm) => ({
     type: SHOW_MEDS_ADD_FORM,
     showMedsAddForm
-})
+});
+
+export const SHOW_PATIENT_LIST = 'SHOW_PATIENT_LIST';
+export const showPatientList = () => ({
+    type: SHOW_PATIENT_LIST,
+});
 
 
 //fetch list of all patients, medications, pharmacy and physician
@@ -99,8 +104,7 @@ export const getPatientList = () => (dispatch) => {
     return fetch(`${API_BASE_URL}`, {
             method: 'GET',
             headers: {
-                'content-Type': 'application/json'
-            },
+                'content-Type': 'application/json' },
         })
         .then(res => {
             if (!res.ok) {
@@ -191,7 +195,7 @@ export const addToPatientList = (values) => dispatch => {
             })
             .then(({patientSuccess}) => dispatch(updatePatientSuccess()))
             .then(({patientData}) => dispatch(getPatientList()))
-            .then(({patientList}) => dispatch(showPatientList()))
+            .then(({patientList}) => dispatch(showPatientDashboard()))
             .catch(err => {
                 dispatch(getPatientListError(err));
             });

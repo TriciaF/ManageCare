@@ -17,8 +17,9 @@ app.use(morgan('common'));
 app.use(cors({ origin: CLIENT_ORIGIN }));
 
 
-//for CORS
-app.use(function(req, res, next) {
+// ifor CORS
+app.use(function(req, res, next) 
+{
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
 	res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');

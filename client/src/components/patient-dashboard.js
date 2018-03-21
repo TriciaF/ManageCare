@@ -3,9 +3,11 @@ import {connect} from 'react-redux';
 import {removeFromDashboard,  
         showMedsAddForm, 
         addToDashboard,
-        getPatientList} from '../actions/patient';
+        getPatientList,
+        showPatientList} from '../actions/patient';
 import AddMedsForm from './add-meds-form';
 import PatientForm from './patient-form';
+import PatientList from './patient-list'
 
 export class PatientDashboard extends React.Component {
 
@@ -21,6 +23,10 @@ export class PatientDashboard extends React.Component {
     }
     if(this.props.showAddPatientForm){
       return <PatientForm />
+    }
+    if(this.props.showPatientList){
+      // this.props.dispatch(getPatientList())
+      return <PatientList />
     }
 
     const medicationList = this.props.patientDashboard.medication.map((med, index) => {
@@ -65,14 +71,13 @@ export class PatientDashboard extends React.Component {
                 {this.props.currentPatient}
             </h1>
         </div>
-        <div className="dashboard-buttons">
-              <div>
-                <button className="add-med-button" onClick={() =>this.props.dispatch(showMedsAddForm())}>Add Medication</button>
-                <button className="back-to-patient-list-button" onClick={() =>this.props.dispatch(getPatientList())}>Back to Patient List</button>
-              </div>
-        </div>
         <div className="medicine-list">
-          <table className="medication-table">
+        <div className="dashboard-buttons">
+                <button className="add-med-button" onClick={() =>this.props.dispatch(showMedsAddForm())}>Add Medication</button>
+                <button className="back-to-patient-list-button" onClick={() =>this.props.dispatch(showPatientList())}>Back to Patient List</button>
+        </div>
+        <div className='medication-table'>
+          <table>
               <tbody>
                   <tr>
                     <th>Name</th>
@@ -89,6 +94,7 @@ export class PatientDashboard extends React.Component {
                       {medicationList}
               </tbody>
           </table>
+        </div>
          </div>
       </div>  
     );//end return
@@ -103,7 +109,8 @@ const mapStateToProps = state => ({
   removeMedication: state.patient.removeMedication,
   currentPatient: state.patient.currentPatient,
   showMedsAddForm: state.patient.showMedsAddForm,
-  showAddPatientForm: state.patient.showAddPatientForm
+  showAddPatientForm: state.patient.showAddPatientForm,
+  showPatientList: state.patient.showPatientList
 });
 
 export default connect(mapStateToProps)(PatientDashboard);

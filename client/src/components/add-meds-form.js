@@ -23,9 +23,10 @@ export class AddMedsForm extends React.Component {
       }
 
       return (
-        <div className="add-medicine-form">
-          <form onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
+        <div>
+          <form className='add-medicine-form' onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
             {error}
+            <span className="medicine">Medicine:</span>
               <Field
                   component={AddMedsInput}
                   type="text"
@@ -47,6 +48,7 @@ export class AddMedsForm extends React.Component {
                   id="medSchedule"
                   placeholder="schedule"
               />
+            <span className="medicine">Pharmacy:</span>
               <Field
                   component={AddMedsInput}
                   type="text"
@@ -68,6 +70,7 @@ export class AddMedsForm extends React.Component {
                   id="pharmPhone"
                   placeholder="pharmacy phone number"
               />
+            <span className="medicine">Physician:</span>
               <Field
                   component={AddMedsInput}
                   type="text"
@@ -89,7 +92,7 @@ export class AddMedsForm extends React.Component {
                   id="physicianPhone"
                   placeholder="physician's phone number"
               />
-              <button className="add-medicine-button" disabled={this.props.pristine || this.props.submitting}>
+              <button className="submit-medicine-button" disabled={this.props.pristine || this.props.submitting}>
                   Submit
               </button>
             </form>

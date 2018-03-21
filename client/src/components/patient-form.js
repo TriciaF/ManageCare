@@ -23,7 +23,7 @@ console.log('Enter PatientForm')
     }
     return (
         <form
-            className="patient-form"
+            className="add-patient-form"
             onSubmit={this.props.handleSubmit(values =>
               this.onSubmit(values)
           )}>
@@ -32,7 +32,7 @@ console.log('Enter PatientForm')
                 component={PatientInput}
                 type="text"
                 name="name"
-                id="name"
+                id="patientName"
                 placeholder="patient name"
                 validate={[required, nonEmpty]}
             />
@@ -40,7 +40,7 @@ console.log('Enter PatientForm')
                 component={PatientInput}
                 type="medication"
                 name="medication"
-                id="medication"
+                id="medName"
                 placeholder="medication"
                 validate={[required, nonEmpty]}
             />
@@ -48,35 +48,35 @@ console.log('Enter PatientForm')
                 component={PatientInput}
                 type="dosage"
                 name="dosage"
-                id="dosage"
+                id="medDosage"
                 placeholder="dosage"
             />
             <Field
                 component={PatientInput}
                 type="schedule"
                 name="schedule"
-                id="schedule"
+                id="medSchedule"
                 placeholder="schedule"
             />
             <Field
                 component={PatientInput}
                 type="pharmacyName"
                 name="pharmacyName"
-                id="pharmacyName"
+                id="pharmName"
                 placeholder="pharmacy name"
             />
             <Field
                 component={PatientInput}
                 type="pharmacyAddr"
                 name="pharmacyAddr"
-                id="pharmacyAddr"
+                id="pharmAddr"
                 placeholder="pharmacy address"
             />
             <Field
                 component={PatientInput}
                 type="pharmacyPhone"
                 name="pharmacyPhone"
-                id="pharmacyPhone"
+                id="pharmPhone"
                 placeholder="pharmacy phone number"
             />
             <Field
@@ -100,7 +100,7 @@ console.log('Enter PatientForm')
                 id="physicianPhone"
                 placeholder="physician's phone number"
             />
-            <button disabled={this.props.pristine || this.props.submitting}>
+            <button className='submit-add-patient-button' disabled={this.props.pristine || this.props.submitting}>
                 Submit
             </button>
         </form>

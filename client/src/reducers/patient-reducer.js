@@ -2,7 +2,7 @@ import {
     PATIENTLIST_REQUEST_SENT,
     GET_PATIENTLIST_SUCCESS,
     GET_PATIENTLIST_ERROR,
-    SHOW_PATIENT_LIST,
+    SHOW_PATIENT_DASHBOARD,
     SET_PATIENT_DASHBOARD,
     GET_PATIENT_DASHBOARD,
     UPDATE_PATIENT_SUCCESS,
@@ -12,12 +12,14 @@ import {
     SHOW_MEDS_ADD_FORM,
     ADD_NEW_PATIENT,
     SHOW_ADD_PATIENT_FORM,
+    SHOW_PATIENT_LIST
 } from '../actions/patient';
 
 const initialState = {
     loading: false,
     error: null,
     patientList: [],
+    showPatientDashboard: false,
     showPatientList: false,
     currentPatient: null,
     patientDashboard: null,
@@ -44,16 +46,16 @@ export default function reducer(state = initialState, action) {
         return Object.assign({}, state, {
             error: action.error
         });
-    } else if (action.type === SHOW_PATIENT_LIST) {
-      console.log('enter showPatientList')
+    } else if (action.type === SHOW_PATIENT_DASHBOARD) {
+      console.log('enter showPatientDashboard')
         return Object.assign({}, state, {
-            showPatientList: true
+            showPatientDashboard: true,
+            showPatientList: false
         });
     } else if (action.type === SET_PATIENT_DASHBOARD) {
       console.log('Enter set patient Dashboard: ', action)
       return Object.assign({}, state, {
           currentPatient: action.currentPatient,
-          showPatientList: false,
           patientDashboard: {
               id: action.patientDashboard.id,
               name: action.patientDashboard.name,
@@ -80,7 +82,14 @@ export default function reducer(state = initialState, action) {
     } else if (action.type === SHOW_ADD_PATIENT_FORM) {
       console.log('Enter showAddPatientForm action')
         return Object.assign({}, state, {
-          showAddPatientForm: true
+          showAddPatientForm: true,
+          showPatientDashboard: false
+        });
+    } else if (action.type === SHOW_PATIENT_LIST) {
+      console.log('Enter showPatientList')
+        return Object.assign({}, state, {
+          showPatientList: true,
+          showPatientDashboard: false,
         });
     } else if (action.type === ADD_MEDICATION) {
         console.log("Enter AddMedication action = ", action)
@@ -123,7 +132,8 @@ export default function reducer(state = initialState, action) {
         });
     } else if (action.type === SHOW_MEDS_ADD_FORM) {
         return Object.assign({}, state, {
-            showMedsAddForm: true
+            showMedsAddForm: true,
+            showPatientDashboard: false
         });
     } else if (action.type === ADD_NEW_PATIENT) {
         console.log('Enter AddNewPatient action = ', action);

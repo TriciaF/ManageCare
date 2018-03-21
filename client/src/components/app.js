@@ -6,7 +6,7 @@ import ManageCare from './manageCare';
 import PatientList from './patient-list';
 import NavBarTop from './nav-bar-top';
 import LoginForm from './login-form';
-import PatientDashboard from './patient-dashboard';
+import PatientForm from './patient-form';
 import {clearAuth} from '../actions/auth';
 
 
@@ -16,7 +16,7 @@ export class App extends React.Component {
     if (nextProps.loggedIn && !this.props.loggedIn) {
         // When we are logged in, start login timer
         this.startLogoutWithInactivity();
-        this.props.history.push('/patient')
+        this.props.history.push('/')
     } else if (!nextProps.loggedIn && this.props.loggedIn) {
         // Stop refreshing when we log out
         this.stopPeriodicRefresh(); 
@@ -49,7 +49,6 @@ export class App extends React.Component {
             <Route exact path='/' component={ManageCare}/>
             <Route exact path='/login' component={LoginForm}/>
             <Route exact path='/patient' component={PatientList}/>
-            <Route exact path='/dashboard' component={PatientDashboard}/>
           </div>
 
 

@@ -4,7 +4,6 @@ import { showAddPatientForm} from '../actions/patient';
 import {clearAuth } from '../actions/auth';
 import {clearAuthToken} from '../local-storage';
 import LoginForm from './login-form';
-import PatientForm from './patient-form';
 
 class NavBarTop extends React.Component {
 logOut() {
@@ -12,7 +11,7 @@ logOut() {
     clearAuthToken();
 }
 logIn() {
-  console.log("enter logIn")
+  console.log("enter logIn from NavBarTop")
   return <LoginForm />
 }
 register(){
@@ -41,7 +40,7 @@ render() {
       )
       addPatient = (
           <div onClick={() => this.addPatient()}>
-            <a className="nav-words" href='/patient'>
+            <a className="nav-words" href='#'>
               Add Patient
             </a>
           </div>
