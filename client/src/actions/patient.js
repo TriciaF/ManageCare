@@ -86,9 +86,8 @@ export const addNewPatient = (patientList, addPatient) => ({
 });
 
 export const SHOW_MEDS_ADD_FORM = 'SHOW_MEDS_ADD_FORM';
-export const showMedsAddForm = (showMedsAddForm) => ({
+export const showMedsAddForm = () => ({
     type: SHOW_MEDS_ADD_FORM,
-    showMedsAddForm
 });
 
 export const SHOW_PATIENT_LIST = 'SHOW_PATIENT_LIST';
@@ -101,7 +100,7 @@ export const showPatientList = () => ({
 export const getPatientList = () => (dispatch) => {
     console.log('entered async action getPatientList');
     dispatch(patientListRequestSent());
-    return fetch(`${API_BASE_URL}`, {
+    return fetch(`${API_BASE_URL}/patient`, {
             method: 'GET',
             headers: {
                 'content-Type': 'application/json' },
@@ -128,7 +127,7 @@ export const addToDashboard = (values) => dispatch => {
         console.log("Enter addToDashboard");
         dispatch(patientListRequestSent());
         const id = values.id;
-        return fetch(`${API_BASE_URL}/`+ id , {
+        return fetch(`${API_BASE_URL}/patient`+ id , {
                 method: 'PUT',
                 headers: {
                     'content-Type': 'application/json'
@@ -136,6 +135,7 @@ export const addToDashboard = (values) => dispatch => {
                 body: JSON.stringify(values)
             }) //end fetch
             .then(res => {
+                console.log('response back from addToDashboard ', res.json())
                 if (!res.ok) {
                     return Promise.reject(res.statusText)
                 }
@@ -156,7 +156,7 @@ export const removeFromDashboard = (values, currentPatient) => dispatch => {
         const obj = {"name":currentPatient};
         console.log(obj);
         const id = values.id
-        return fetch(`${API_BASE_URL}/` + id, {
+        return fetch(`${API_BASE_URL}/patient` + id, {
                 method: 'PUT',
                 headers: {
                     'content-Type': 'application/json'
@@ -180,7 +180,7 @@ export const removeFromDashboard = (values, currentPatient) => dispatch => {
 export const addToPatientList = (values) => dispatch => {
         console.log("Enter addToPatientList", values);
         dispatch(patientListRequestSent());
-        return fetch(`${API_BASE_URL}/`, {
+        return fetch(`${API_BASE_URL}/patient`, {
                 method: 'POST',
                 headers: {
                     'content-Type': 'application/json'

@@ -4,13 +4,13 @@ const express = require('express');
 const userRouter = express.Router();
 const { users } = require('./user-model');
 const bodyParser = require('body-parser');
-
+const { Users } = require('./user-schema');
 userRouter.use(bodyParser.json());
 
 
 /* ========== POST/CREATE ITEM ========== */
 userRouter.post('/login', (req, res) => {
-	console.log('enter post end point');
+	console.log('Enter userRouter /login');
 	const requiredFields = ['username', 'password'];
 	const missingField = requiredFields.find(field => !(field in req.body));
 
@@ -94,23 +94,22 @@ userRouter.post('/login', (req, res) => {
 
 	// Username and password come in pre-trimmed, otherwise we throw an error
 	// before this
-	let { username, password } = req.body;
-
-	users.create(username, password)
-		.then(response => {
-			console.log('user.create: ', username);
-			return res.status(201).json(username).end();
-		})
-		.catch(err => {
-			console.log(err);
-			// Forward validation errors on to the client, otherwise give a 500
-			// error because something unexpected has happened
-			if (err.reason === 'ValidationError') {
-				return res.status(err.code).json(err);
-			}
-			res.status(500).json({ code: 500, message: 'Internal server error' });
-		});
-
+  let { username, password } = req.body;
+  
+  return users.create(username, password)
+  .then(user => {
+		console.log('user.create: ', username);
+		return res.status(201).json(user).end();
+	})
+  .catch(err => {
+    console.log(err);
+    // Forward validation errors on to the client, otherwise give a 500
+    // error because something unexpected has happened
+    if (err.reason === 'ValidationError') {
+      return res.status(err.code).json(err);
+    }
+    res.status(500).json({ code: 500, message: 'Internal server error' });
+  }); 
 });
 
 

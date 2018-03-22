@@ -2,8 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {removeFromDashboard,  
         showMedsAddForm, 
-        addToDashboard,
-        getPatientList,
         showPatientList} from '../actions/patient';
 import AddMedsForm from './add-meds-form';
 import PatientForm from './patient-form';
@@ -18,14 +16,10 @@ export class PatientDashboard extends React.Component {
     if(this.props.showMedsAddForm){
       return <AddMedsForm />
     }
-    if(this.props.addMedication) {
-      this.props.dispatch(addToDashboard(this.props.patientDashboard))
-    }
     if(this.props.showAddPatientForm){
       return <PatientForm />
     }
     if(this.props.showPatientList){
-      // this.props.dispatch(getPatientList())
       return <PatientList />
     }
 
@@ -103,10 +97,7 @@ export class PatientDashboard extends React.Component {
 
 
 const mapStateToProps = state => ({
-  patientList: state.patient.patientList,
   patientDashboard: state.patient.patientDashboard,
-  addMedication: state.patient.addMedication,
-  removeMedication: state.patient.removeMedication,
   currentPatient: state.patient.currentPatient,
   showMedsAddForm: state.patient.showMedsAddForm,
   showAddPatientForm: state.patient.showAddPatientForm,

@@ -22,11 +22,12 @@ const users = {
 						});
 				} else {
 					// If there is no existing user, hash the password
-					const hash = bcrypt.hashSync(password, 10);
+          const hash = bcrypt.hashSync(password, 10);
+          console.log("user not found - creating user")
 					return Users.create({
 						username: username,
 						password: hash,
-					});
+          });
 				}
 			});
 	},

@@ -32,7 +32,8 @@ body {
 .add-med-button,
 .back-to-patient-list-button,
 .submit-medicine-button,
-.submit-add-patient-button {
+.submit-add-patient-button,
+.registration-button {
     /* box-sizing: border-box; */
     background-color: #AAAAAA;
     width: auto;
@@ -46,6 +47,9 @@ body {
     font-weight: bold;
 }
 
+#firstname,
+#lastname,
+#confirmPassword,
 #patientName,
 #username,
 #password,
@@ -136,7 +140,8 @@ body:before {
 
 .add-medicine-form,
 .add-patient-form,
-.medicine-list {
+.medicine-list,
+.registration-form {
     background-color: #70D4B4;
     height: 600px;
     margin-top: 20px;

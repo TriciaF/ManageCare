@@ -6,7 +6,7 @@ import ManageCare from './manageCare';
 import PatientList from './patient-list';
 import NavBarTop from './nav-bar-top';
 import LoginForm from './login-form';
-import PatientForm from './patient-form';
+import RegistrationPage from './registration-page';
 import {clearAuth} from '../actions/auth';
 
 
@@ -49,6 +49,7 @@ export class App extends React.Component {
             <Route exact path='/' component={ManageCare}/>
             <Route exact path='/login' component={LoginForm}/>
             <Route exact path='/patient' component={PatientList}/>
+            <Route exact path='/register' component={RegistrationPage}/>
           </div>
 
 

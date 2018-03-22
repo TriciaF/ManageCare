@@ -5,14 +5,14 @@ const { Strategy: LocalStrategy } = require('passport-local');
 // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Assigning_to_new_variable_names
 const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
 
-const { Users } = require('../users/models');
+const { Users } = require('../users/user-schema');
 const { JWT_SECRET } = require('../config');
 
 const localStrategy = new LocalStrategy((username, password, callback) => {
-	let user;
+  let user;
 	Users.findOne({ username: username })
 		.then(_user => {
-			user = _user;
+      user = _user
 			if (!user) {
 				// Return a rejected promise so we break out of the chain of .thens.
 				// Any errors like this will be handled in the catch block.
@@ -40,16 +40,17 @@ const localStrategy = new LocalStrategy((username, password, callback) => {
 		});
 });
 
-const jwtStrategy = new JwtStrategy({
-	secretOrKey: JWT_SECRET,
-	// Look for the JWT as a Bearer auth header
-	jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
-	// Only allow HS256 tokens - the same as the ones we issue
-	algorithms: ['HS256']
-},
-(payload, done) => {
-	done(null, payload.user);
-}
+const jwtStrategy = new JwtStrategy(
+  {
+    secretOrKey: JWT_SECRET,
+    // Look for the JWT as a Bearer auth header
+    jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
+    // Only allow HS256 tokens - the same as the ones we issue
+    algorithms: ['HS256']
+  },
+  (payload, done) => {
+    done(null, payload.user);
+  }
 );
 
 module.exports = { localStrategy, jwtStrategy };

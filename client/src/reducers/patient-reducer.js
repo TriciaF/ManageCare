@@ -130,7 +130,8 @@ export default function reducer(state = initialState, action) {
                 medication: meds
             }
         });
-    } else if (action.type === SHOW_MEDS_ADD_FORM) {
+    } else if (action.type === SHOW_MEDS_ADD_FORM) { 
+        console.log('Enter showAddMedicationForm = ')
         return Object.assign({}, state, {
             showMedsAddForm: true,
             showPatientDashboard: false

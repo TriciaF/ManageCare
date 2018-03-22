@@ -1,14 +1,15 @@
 import React from 'react';
 import {Field, reduxForm, focus} from 'redux-form';
 import AddMedsInput from './add-meds-input';
-import {addMedication} from '../actions/patient';
+import {addMedication, addToDashboard} from '../actions/patient';
 
 
 
 export class AddMedsForm extends React.Component {
 
   onSubmit(values) {
-      return this.props.dispatch(addMedication(values))
+      this.props.dispatch(addMedication(values))
+      this.props.dispatch(addToDashboard(this.props.patientDashboard))
   }
 
   render() {

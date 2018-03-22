@@ -4,13 +4,18 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
+const passport = require('passport');
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const morgan = require('morgan');
+
+
 const patientRouter = require('./patients/patient-router');
 const userRouter = require('./users/user-router');
 const authRouter = require('./auth/auth-router');
+
 const { PORT, DATABASE_URL, CLIENT_ORIGIN } = require('./config');
+const { localStrategy, jwtStrategy } = require('./auth/strategies');
 
 const app = express();
 app.use(morgan('common'));
@@ -29,6 +34,8 @@ app.use(function(req, res, next)
 	next();
 });
 
+passport.use(localStrategy);
+passport.use(jwtStrategy);
 
 //Send static files to client
 app.use(express.static(path.join(__dirname, './client/public')));
@@ -36,6 +43,14 @@ app.use(express.static(path.join(__dirname, './client/public')));
 app.use('/', patientRouter);
 app.use('/', userRouter);
 app.use('/auth', authRouter);
+
+const jwtAuth = passport.authenticate('jwt', { session: false });
+
+app.get('/protected', jwtAuth, (req, res) => {
+  res.json({
+    data: 'authorized'
+  });
+});
 
 //server functions
 let server;

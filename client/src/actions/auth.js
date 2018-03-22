@@ -1,5 +1,8 @@
-// import jwtDecode from 'jwt-decode';
-import { LOGIN_URL } from '../config';
+import jwtDecode from 'jwt-decode';
+import {SubmissionError} from 'redux-form';
+import { AUTH_URL } from '../config';
+import { normalizeResponseErrors } from './utils';
+import {saveAuthToken, clearAuthToken} from '../local-storage';
 
 
 
@@ -48,42 +51,68 @@ export const logOut = (loggedIn) => ({
 
 // Stores the auth token in state and localStorage, and decodes and stores
 // the user data stored in the token
-// const storeAuthInfo = (authToken, dispatch) => {
-//     const decodedToken = jwtDecode(authToken);
-//     dispatch(setAuthToken(authToken));
-//     dispatch(authSuccess(decodedToken.user));
-//     saveAuthToken(authToken);
-// };
+const storeAuthInfo = (authToken, dispatch) => {
+  console.log('StoreAuthInfo: token = ', authToken)
+    const decodedToken = jwtDecode(authToken);
+    dispatch(setAuthToken(authToken));
+    dispatch(authSuccess(decodedToken.user));
+    saveAuthToken(authToken);
+};
 
-//does not save token to local storage
-// const storeAuthInfo = (authToken, dispatch) => {
-//     const decodedToken = jwtDecode(authToken);
-//     dispatch(setAuthToken(authToken));
-//     dispatch(authSuccess(decodedToken.user));
-// };
 
-export const login = (username, password) => dispatch => {
-    dispatch(authRequest());
-    return fetch(`${LOGIN_URL}`, {
+export const login = (username, password) => (dispatch, getState) => {
+  console.log('Enter login')
+  const authToken = getState().auth.authToken;
+  dispatch(authRequest());
+    return fetch(`${AUTH_URL}/login`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${authToken}`
             },
             body: JSON.stringify({
                 username,
                 password
             })
         })
-        .then(res => {
-            if (!res.ok) {
-                return Promise.reject(res.statusText)
-            }
-            return res.json();
-        })
-        .then(user => {
-            dispatch(authSuccess(user))
-        })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json()) 
+        .then(({authToken}) => storeAuthInfo(authToken, dispatch)) 
         .catch(err => {
-            dispatch(authError(err))
+          const {code} = err;
+          const message = 
+            code === 401
+              ? "Incorrect username or password"
+              : 'Unable to login, please try again';
+            dispatch(authError(err));
+            //Could not authenticate, so return a Submission Error for Redux form
+            return Promise.reject(
+              new SubmissionError({
+                _error: message
+              })
+            );
         })
+};
+
+export const refreshAuthToken = () => (dispatch, getState) => {
+  dispatch(authRequest());
+  const authToken = getState().auth.authToken;
+  return fetch(`${AUTH_URL}/refresh`, {
+      method: 'POST',
+      headers: {
+          // Provide our existing token as credentials to get a new one
+          Authorization: `Bearer ${authToken}`
+      }
+  })
+  .then(res => normalizeResponseErrors(res))
+  .then(res => res.json())
+  .then(({authToken}) => storeAuthInfo(authToken, dispatch))
+  .catch(err => {
+      // We couldn't get a refresh token because our current credentials
+      // are invalid or expired, or something else went wrong, so clear
+      // them and sign us out
+      dispatch(authError(err));
+      dispatch(clearAuth());
+      clearAuthToken(authToken);
+  });
 };

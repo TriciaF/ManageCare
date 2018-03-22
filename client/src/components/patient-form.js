@@ -2,7 +2,7 @@ import React from 'react';
 import '../index.css';
 import {Field, reduxForm, focus} from 'redux-form';
 import {required, nonEmpty} from '../validators';
-import PatientInput from './patient-input';
+import Input from './input';
 import {addNewPatient} from '../actions/patient';
 
 export class PatientForm extends React.Component {
@@ -29,7 +29,7 @@ console.log('Enter PatientForm')
           )}>
             {error}
             <Field
-                component={PatientInput}
+                component={Input}
                 type="text"
                 name="name"
                 id="patientName"
@@ -37,7 +37,7 @@ console.log('Enter PatientForm')
                 validate={[required, nonEmpty]}
             />
             <Field
-                component={PatientInput}
+                component={Input}
                 type="medication"
                 name="medication"
                 id="medName"
@@ -45,56 +45,56 @@ console.log('Enter PatientForm')
                 validate={[required, nonEmpty]}
             />
             <Field
-                component={PatientInput}
+                component={Input}
                 type="dosage"
                 name="dosage"
                 id="medDosage"
                 placeholder="dosage"
             />
             <Field
-                component={PatientInput}
+                component={Input}
                 type="schedule"
                 name="schedule"
                 id="medSchedule"
                 placeholder="schedule"
             />
             <Field
-                component={PatientInput}
+                component={Input}
                 type="pharmacyName"
                 name="pharmacyName"
                 id="pharmName"
                 placeholder="pharmacy name"
             />
             <Field
-                component={PatientInput}
+                component={Input}
                 type="pharmacyAddr"
                 name="pharmacyAddr"
                 id="pharmAddr"
                 placeholder="pharmacy address"
             />
             <Field
-                component={PatientInput}
+                component={Input}
                 type="pharmacyPhone"
                 name="pharmacyPhone"
                 id="pharmPhone"
                 placeholder="pharmacy phone number"
             />
             <Field
-                component={PatientInput}
+                component={Input}
                 type="physicianName"
                 name="physicianName"
                 id="physicianName"
                 placeholder="physician's name"
             />
             <Field
-                component={PatientInput}
+                component={Input}
                 type="physicianAddr"
                 name="physicianAddr"
                 id="physicianAddr"
                 placeholder="physician's address"
             />
             <Field
-                component={PatientInput}
+                component={Input}
                 type="physicianPhone"
                 name="physicianPhone"
                 id="physicianPhone"
