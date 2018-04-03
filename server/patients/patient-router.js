@@ -15,7 +15,8 @@ patientRouter.get('/patient', (req, res) => {
 	console.log('enter GET end point');
 	patients.get()
 		.then(response => {
-			res.json(response.map(item => item.serialize()));
+      console.log('response from find patients = ', response)
+      res.json(response.map(item => item.serialize()));
 		})
 		.catch(err => {
 			console.log(err);

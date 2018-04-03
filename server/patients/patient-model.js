@@ -15,7 +15,7 @@ const patients = {
 	},
 
 	get: function(id = null) {
-		console.log('Enter Patients:Get');
+		console.log('Enter Patients:Geti ', id);
 		if (id === null) {
 			return Patients.find();
 		} else
@@ -26,19 +26,18 @@ const patients = {
 		console.log('enter update function in model: ', _id, patientName, _medication);
 
 		if (_medication){
-			console.log('Enter Patients:Update');
-			const meds = _medication.map(item => {
-				return item;
-			});
-			const updateObj = {
-				name: patientName,
-				medication: meds
-			};
-			console.log(updateObj);
+      let meds = _medication.map(med => {
+        return med
+      });
+
+      // let updateObj = {
+      //   name: patientName,
+      //   medication: meds
+      // };
+
 			return Patients
-				.findByIdAndUpdate(_id, { $set: updateObj });
-		} 
-    
+				.findByIdAndUpdate(_id, {$set:{'name': patientName, 'medication': meds}}, {new: true})
+    } 
 		else {
 			return Patients.update({name: patientName}, { $pull: { medication: { _id: _id } }}, { safe: true, multi:true });
 		}
