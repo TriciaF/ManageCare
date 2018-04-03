@@ -2,13 +2,15 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {DropdownList} from 'react-widgets';
 import PatientDashboard from './patient-dashboard'
-import PatientForm from './patient-form'
-import {getPatientList, setPatientDashboard, showPatientDashboard} from '../actions/patient';
+import PatientForm from './patient-form';
+import AddMedsForm from './add-meds-form';
+import {getPatientList, setPatientDashboard, showPatientDashboard, addToDashboard} from '../actions/patient';
 import 'react-widgets/dist/css/react-widgets.css';
 
 
 export class PatientList extends React.Component {
   componentWillMount() {
+    console.log('Enter PatientList component will mount')
     this.props.dispatch(getPatientList());
   }
 
@@ -22,15 +24,22 @@ export class PatientList extends React.Component {
   };
 
    render() {
-
-  if(this.props.showPatientDashboard) {
-    console.log('Enter PatientList, showPatientDashboard')
-    return <PatientDashboard />
-  }
-  if(this.props.showAddPatientForm) {
-    console.log('Enter PatientList, showAddPatientForm')
-    return <PatientForm />
-  }
+    if(this.props.addMedication) {
+      console.log('Enter PatientList, addMedication');
+      return this.props.dispatch(addToDashboard(this.props.patientDashboard))
+    }
+    if(this.props.showPatientDashboard) {
+      console.log('Enter PatientList, showPatientDashboard')
+      return <PatientDashboard />
+    }
+    if(this.props.showAddPatientForm) {
+      console.log('Enter PatientList, showAddPatientForm')
+      return <PatientForm />
+    }
+    if(this.props.showAddMedsForm) {
+      console.log('Enter PatientList, showAddMedsForm')
+      return <AddMedsForm />
+    }
 
     //map over state.patientList to obtain the patient name
       const patients = this.props.patientList.map(patient => {
@@ -56,7 +65,10 @@ const mapStateToProps = state => ({
   loggedIn: state.auth.loggedIn,
   patientList: state.patient.patientList,
   showPatientDashboard: state.patient.showPatientDashboard,
-  showAddPatientForm: state.patient.showAddPatientForm
+  showAddPatientForm: state.patient.showAddPatientForm,
+  showAddMedsForm: state.patient.showAddMedsForm,
+  addMedication: state.patient.addMedication,
+  patientDashboard: state.patient.patientDashboard
 });
 
 export default connect(mapStateToProps)(PatientList);

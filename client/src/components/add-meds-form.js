@@ -1,7 +1,7 @@
 import React from 'react';
 import {Field, reduxForm, focus} from 'redux-form';
 import AddMedsInput from './add-meds-input';
-import {addMedication, addToDashboard} from '../actions/patient';
+import {addMedication, addToDashboard, getPatientDashboard} from '../actions/patient';
 
 
 
@@ -9,7 +9,7 @@ export class AddMedsForm extends React.Component {
 
   onSubmit(values) {
       this.props.dispatch(addMedication(values))
-      this.props.dispatch(addToDashboard(this.props.patientDashboard))
+      // this.props.dispatch(addToDashboard(this.props.dispath(getPatientDashboard)))
   }
 
   render() {

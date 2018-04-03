@@ -85,9 +85,10 @@ export const addNewPatient = (patientList, addPatient) => ({
     addPatient
 });
 
-export const SHOW_MEDS_ADD_FORM = 'SHOW_MEDS_ADD_FORM';
-export const showMedsAddForm = () => ({
-    type: SHOW_MEDS_ADD_FORM,
+export const SHOW_ADD_MEDS_FORM = 'SHOW_ADD_MEDS_FORM';
+export const showAddMedsForm = (showAddMedsForm) => ({
+    type: SHOW_ADD_MEDS_FORM,
+    showAddMedsForm
 });
 
 export const SHOW_PATIENT_LIST = 'SHOW_PATIENT_LIST';
@@ -123,11 +124,12 @@ export const getPatientList = () => (dispatch) => {
 
 //update the local store to add medication, 
 //then update the patient database with new medication
-export const addToDashboard = (values) => dispatch => {
-        console.log("Enter addToDashboard");
-        dispatch(patientListRequestSent());
+export const addToDashboard = (values) => (dispatch, getState) => {
+        console.log("Enter addToDashboard values = ", values);
         const id = values.id;
-        return fetch(`${API_BASE_URL}/patient`+ id , {
+        console.log('this is the id = ', id) 
+        dispatch(patientListRequestSent());
+        return fetch(`${API_BASE_URL}/patient/`+ id , {
                 method: 'PUT',
                 headers: {
                     'content-Type': 'application/json'
@@ -135,7 +137,6 @@ export const addToDashboard = (values) => dispatch => {
                 body: JSON.stringify(values)
             }) //end fetch
             .then(res => {
-                console.log('response back from addToDashboard ', res.json())
                 if (!res.ok) {
                     return Promise.reject(res.statusText)
                 }
@@ -156,7 +157,7 @@ export const removeFromDashboard = (values, currentPatient) => dispatch => {
         const obj = {"name":currentPatient};
         console.log(obj);
         const id = values.id
-        return fetch(`${API_BASE_URL}/patient` + id, {
+        return fetch(`${API_BASE_URL}/patient/` + id, {
                 method: 'PUT',
                 headers: {
                     'content-Type': 'application/json'

@@ -1,21 +1,19 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {removeFromDashboard,  
-        showMedsAddForm, 
-        showPatientList} from '../actions/patient';
-import AddMedsForm from './add-meds-form';
+        showAddMedsForm, 
+        showPatientList, getPatientList} from '../actions/patient';
 import PatientForm from './patient-form';
 import PatientList from './patient-list'
 
 export class PatientDashboard extends React.Component {
 
-
+  backToPatientList() {
+    this.props.dispatch(showPatientList());
+    return this.props.dispatch(getPatientList())
+  }
   render() {
     console.log('Enter PatientDashboard Component');
-
-    if(this.props.showMedsAddForm){
-      return <AddMedsForm />
-    }
     if(this.props.showAddPatientForm){
       return <PatientForm />
     }
@@ -67,8 +65,8 @@ export class PatientDashboard extends React.Component {
         </div>
         <div className="medicine-list">
         <div className="dashboard-buttons">
-                <button className="add-med-button" onClick={() =>this.props.dispatch(showMedsAddForm())}>Add Medication</button>
-                <button className="back-to-patient-list-button" onClick={() =>this.props.dispatch(showPatientList())}>Back to Patient List</button>
+                <button className="add-med-button" onClick={() =>this.props.dispatch(showAddMedsForm(true))}>Add Medication</button>
+                <button className="back-to-patient-list-button" onClick={() =>this.backToPatientList()}>Back to Patient List</button>
         </div>
         <div className='medication-table'>
           <table>
@@ -99,7 +97,6 @@ export class PatientDashboard extends React.Component {
 const mapStateToProps = state => ({
   patientDashboard: state.patient.patientDashboard,
   currentPatient: state.patient.currentPatient,
-  showMedsAddForm: state.patient.showMedsAddForm,
   showAddPatientForm: state.patient.showAddPatientForm,
   showPatientList: state.patient.showPatientList
 });

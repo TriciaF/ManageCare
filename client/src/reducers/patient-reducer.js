@@ -9,7 +9,7 @@ import {
     UPDATE_PATIENT_ERROR,
     ADD_MEDICATION,
     REMOVE_MEDICATION,
-    SHOW_MEDS_ADD_FORM,
+    SHOW_ADD_MEDS_FORM,
     ADD_NEW_PATIENT,
     SHOW_ADD_PATIENT_FORM,
     SHOW_PATIENT_LIST
@@ -23,7 +23,7 @@ const initialState = {
     showPatientList: false,
     currentPatient: null,
     patientDashboard: null,
-    showMedsAddForm: false,
+    showAddMedsForm: false,
     removeMedication: false,
     addPatient: false,
     showAddPatientForm: false,
@@ -32,9 +32,11 @@ const initialState = {
 
 
 export default function reducer(state = initialState, action) {
+  console.log("Enter PatientList Request Sent")
     if (action.type === PATIENTLIST_REQUEST_SENT) {
         return Object.assign({}, state, {
-            loading: true
+            loading: true,
+            addMedication: false
         });
     } else if (action.type === GET_PATIENTLIST_SUCCESS) {
         console.log('enter getPatientListSuccess', action.patientList);
@@ -65,7 +67,7 @@ export default function reducer(state = initialState, action) {
           }
       });
     } else if (action.type === GET_PATIENT_DASHBOARD) {
-        console.log(state.patientDashboard)
+        console.log('enter GetpatientDashboard')
         return state.patientDashboard
 
     } else if (action.type === UPDATE_PATIENT_SUCCESS) {
@@ -73,7 +75,8 @@ export default function reducer(state = initialState, action) {
         return Object.assign({}, state, {
             error: false,
             addMedication: false,
-            addPatient: false
+            addPatient: false,
+            loading: false
         });
     } else if (action.type === UPDATE_PATIENT_ERROR) {
         return Object.assign({}, state, {
@@ -95,7 +98,8 @@ export default function reducer(state = initialState, action) {
         console.log("Enter AddMedication action = ", action)
         return Object.assign({}, state, {
             addMedication: true,
-            showMedsAddForm: false,
+            showAddMedsForm: false,
+            showPatientDashboard: true,
             patientDashboard: {
                 id: state.patientDashboard.id,
                 name: state.patientDashboard.name,
@@ -130,10 +134,10 @@ export default function reducer(state = initialState, action) {
                 medication: meds
             }
         });
-    } else if (action.type === SHOW_MEDS_ADD_FORM) { 
-        console.log('Enter showAddMedicationForm = ')
+    } else if (action.type === SHOW_ADD_MEDS_FORM) { 
+        console.log('Enter showAddMedicationForm = ', action)
         return Object.assign({}, state, {
-            showMedsAddForm: true,
+            showAddMedsForm: action.showAddMedsForm,
             showPatientDashboard: false
         });
     } else if (action.type === ADD_NEW_PATIENT) {
@@ -148,6 +152,7 @@ export default function reducer(state = initialState, action) {
                 addPatient: false,
                 showAddPatientForm: false,
                 patientList: state.patientList.concat([{
+                    id: action.patientList.id,
                     name: action.patientList.name,
                     medication: {
                         name: action.patientList.medication.medName,

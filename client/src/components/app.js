@@ -41,8 +41,7 @@ export class App extends React.Component {
       clearInterval(this.logoutTimer);
   }
     render() {
-
-      console.log('render App');
+      console.log('Enter render App');
         return ( 
           <div className = "app" >
             <NavBarTop />

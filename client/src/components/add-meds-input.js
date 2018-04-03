@@ -33,6 +33,7 @@ export default class AddMedsInput extends React.Component {
                     type={this.props.type}
                     placeholder={this.props.placeholder}
                     ref={input => (this.input = input)}
+                    aria-labelledby = {this.props.feedback}
                 />
                 {error}
                 {warning}
