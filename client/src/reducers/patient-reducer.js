@@ -42,7 +42,8 @@ export default function reducer(state = initialState, action) {
         console.log('enter getPatientListSuccess', action.patientList);
         return Object.assign({}, state, {
             patientList: action.patientList,
-            loading: false
+            loading: false,
+            showAddPatientForm: false
         });
     } else if (action.type === GET_PATIENTLIST_ERROR) {
         return Object.assign({}, state, {

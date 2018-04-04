@@ -1,7 +1,7 @@
 import React from 'react';
 import {Field, reduxForm, focus} from 'redux-form';
 import AddMedsInput from './add-meds-input';
-import {addMedication, addToDashboard, getPatientDashboard} from '../actions/patient';
+import {addMedication} from '../actions/patient';
 
 
 
