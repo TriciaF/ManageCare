@@ -15,9 +15,9 @@ export class ManageCare extends React.Component {
 
     return (
       <div className="manage-care">
-        <header className="manage-care-header">
+        <div className="manage-care-header">
            <div id="circle">Manage Care</div>
-        </header> 
+        </div> 
         <div>
            <NavBarBottom />
         </div>
