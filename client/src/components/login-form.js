@@ -11,7 +11,6 @@ export class LoginForm extends React.Component {
     }
 
     render() {
-      console.log('Enter LoginForm component');
         let error;
         if (this.props.error) {
             error = (

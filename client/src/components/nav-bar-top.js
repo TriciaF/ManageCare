@@ -11,7 +11,6 @@ logOut() {
     clearAuthToken();
 }
 logIn() {
-  console.log("enter logIn from NavBarTop")
   return <LoginForm />
 }
 register(){
@@ -19,7 +18,6 @@ register(){
     return <div>register</div>
 }
 addPatient() {
-    console.log('Enter addPatient - NavBarTop')
     return this.props.dispatch(showAddPatientForm());
 }
 

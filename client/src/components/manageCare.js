@@ -6,10 +6,8 @@ import NavBarBottom from './nav-bar-bottom';
 export class ManageCare extends React.Component {
   
     render() {
-      console.log('Enter ManageCare component');
       // If we are logged in redirect straight to the user's dashboard
       if (this.props.loggedIn) {
-        console.log('enter ManageCare Redirect to /patient');
           return (<Redirect to="/patient" />);
       }
 
@@ -18,7 +16,7 @@ export class ManageCare extends React.Component {
         <div className="manage-care-header">
            <div id="circle">Manage Care</div>
         </div> 
-        <div>
+        <div className='nav-bar-bottom-container'>
            <NavBarBottom />
         </div>
       </div> 

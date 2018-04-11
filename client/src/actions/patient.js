@@ -99,7 +99,6 @@ export const showPatientList = () => ({
 
 //fetch list of all patients, medications, pharmacy and physician
 export const getPatientList = () => (dispatch) => {
-    console.log('entered async action getPatientList');
     dispatch(patientListRequestSent());
     return fetch(`${API_BASE_URL}/patient`, {
             method: 'GET',
@@ -113,7 +112,6 @@ export const getPatientList = () => (dispatch) => {
             return res.json();
         })
         .then(list => {
-            console.log('This is the list back from fetch: ', list);
             dispatch(getPatientListSuccess(list));
         })
         .catch(err => {
@@ -125,9 +123,7 @@ export const getPatientList = () => (dispatch) => {
 //update the local store to add medication, 
 //then update the patient database with new medication
 export const addToDashboard = (values) => (dispatch, getState) => {
-        console.log("Enter addToDashboard values = ", values);
         const id = values.id;
-        console.log('this is the id = ', id) 
         dispatch(patientListRequestSent());
         return fetch(`${API_BASE_URL}/patient/`+ id , {
                 method: 'PUT',
@@ -151,11 +147,9 @@ export const addToDashboard = (values) => (dispatch, getState) => {
 
 //update the local store to remove medication, then update the patient database
 export const removeFromDashboard = (values, currentPatient) => dispatch => {
-        console.log("Enter removeFromDashboard ", values, currentPatient);
         dispatch(removeMedication(values));
         dispatch(patientListRequestSent());
         const obj = {"name":currentPatient};
-        console.log(obj);
         const id = values.id
         return fetch(`${API_BASE_URL}/patient/` + id, {
                 method: 'PUT',
@@ -179,7 +173,6 @@ export const removeFromDashboard = (values, currentPatient) => dispatch => {
 
 //add new patient
 export const addToPatientList = (values) => dispatch => {
-        console.log("Enter addToPatientList", values);
         dispatch(patientListRequestSent());
         return fetch(`${API_BASE_URL}/patient`, {
                 method: 'POST',

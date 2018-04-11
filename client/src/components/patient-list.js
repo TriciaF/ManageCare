@@ -10,12 +10,10 @@ import 'react-widgets/dist/css/react-widgets.css';
 
 export class PatientList extends React.Component {
   componentWillMount() {
-    console.log('Enter PatientList component will mount')
     this.props.dispatch(getPatientList());
   }
 
   onChange(value) {
-    console.log('enter onChange setCurrentPatient', value)
     const patientDashboardInfo = this.props.patientList.find(patient => {
       return patient.name === value
     });
@@ -25,19 +23,15 @@ export class PatientList extends React.Component {
 
    render() {
     if(this.props.addMedication) {
-      console.log('Enter PatientList, addMedication');
       return this.props.dispatch(addToDashboard(this.props.patientDashboard))
     }
     if(this.props.showPatientDashboard) {
-      console.log('Enter PatientList, showPatientDashboard')
       return <PatientDashboard />
     }
     if(this.props.showAddPatientForm) {
-      console.log('Enter PatientList, showAddPatientForm')
       return <PatientForm />
     }
     if(this.props.showAddMedsForm) {
-      console.log('Enter PatientList, showAddMedsForm')
       return <AddMedsForm />
     }
 

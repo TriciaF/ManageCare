@@ -3,7 +3,7 @@ body {
     padding: 0;
     margin: 0;
     height: 100%;
-    font-family: sans-serif;
+    font-family: Verdana;
 }
 
 .clearfix:before,
@@ -195,7 +195,7 @@ body:before {
 }
 
 .medication-card-content-title {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
 }
 
@@ -232,16 +232,21 @@ body:before {
     font-stretch: extra-expanded;
 }
 
+.nav-bar-bottom-container {
+    margin-top: 40px;
+}
+
 .nav-bar-bottom {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: flex-end;
-    /* background-color: #70D4B4; */
+    justify-content: space-around;
+    flex-wrap: wrap;
+    /* align-items: center; */
+    /* align-content: flex-end; */
+    background-color: #70D4B4;
     padding-top: 20px;
     padding-bottom: 20px;
-    height: 370px;
-    width: 100%;
+    /* height: 370px;
+    width: 100%; */
 }
 
 .nav-bottom-column1,
@@ -249,18 +254,17 @@ body:before {
 .nav-bottom-column3 {
     display: flex;
     flex-direction: column;
-    /* justify-content: space-around; */
-    align-items: center;
-    align-content: flex-start;
+    justify-content: space-around;
+    border-radius: 5px;
+    border: solid 1px rgb(202, 199, 199);
+    background-color: #fff;
     width: 400px;
-    height: 290px;
-    /* background-color: #FBF0F0; */
-    /* border: 1px solid #BBBBBB; */
-    /* border-radius: 15px 15px; */
+    /* height: 290px; */
     flex: 0 1 auto;
-    margin-right: 40px;
-    margin-left: 40px;
-    text-align: center;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.10), 0px 10px 20px rgba(0, 0, 0, 0.05), 0px 20px 20px rgba(0, 0, 0, 0.05), 0px 30px 20px rgba(0, 0, 0, 0.05);
 }
 
 .nav-bottom-heading {
@@ -268,6 +272,7 @@ body:before {
     word-wrap: break-word;
     margin-left: auto;
     margin-right: auto;
+    padding: 20px;
     text-decoration: underline;
     font-weight: 100;
 }
@@ -332,7 +337,7 @@ body:before {
     display: inline;
 }
 
-@media screen and (min-width: 368px) {
+@media screen and (max-width: 400px) {
     .content-desktop {
         display: block;
     }
@@ -357,8 +362,8 @@ body:before {
     .medicine-list {
         height: 100%;
     }
-    .link-item {
-        width: 125px;
-        text-align: center;
+    #circle {
+        height: 200px;
+        width: 200px;
     }
 }

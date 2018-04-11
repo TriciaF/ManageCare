@@ -32,14 +32,12 @@ const initialState = {
 
 
 export default function reducer(state = initialState, action) {
-  console.log("Enter PatientList Request Sent")
     if (action.type === PATIENTLIST_REQUEST_SENT) {
         return Object.assign({}, state, {
             loading: true,
             addMedication: false
         });
     } else if (action.type === GET_PATIENTLIST_SUCCESS) {
-        console.log('enter getPatientListSuccess', action.patientList);
         return Object.assign({}, state, {
             patientList: action.patientList,
             loading: false,
@@ -50,13 +48,11 @@ export default function reducer(state = initialState, action) {
             error: action.error
         });
     } else if (action.type === SHOW_PATIENT_DASHBOARD) {
-      console.log('enter showPatientDashboard')
         return Object.assign({}, state, {
             showPatientDashboard: true,
             showPatientList: false
         });
     } else if (action.type === SET_PATIENT_DASHBOARD) {
-      console.log('Enter set patient Dashboard: ', action)
       return Object.assign({}, state, {
           currentPatient: action.currentPatient,
           patientDashboard: {
@@ -68,11 +64,9 @@ export default function reducer(state = initialState, action) {
           }
       });
     } else if (action.type === GET_PATIENT_DASHBOARD) {
-        console.log('enter GetpatientDashboard')
         return state.patientDashboard
 
     } else if (action.type === UPDATE_PATIENT_SUCCESS) {
-      console.log('enter updatePatientSuccess')
         return Object.assign({}, state, {
             error: false,
             addMedication: false,
@@ -84,19 +78,16 @@ export default function reducer(state = initialState, action) {
             error: action.error
         });
     } else if (action.type === SHOW_ADD_PATIENT_FORM) {
-      console.log('Enter showAddPatientForm action')
         return Object.assign({}, state, {
           showAddPatientForm: true,
           showPatientDashboard: false
         });
     } else if (action.type === SHOW_PATIENT_LIST) {
-      console.log('Enter showPatientList')
         return Object.assign({}, state, {
           showPatientList: true,
           showPatientDashboard: false,
         });
     } else if (action.type === ADD_MEDICATION) {
-        console.log("Enter AddMedication action = ", action)
         return Object.assign({}, state, {
             addMedication: true,
             showAddMedsForm: false,
@@ -122,11 +113,9 @@ export default function reducer(state = initialState, action) {
             }
         });
     } else if (action.type === REMOVE_MEDICATION) {
-        console.log('Enter removeMedication action ', action);
         const meds = state.patientDashboard.medication.filter(med => {
             return med.name !== action.patientDashboard.name
         })
-        console.log('This is the meds array: ', meds);
         return Object.assign({}, state, {
             removeMedication: true,
             patientDashboard: {
@@ -136,13 +125,11 @@ export default function reducer(state = initialState, action) {
             }
         });
     } else if (action.type === SHOW_ADD_MEDS_FORM) { 
-        console.log('Enter showAddMedicationForm = ', action)
         return Object.assign({}, state, {
             showAddMedsForm: action.showAddMedsForm,
             showPatientDashboard: false
         });
     } else if (action.type === ADD_NEW_PATIENT) {
-        console.log('Enter AddNewPatient action = ', action);
         if (!state.addPatient) {
             return Object.assign({}, state, {
                 showAddPatientForm: true,

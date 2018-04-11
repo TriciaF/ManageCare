@@ -4,7 +4,6 @@ import {LOGIN_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
 
 export const registerUser = user => (dispatch) => {
-  console.log('Enter registerUser, ', user)
     return fetch(`${LOGIN_URL}`, {
         method: 'POST',
         headers: {

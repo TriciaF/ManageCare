@@ -12,7 +12,6 @@ import {clearAuth} from '../actions/auth';
 
 export class App extends React.Component {
   componentWillReceiveProps(nextProps) {
-    console.log('enter App componentWillReceiveProps');
     if (nextProps.loggedIn && !this.props.loggedIn) {
         // When we are logged in, start login timer
         this.startLogoutWithInactivity();
@@ -25,7 +24,6 @@ export class App extends React.Component {
 };
 
   startLogoutWithInactivity(){
-    console.log('startLogoutWithInactity');
     this.logoutTimer = setInterval( () => this.props.dispatch(clearAuth()), 6 * 60000);
   };
 
@@ -34,14 +32,12 @@ export class App extends React.Component {
   };
  
   stopPeriodicRefresh() {
-    console.log('stopPeriodRefresh');
       if (!this.logoutTimer) {
           return;
       }
       clearInterval(this.logoutTimer);
   }
     render() {
-      console.log('Enter render App');
         return ( 
           <div className = "app" >
             <NavBarTop />

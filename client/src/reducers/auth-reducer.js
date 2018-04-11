@@ -45,12 +45,10 @@ export default function reducer(state = initialState, action) {
             error: action.error
         });
     } else if (action.type === LOGOUT_WARNING) {
-        console.log('logout warning');
         return Object.assign({}, state, {
             logoutWarning: true
         });
     } else if (action.type === LOGOUT) {
-        console.log('logout reducer');
         return Object.assign({}, state, {
             loggedIn: false
         });

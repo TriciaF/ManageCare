@@ -21,7 +21,7 @@ export class PatientDashboard extends React.Component {
       return <PatientList />
     }
 
-    const medicationList = this.props.patientDashboard.medication.map( med => {
+    const medicationList = this.props.patientDashboard.medication.map(med=> {
       return (
         <div className='medication-card'>
           <div className='medication-card-content-title'>Medication:</div>

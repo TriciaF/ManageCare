@@ -9,7 +9,6 @@ export class AddMedsForm extends React.Component {
 
   onSubmit(values) {
       this.props.dispatch(addMedication(values))
-      // this.props.dispatch(addToDashboard(this.props.dispath(getPatientDashboard)))
   }
 
   render() {

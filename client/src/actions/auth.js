@@ -52,7 +52,6 @@ export const logOut = (loggedIn) => ({
 // Stores the auth token in state and localStorage, and decodes and stores
 // the user data stored in the token
 const storeAuthInfo = (authToken, dispatch) => {
-  console.log('StoreAuthInfo: token = ', authToken)
     const decodedToken = jwtDecode(authToken);
     dispatch(setAuthToken(authToken));
     dispatch(authSuccess(decodedToken.user));
@@ -61,7 +60,6 @@ const storeAuthInfo = (authToken, dispatch) => {
 
 
 export const login = (username, password) => (dispatch, getState) => {
-  console.log('Enter login')
   const authToken = getState().auth.authToken;
   dispatch(authRequest());
     return fetch(`${AUTH_URL}/login`, {
