@@ -21,41 +21,20 @@ export class PatientDashboard extends React.Component {
       return <PatientList />
     }
 
-    const medicationList = this.props.patientDashboard.medication.map((med, index) => {
-      return (<tr key={index}>
-              <td>
-               {med.name}
-             </td>
-             <td>
-               {med.dosage}
-             </td>
-             <td>
-               {med.schedule}
-             </td>
-             <td>
-               {med.pharmacy.name}
-             </td>
-             <td>
-               {med.pharmacy.address}
-             </td>
-             <td>
-               {med.pharmacy.phoneNumber}
-             </td>
-             <td>
-               {med.physician.name}
-             </td>
-             <td>
-               {med.physician.address}
-             </td>
-             <td>
-               {med.physician.phoneNumber}
-             </td>
-             <td>
-                 <button className="rem-med-button" onClick={()=>this.props.dispatch(removeFromDashboard(med, this.props.patientDashboard.name))}>X</button>
-             </td>
-          </tr>)
+    const medicationList = this.props.patientDashboard.medication.map( med => {
+      return (
+        <div className='medication-card'>
+          <div className='medication-card-content-title'>Medication:</div>
+            <span className='medication-card-content'> {med.name}, {med.dosage}, {med.schedule}</span>
+          <div className='medication-card-content-title'>Pharmacy:</div>
+            <span className='medication-card-content'> {med.pharmacy.name}, {med.pharmacy.address}, {med.pharmacy.phoneNumer}</span>
+          <div className='medication-card-content-title'>Physician:</div>
+            <span className='medication-card-content'> {med.physician.name}, {med.physician.address}, {med.physician.phoneNumber}</span>
+          <button className="rem-med-button" onClick={()=>this.props.dispatch(removeFromDashboard(med, this.props.patientDashboard.name))}>remove</button>
+        </div>
+      )
     })
-    
+
     return (
       <div>
           <div className="dashboard-header">
@@ -69,23 +48,7 @@ export class PatientDashboard extends React.Component {
                 <button className="back-to-patient-list-button" onClick={() =>this.backToPatientList()}>Back to Patient List</button>
         </div>
         <div className='medication-table'>
-          <table>
-              <tbody>
-                  <tr>
-                    <th>Name</th>
-                    <th>Dosage</th>
-                    <th>Schedule</th>
-                    <th>Pharmacy Name</th>
-                    <th>Pharmacy Address</th>
-                    <th>Pharmacy Phone Number</th>
-                    <th>Physician Name</th>
-                    <th>Physician Address</th>
-                    <th>Physician Phone Number</th>
-                    <th>Remove</th>
-                  </tr>
-                      {medicationList}
-              </tbody>
-          </table>
+            {medicationList}
         </div>
          </div>
       </div>  
