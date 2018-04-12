@@ -4,7 +4,6 @@
 - [Application Links](#Link-to-Deployed-Application)
 - [Application Release version](#Release Version)
 - [Tech Resources used in this application](#Tech-Stack)
-- [Application Screen Shots](#Screen Shots)
 - [Server side REST API description](#Server- REST API)
 
 #Project Description
@@ -26,13 +25,7 @@ v1.0.0
 * Mongoose and MongoDB
 * Travis CI, Netlify, and Heroku for CICD
 * Front End: HTML, CSS, JavaScript, React, Redux
-
-#Screen Shots
-Home Page
  
-Patient Dashboard
- 
-
 #Server - REST API
 
 * User Router:
